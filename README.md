@@ -2,6 +2,8 @@
 
 A standalone desktop utility designed to browse, filter, and analyze item data for ANNO 117: Pax Romana. This tool provides a deep-dive interface for the game's item data, allowing players to find the perfect specialist or captain for their next Roman empire.
 
+-> Deutsches Readme findet ihr [hier](readme_german.md)
+
 ![Anno 117 Item Inspector](thumbnail_en.jpg)
 
 # Features
@@ -32,7 +34,7 @@ Every item entry is broken down into two distinct sections:
 - Clear all Filters by pressing the "Clear All" Button.
 
 # Getting Started
-- Download the standalone exe file from the Releases.
+- Download the standalone exe file from the Releases, place it anywhere on your PC and double-click to start.
 - If you want to run the script locally:
   - Prerequisites:
     - Python 3.10 or higher
@@ -42,8 +44,11 @@ Every item entry is broken down into two distinct sections:
     - Run the extract_assets_resolve_pools_buffs_conditions_sources.py script to generate a fresh scv file - update the game assets.xml and language files in the data folder if necessary.
     - Run the application anno117_item_inspector.py
 
+# Known Issues
+- Currently (v1.4 of the game) there are two items introduced into the assets with the Marvelous Mosaic cDLC, which indicate their sources to be the Hall of Fame, but Ubisoft confirmed, that there are no new HoF items with the update. As the script cannot differentiate between server-site implemented HoF items and non-server site implemented HoF items, the Item Inspector displays these items, even though they are not (yet) obtainable, also indicated by their missing (therefore defaulting to the placeholder hooded) in-game icon.
+
 # Credits
-- DuxVitae for the idea of extracting the item data to a csv
+- DuxVitae for the idea of extracting item data to a csv file.
 - Google Gemini for coding the majority of this project
 
 # License
