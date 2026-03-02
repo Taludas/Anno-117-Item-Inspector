@@ -1238,6 +1238,7 @@ class ItemBrowserApp:
 
     def update_source_dropdown(self):
         display_names = []
+        # Change this to store LISTS of raw IDs: { "Contracts": ["POOL_123", "POOL_456"], ... }
         self.source_display_to_raw = {}
         clean_pattern = re.compile(r'<[^>]*>|\[S?IMG:[^\]]*\]')
 
@@ -1249,10 +1250,9 @@ class ItemBrowserApp:
                 guid = raw_str.replace("POOL_", "")
                 mapping = REWARD_POOL_MAPPING.get(guid)
                 if mapping and len(mapping) > 1:
+                    # Resolve name using the OasisId (mapping[1])
                     name = self.localization_map.get(str(mapping[1]), guid)
-
             else:
-                # Standard Source_Labels logic
                 mapping = SOURCE_LABELS.get(raw_str)
                 if mapping and isinstance(mapping, list) and len(mapping) > 1:
                     name = self.localization_map.get(str(mapping[1]), raw_str)
@@ -1264,10 +1264,18 @@ class ItemBrowserApp:
             name = name.replace(" • ", "").replace(" - ", " ").strip(" -").strip()
 
             if name:
-                display_names.append(name)
-                self.source_display_to_raw[name] = raw
+                if name not in display_names:
+                    display_names.append(name)
 
-        self.source_combo['values'] = ["All"] + sorted(list(set(display_names)))
+                # IMPORTANT: Append to a list so "Contracts" holds ALL matching POOL IDs
+                if name not in self.source_display_to_raw:
+                    self.source_display_to_raw[name] = []
+
+                # Avoid duplicates in the list
+                if raw not in self.source_display_to_raw[name]:
+                    self.source_display_to_raw[name].append(raw)
+
+        self.source_combo['values'] = ["All"] + sorted(display_names)
 
     # Sort treeview content when a column header is clicked.
     def sort_column(self, col, reverse):
@@ -1644,6 +1652,9 @@ class ItemBrowserApp:
             # 2. Sync the language variable (in case it wasn't set in on_language_change)
             self.current_language = self.lang_var.get().lower()
 
+            # Clear Cache
+            self.name_resolution_cache = {}
+
             # 3. Perform the actual data reload
             self.load_localization(self.current_language)
 
@@ -1671,8 +1682,7 @@ class ItemBrowserApp:
             restore_selection(self.effect_var, self.effect_display_to_raw, current_eff_raw)
             restore_selection(self.source_var, self.source_display_to_raw, current_source_raw)
 
-            # Clear cache and refresh
-            self.name_resolution_cache = {}
+            # Refresh
             self.refresh_table()
 
             # Restore selection in Treeview
@@ -1721,7 +1731,7 @@ class ItemBrowserApp:
         niche_raw_filter = self.niche_display_to_raw.get(niche_disp)
         eff_disp = self.effect_var.get()
         eff_raw_filter = self.effect_display_to_raw.get(eff_disp)
-        selected_source_raw = self.source_display_to_raw.get(self.source_var.get(), "All")
+        source_name = self.source_var.get()
         s_query = self.search_var.get().strip().lower()
 
         # 3. Filter Logic
@@ -1792,18 +1802,31 @@ class ItemBrowserApp:
                 if filter_val not in item_search_terms:
                     continue
 
-            if selected_source_raw != "All":
-                item_source = item.get('Source', '')
-                source_parts = [p.strip() for p in item_source.split('|') if p.strip()]
-                found_src = False
+            if source_name != "All":
+                # Use the string 'source_name' as the key to get the list of IDs
+                allowed_ids = self.source_display_to_raw.get(source_name, [])
+
+                # Safety check: ensure it's a list
+                if not isinstance(allowed_ids, list):
+                    allowed_ids = [allowed_ids]
+
+                item_source_raw = item.get('Source', '')
+                source_parts = [p.strip() for p in item_source_raw.split('|') if p.strip()]
+
+                found_source = False
                 for p in source_parts:
-                    if selected_source_raw.startswith("POOL_"):
-                        target_guid = selected_source_raw.replace("POOL_", "")
-                        if p.split('[')[0].strip() == target_guid: found_src = True
-                    elif p.startswith(f"{selected_source_raw}:") or p == selected_source_raw:
-                        found_src = True
-                    if found_src: break
-                if not found_src: continue
+                    if "[" in p and "]" in p:
+                        item_raw_id = f"POOL_{p.split('[')[0].strip()}"
+                    else:
+                        item_raw_id = p.split(':', 1)[0].strip()
+
+                    # Check if this item's source ID is in our list of allowed IDs
+                    if item_raw_id in allowed_ids:
+                        found_source = True
+                        break
+
+                if not found_source:
+                    continue
 
             # Resolve name for search and display
             raw_name = self.get_resolved_name(item['GUID'])
