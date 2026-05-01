@@ -10,6 +10,7 @@ import json
 import sys
 import platform
 import ctypes
+import _version
 
 # Visual Styles
 BG_MAIN = "#0b192c"
@@ -95,6 +96,7 @@ BUFF_EFFECT_MAPPING = {
     "AccuracyCatapultModuleUpgrage": ["data/ui/fhd/base/icon_content/military/icon_2d_accuracy.png", "-6903547229044160126"],
     "AccuracyUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_accuracy.png", "-6914510932562426253"],
     "ActiveTradePriceInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_percentage.png", "-6904910338903030922"],
+    "AddedFertility": ["data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png", "-6909929033293673440", "-6907770522750495863"],
     "AdditionalLoadingSpeedInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_ship_civilian.png", "-6913245221430448853"],
     "AdditionalMoneyIncome": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6907832455942731395"],
     "AdditionalOutput": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_goods.png", "-6899820196143793484"],
@@ -235,7 +237,7 @@ CONDITION_TYPES = {
     "ConditionWarState": "-6916305455916138439",
     "ConditionDominantPatron": "-6917281781830473807",
     "ConditionInStorage": ["-6904656400857447148", "-6916792298682888435"],
-    "ConditionTradeRouteCount": "-6915569607474692589",
+    "ConditionTradeRouteCount": "-6915569607474692589"
 }
 
 # No Religion Condition
@@ -260,7 +262,8 @@ CONDITION_ATTRIBUTES = {
     "ActiveEmperorReputation": ["-6900988673237471031", "-6909286393160361264"],
     "ContractsCompleted": "-6915965511056834686",
     "ShipsSoldToParticipant": "-6915345810045190210",
-    "IslandsDiscovered": "-6917195644310704229"
+    "IslandsDiscovered": "-6917195644310704229",
+    "ItemsInStock": ["-6914097598100160370", "-6916792298682888435"],
 }
 
 # Condition Scope
@@ -311,6 +314,7 @@ REWARD_POOL_MAPPING = {
     "43020": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_manx.png", "-6910353931395472437"],
     "43021": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_corvinus.png", "-6913545710924920342"],
     "43022": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038"],
+    "145045": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071"],
     "64766": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6914762194635081755"],
     "64767": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6915564870584412590"],
     "64768": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6916763202365380332"],
@@ -350,6 +354,9 @@ REWARD_POOL_MAPPING = {
     "64802": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6914762194635081755"],
     "64803": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6915564870584412590"],
     "64804": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6916763202365380332"],
+    "145046": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6914762194635081755"],
+    "145047": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6915564870584412590"],
+    "145048": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6916763202365380332"],
     "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6906931485680097276", "-6906931485680097276"],
     "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915741635554061343", "-6915741635554061343"],
     "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6909604399726531068", "-6909604399726531068"],
@@ -368,6 +375,7 @@ REWARD_POOL_MAPPING = {
     "95450": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038"],
     "95452": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_empress_julia.png", "-6917064935972779595"],
     "95453": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_emperor_calidus.png", "-6903528267829072805"],
+    "145049": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071"],
     "122533": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6908176692369518815"],
     "122534": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6909503110265739293"],
     "122535": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6915877880140582624"],
@@ -382,12 +390,23 @@ REWARD_POOL_MAPPING = {
     "122544": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6906276675127952394"],
     "122545": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6907991623289664677"],
     "122546": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6900196985132589583"],
-    "122547": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6914573601432067141"]
+    "122547": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6914573601432067141"],
+    "145050": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6913008330424928700"]
+}
+
+REWARD_POOL_CATEGORY_ORDER = {
+    "icon_2d_festival":              0,  # Festivals
+    "icon_2d_buy_sell":              1,  # Traders
+    "icon_2d_questlog_writting":     2,  # Quests
+    "icon_2d_loading_ramp_ship":     3,  # Ship / Rivals
+    "icon_2d_research_economic":     4,  # Research
+    "icon_2d_research_civic":        4,
+    "icon_2d_research_military":     4
 }
 
 # Source Labels
 SOURCE_LABELS = {
-    "ItemGainedWhenDefeated": ["data/ui/fhd/base/icon_content/diplomacy/icon_2d_subjugation_consul.png", "-6908695275642242805"],
+    "ItemGainedWhenDefeated": ["data/ui/fhd/base/icon_content/diplomacy/icon_2d_subjugation_consul.png", "-6914401298572542861"],
     "HallofFame": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_anno_account.png", "-6906945524005841361"],
     "Quest": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_quest_tracker.png", "-6905698394117185352"]
 }
@@ -404,8 +423,8 @@ DLC_ICONS = {
 class ItemBrowserApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Anno 117 Item Inspector")
-        self.root.iconbitmap(resource_path("app_icon.ico"))
+        self.root.title("Anno 117 Item Inspector" + f' v{_version.__VERSION__}')
+        self.root.iconbitmap(resource_path("data/ui/anno117_item_inspector.ico"))
         self.root.geometry("1440x900")
         self.root.configure(bg=BG_MAIN)
 
@@ -422,6 +441,7 @@ class ItemBrowserApp:
         self.rarity_display_to_raw = {}
         self.alloc_display_to_raw = {}
         self.source_display_to_raw = {}
+        self._search_after_id = None
         self.icon_cache = {}
         self.name_resolution_cache = {}
         self.photo_image_cache = {}
@@ -669,7 +689,7 @@ class ItemBrowserApp:
                         if val and val != "None":
                             found = re.findall(r'(\w+|-?\d{15,20})', val)
                             for m in found:
-                                if m in ["Disease", "Plague", "Fire", "Inferno", "Unrest", "Rebellion"]:
+                                if m in ["Disease", "Plague", "Fire", "Inferno", "Unrest", "Rebellion", "FertilityPercent"]:
                                     continue
                                 if not m.replace('-','').isdigit() or m == target_add_eff_id:
                                     self.filter_effects_raw.add(m)
@@ -793,14 +813,22 @@ class ItemBrowserApp:
             return None
 
     # Map item's game version from mentioning dlcs in icon path
-    def get_dlc_key_from_path(self, icon_path):
+    def get_dlc_key_from_path(self, icon_path, origin=""):
+        # Origin column takes priority if populated
+        if origin:
+            origin_lower = origin.lower()
+            if "CDLC01" in origin_lower: return "cdlc01"
+            if "DLC01"  in origin_lower: return "dlc01"
+            if "DLC02"  in origin_lower: return "dlc02"
+            if "DLC03"  in origin_lower: return "dlc03"
+
+        # Fallback: infer from icon path as before
         if not icon_path: return "base"
         path_lower = icon_path.lower().replace('\\', '/')
-
         if "data/ui/fhd/cdlc01" in path_lower: return "cdlc01"
-        if "data/ui/fhd/dlc01" in path_lower: return "dlc01"
-        if "data/ui/fhd/dlc02" in path_lower: return "dlc02"
-        if "data/ui/fhd/dlc03" in path_lower: return "dlc03"
+        if "data/ui/fhd/dlc01"  in path_lower: return "dlc01"
+        if "data/ui/fhd/dlc02"  in path_lower: return "dlc02"
+        if "data/ui/fhd/dlc03"  in path_lower: return "dlc03"
 
         return "base"
 
@@ -884,6 +912,24 @@ class ItemBrowserApp:
         if not raw_source or raw_source == "None": return []
 
         parts = [p.strip() for p in raw_source.split('|') if p.strip()]
+
+        def source_sort_key(part):
+            # Pool entries carry their GUID before the bracket
+            if "[" in part and "]" in part:
+                match = re.match(r'(\d+)\s*\[', part)
+                if match:
+                    guid = match.group(1)
+                    mapping = REWARD_POOL_MAPPING.get(guid, [])
+                    if mapping:
+                        icon_path = mapping[0] if mapping[0].endswith('.png') else ""
+                        for key, priority in REWARD_POOL_CATEGORY_ORDER.items():
+                            if key in icon_path:
+                                return priority
+            # Keyed sources (Quest:, ItemGainedWhenDefeated:, HallofFame:) go last
+            return 99
+
+        parts.sort(key=source_sort_key)
+
         resolved_lines = []
 
         for part in parts:
@@ -1051,12 +1097,12 @@ class ItemBrowserApp:
         # --- ROW 1 ---
         tk.Label(row1, text="Language:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.lang_var = tk.StringVar(value=self.current_language)
-        ttk.Combobox(row1, textvariable=self.lang_var, values=LANGUAGES, state="readonly", width=20).pack(side=tk.LEFT, padx=(0, 8))
+        ttk.Combobox(row1, textvariable=self.lang_var, values=LANGUAGES, state="readonly", width=17).pack(side=tk.LEFT, padx=(0, 8))
         self.lang_var.trace("w", lambda *args: self.on_language_change())
 
         tk.Label(row1, text="Slot:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.alloc_var = tk.StringVar(value="All")
-        self.alloc_combo = ttk.Combobox(row1, textvariable=self.alloc_var, state="readonly", width=10)
+        self.alloc_combo = ttk.Combobox(row1, textvariable=self.alloc_var, state="readonly", width=5)
         self.alloc_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_slot_dropdown()
         self.alloc_var.trace("w", lambda *args: self.refresh_table())
@@ -1084,14 +1130,14 @@ class ItemBrowserApp:
 
         tk.Label(row1, text="Effect:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.effect_var = tk.StringVar(value="All")
-        self.effect_combo = ttk.Combobox(row1, textvariable=self.effect_var, state="readonly", width=30)
+        self.effect_combo = ttk.Combobox(row1, textvariable=self.effect_var, state="readonly", width=37)
         self.effect_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_effect_dropdown()
         self.effect_var.trace("w", lambda *args: self.refresh_table())
 
         tk.Label(row1, text="Source:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.source_var = tk.StringVar(value="All")
-        self.source_combo = ttk.Combobox(row1, textvariable=self.source_var, state="readonly", width=30)
+        self.source_combo = ttk.Combobox(row1, textvariable=self.source_var, state="readonly", width=40)
         self.source_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_source_dropdown()
         self.source_var.trace("w", lambda *args: self.refresh_table())
@@ -1106,6 +1152,17 @@ class ItemBrowserApp:
 
         # 2. Bind the ENTER key to the ENTRY widget, not the StringVar
         self.search_entry.bind("<Return>", lambda e: self.refresh_table())
+
+        # Dynamic search: fires after 300ms idle, only when ≥3 chars or empty
+        self._search_after_id = None
+        def on_search_change(*args):
+            if self._search_after_id:
+                self.root.after_cancel(self._search_after_id)
+            query = self.search_var.get()
+            if len(query) >= 3 or len(query) == 0:
+                self._search_after_id = self.root.after(300, self.refresh_table)
+
+        self.search_var.trace("w", on_search_change)
 
         # 3. The search button
         search_btn = tk.Button(row2, text="🔍", command=self.refresh_table, bg=BG_SECTION, fg=FG_MAIN, cursor="hand2")
@@ -1498,19 +1555,19 @@ class ItemBrowserApp:
     def _disable_sash_drag(self, event):
         # Identify what part of the PanedWindow was clicked
         # "sash" refers to the divider between panes
-        if "sash" in main_paned.identify(event.x, event.y):
+        if "sash" in self.main_paned.identify(event.x, event.y):
             return "break"
 
     def setup_main_layout(self):
-        main_paned = tk.PanedWindow(self.root, orient=tk.HORIZONTAL, bg=BG_MAIN, sashwidth=0, sashpad=0, borderwidth=0, handlepad=0, handlesize=0)
-        main_paned.pack(fill=tk.BOTH, expand=True)
-        main_paned.bind("<Button-1>", self._disable_sash_drag)
-        main_paned.bind("<B1-Motion>", self._disable_sash_drag)
+        self.main_paned = tk.PanedWindow(self.root, orient=tk.HORIZONTAL, bg=BG_MAIN, sashwidth=0, sashpad=0, borderwidth=0, handlepad=0, handlesize=0)
+        self.main_paned.pack(fill=tk.BOTH, expand=True)
+        self.main_paned.bind("<Button-1>", self._disable_sash_drag)
+        self.main_paned.bind("<B1-Motion>", self._disable_sash_drag)
 
         # LEFT SIDE: Treeview and Filters
-        left_side = tk.Frame(main_paned, bg=BG_MAIN)
+        left_side = tk.Frame(self.main_paned, bg=BG_MAIN)
         # Reducing default width slightly to ensure right side has space on smaller screens
-        main_paned.add(left_side, width=600, minsize=600, stretch="always")
+        self.main_paned.add(left_side, width=600, minsize=600, stretch="always")
 
         style = ttk.Style()
         style.theme_use("clam")
@@ -1549,8 +1606,8 @@ class ItemBrowserApp:
         self.tree.bind("<Button-3>", lambda e: self.tree_menu.post(e.x_root, e.y_root))
 
         # RIGHT SIDE: Detail Panel
-        self.detail_container = tk.Frame(main_paned, bg=BG_MAIN)
-        main_paned.add(self.detail_container, width=850 , stretch="never")
+        self.detail_container = tk.Frame(self.main_paned, bg=BG_MAIN)
+        self.main_paned.add(self.detail_container, width=850 , stretch="never")
 
         # Header Canvas stays at top
         self.header_canvas = tk.Canvas(self.detail_container, bg=BG_MAIN, height=160, highlightthickness=0)
@@ -2318,7 +2375,12 @@ class ItemBrowserApp:
 
         # DLC Version Icon Logic
         icon_path = data.get('Icon', '')
-        dlc_key = self.get_dlc_key_from_path(icon_path)
+        origin_raw = data.get('Origin', '').strip()
+        dlc_key = self.get_dlc_key_from_path(icon_path, origin_raw)
+
+        # Only show obsidian price if it's dlc01 AND sold by the obsidian trader (GUID 145045)
+        source_raw_price = data.get('Source', '')
+        is_obsidian_item = (dlc_key == "dlc01") and ("145045" in source_raw_price)
 
         # Get the first icon path from your DLC_ICONS mapping
         dlc_icon_rel_path = DLC_ICONS.get(dlc_key, DLC_ICONS["base"])[0]
@@ -2662,12 +2724,33 @@ class ItemBrowserApp:
             separator = '|' if '|' in raw_str else ','
             raw_list = [e.strip() for e in raw_str.split(separator) if e.strip()]
 
+            # --- NEW with DLC01: Extract paired AddedFertility + FertilityPercent before main loop ---
+            fertility_guid = None
+            fertility_pct = None
+            filtered_raw_list = []
+            for e in raw_list:
+                if e.startswith("AddedFertility:"):
+                    fertility_guid = e.split(":", 1)[1].strip()
+                elif e.startswith("FertilityPercent:"):
+                    fertility_pct = e.split(":", 1)[1].strip()
+                else:
+                    filtered_raw_list.append(e)
+            raw_list = filtered_raw_list
+
             # 2. Gather all resolved lines first
             all_lines = []
             for e in raw_list:
                 resolved = res_emb(e)
                 if not resolved or resolved == "None": continue
                 all_lines.extend(resolved.split('\n'))
+
+            # --- NEW with DLC01: Formating for Fertility Items: Append merged fertility line (icon + loca name left, percent right) ---
+            if fertility_guid is not None:
+                f_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png"
+                f_name = self.get_resolved_name(fertility_guid)
+                left = f"[SIMG:{f_icon}] {f_name}" if f_icon else f_name
+                pct = fertility_pct if fertility_pct is not None else "+100%"
+                all_lines.append(f"{left}\t{pct}")
 
             # 3. Filter duplicate headers
             processed_lines = []
@@ -2765,40 +2848,62 @@ class ItemBrowserApp:
         is_meta = data.get('IsMetaItem') == '1'
         meta_text = self.localization_map.get("-6901699015838422825", "Meta Item").strip()
 
+        # Resolve localized "Price" label (icon ignored here, currency_icon used instead)
+        _, price_label = self.resolve_loca_and_icon(PRICE_LABEL_ID, "Price")
+
         if is_meta:
             pr_val = meta_text
+            currency_icon = SOURCE_LABELS["HallofFame"][0]
+            left_label = price_label
+            left_icon = self.asset_guid_to_icon.get("107517", "")
         elif rarity_raw == "Unique":
             pr_val = self.localization_map.get(RARITY_LOCA_MAPPING.get("Unique", ""), "Unique")
+            currency_icon = self.asset_guid_to_icon.get("29293", "")
+            left_label = price_label
+            left_icon = self.asset_guid_to_icon.get("107517", "")
+        elif is_obsidian_item:
+            pr_val = data.get('ObsidianPrice', '0')
+            currency_icon = self.asset_guid_to_icon.get("145102", "")
+            left_label = self.localization_map.get("-6900979948556600852", "Obsidian Item").strip()
+            left_icon = self.asset_guid_to_icon.get("107517", "")
         else:
             pr_val = data.get('Price', '0')
-
-        # 1. Resolve icon and localized label ("Price")
-        price_icon, price_label = self.resolve_loca_and_icon(PRICE_LABEL_ID, "Price")
+            currency_icon = self.asset_guid_to_icon.get("1010017", PRICE_LABEL_ID[0])
+            left_label = price_label
+            left_icon = self.asset_guid_to_icon.get("107517", "")
 
         self.details_text.insert(tk.END, big_sep)
 
-        # 2. Create a container frame that fills the text width
-        # Match the width used in your Niche/Allocation fix
+        # Container frame
         price_row = tk.Frame(self.details_text, bg=BG_MAIN, width=790, height=25)
         price_row.pack_propagate(False)
 
-        # 3. LEFT SIDE: Icon and Label
+        # LEFT SIDE: optional icon + label
         left_group = tk.Frame(price_row, bg=BG_MAIN)
         left_group.pack(side=tk.LEFT)
 
-        if price_icon:
-            img_p = self.get_icon_image(price_icon, (25, 25)) # Slightly larger for the bold font
+        if left_icon:
+            img_l = self.get_icon_image(left_icon, (25, 25))
+            if img_l:
+                ph_l = ImageTk.PhotoImage(img_l)
+                self.icon_cache[f"price_left_icon_{len(self.icon_cache)}"] = ph_l
+                tk.Label(left_group, image=ph_l, bg=BG_MAIN).pack(side=tk.LEFT)
+
+        tk.Label(left_group, text=f" {left_label.upper()}:", font=FONT_UI_BOLD, fg=FG_MAIN, bg=BG_MAIN).pack(side=tk.LEFT)
+
+        # RIGHT SIDE: currency icon + value
+        right_group = tk.Frame(price_row, bg=BG_MAIN)
+        right_group.pack(side=tk.RIGHT)
+
+        tk.Label(right_group, text=pr_val, font=FONT_UI_BOLD, fg=FG_MAIN, bg=BG_MAIN).pack(side=tk.RIGHT, padx=10)
+
+        if currency_icon:
+            img_p = self.get_icon_image(currency_icon, (25, 25))
             if img_p:
                 ph_p = ImageTk.PhotoImage(img_p)
                 self.icon_cache[f"price_icon_{len(self.icon_cache)}"] = ph_p
-                tk.Label(left_group, image=ph_p, bg=BG_MAIN).pack(side=tk.LEFT)
+                tk.Label(right_group, image=ph_p, bg=BG_MAIN).pack(side=tk.LEFT)
 
-        tk.Label(left_group, text=f" {price_label.upper()}:", font=FONT_UI_BOLD, fg=FG_MAIN, bg=BG_MAIN).pack(side=tk.LEFT)
-
-        # 4. RIGHT SIDE: The Price Value
-        tk.Label(price_row, text=pr_val, font=FONT_UI_BOLD, fg=FG_MAIN, bg=BG_MAIN).pack(side=tk.RIGHT, padx=10)
-
-        # 5. Embed the frame into the text widget
         self.details_text.window_create(tk.END, window=price_row)
         self.details_text.insert(tk.END, "\n")
         self.details_text.insert(tk.END, big_sep)

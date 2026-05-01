@@ -49,7 +49,7 @@ def build_extended_source_maps(assets_map):
     quest_item_map = {}
 
     # Identify all Quest-related templates that might need climbing
-    QUEST_TEMPLATES = {'Sequence', 'Decision', 'StateChecker', 'SequenceCharNotif', 'DecisionRoot', 'Decision', 'Function', 'Objective'}
+    QUEST_TEMPLATES = {'Sequence', 'Decision', 'StateChecker', 'SequenceCharNotif', 'GoToObjectiveComponent', 'DecisionRoot', 'Function', 'Objective'}
     quest_related_guids = set()
 
     for guid, asset in assets_map.items():
@@ -95,7 +95,7 @@ def build_extended_source_maps(assets_map):
             rival_rewards[item_id].append(guid)
 
         # 3. Quests with Broad Climbing
-        if tpl in ['Decision', 'Sequence', 'Objective']:
+        if tpl in ['Decision', 'Sequence', 'Objective', 'SequenceCharNotif', 'GoToObjectiveComponent']:
             for text_node in asset.itertext():
                 val = text_node.strip()
                 if val in assets_map:
@@ -242,9 +242,7 @@ def parse_value_node(node):
         try:
             val_num = float(raw_val)
 
-            # 1. ActiveTradePriceInPercent (Offset Logic: 75 -> -25)
-            if tag_name == "ActiveTradePriceInPercent":
-                val_num = val_num - 100
+            # 1. ActiveTradePriceInPercent: value in assets is already the direct percent, no offset needed
 
             # 2. Reduction Tags (Force '-' for positive values)
             REDUCTION_TAGS = [
@@ -256,8 +254,13 @@ def parse_value_node(node):
             # 3. CLEAN FORMATTING: Remove .0 from integers
             val_fmt = str(int(val_num)) if val_num.is_integer() else str(val_num)
 
+            # Tags whose value is a GUID reference — never prepend a sign
+            GUID_VALUE_TAGS = ["AddedFertility"]
+
             if tag_name in REDUCTION_TAGS and val_num > 0:
                 final_val = f"-{val_fmt}"
+            elif tag_name in GUID_VALUE_TAGS:
+                final_val = val_fmt  # raw number, no sign
             else:
                 # 4. Workforce & others get '+' prefix
                 final_val = f"+{val_fmt}" if val_num > 0 else val_fmt
@@ -450,6 +453,9 @@ def resolve_single_buff_asset(asset_node, assets_map, visited_guids, prefix=""):
                 if new_workforce:
                     extracted_effects.append(f"{prefix}ReplaceWorkforce: {new_workforce}")
 
+        # Build tag set ONCE before the loop
+        effect_tags_present = {node.tag for node in parent_node}
+
         for effect_node in parent_node:
             effect_name = effect_node.tag
 
@@ -519,6 +525,10 @@ def resolve_single_buff_asset(asset_node, assets_map, visited_guids, prefix=""):
                 val_str = parse_value_node(effect_node)
                 if val_str: extracted_effects.append(f"{prefix}{effect_name}: {val_str}")
 
+        # if AddedFertility exists but FertilityPercent is absent, default it
+        if "AddedFertility" in effect_tags_present and "FertilityPercent" not in effect_tags_present:
+            extracted_effects.append(f"{prefix}FertilityPercent: +100%")
+
     return extracted_effects
 
 def get_full_buff_description(guid, assets_map):
@@ -577,13 +587,7 @@ def extract_xml_to_csv(xml_file_path, csv_file_path):
         return results
 
     headers = [
-        'GUID', 'Icon', 'Name', 'InfoDescription',
-        'Buff', 'Buff Effects',
-        'BoostBuff', 'BoostBuff Effects',
-        'Boost Hint', 'Boost Condition',
-        'Targets',
-        'Source', # NEW COLUMN
-        'Allocation', 'Rarity', 'Niche', 'Price', 'IsMetaItem'
+        'GUID', 'Icon', 'Name', 'InfoDescription', 'Buff', 'Buff Effects', 'BoostBuff', 'BoostBuff Effects', 'Boost Hint', 'Boost Condition', 'Targets', 'Source', 'Allocation', 'Rarity', 'Niche', 'Price', 'IsMetaItem', 'Origin', 'ObsidianPrice'
     ]
     extracted_data = []
     EXCLUDED_ICON = "data/ui/fhd/base/icon_content/items_specialist/unique/icon_3d_specialist_hooded_01.png"
@@ -610,17 +614,21 @@ def extract_xml_to_csv(xml_file_path, csv_file_path):
             'GUID': guid, 'Icon': icon_val, 'Rarity': final_rarity,
             'Niche': get_text_safe(item_node, 'Niche', 'Finance'),
             'IsMetaItem': '1' if get_text_safe(item_node, 'IsMetaItem', '0') == '1' else '',
-            'Allocation': get_text_safe(item_node, 'Allocation', 'Villa'),
-            'Price': get_text_safe(item_node, 'TradePrice', '')
+            'Allocation': get_text_safe(item_node, 'Allocation', 'Villa')
         }
+
+        row['Price'] = get_text_safe(item_node, 'TradePrice', '')
+        row['Origin'] = get_text_safe(item_node, 'Origin', '')
+        try:
+            row['ObsidianPrice'] = str(round(int(row['Price']) / 4 / 42)) if row['Price'] else ''
+        except (ValueError, ZeroDivisionError):
+            row['ObsidianPrice'] = ''
 
         oasis = asset.find('.//Text/OasisId')
         row['Name'] = oasis.text.strip() if oasis is not None else f"INHERIT:{inheritance_map.get(guid, '')}"
         row['InfoDescription'] = get_text_safe(asset, './/InfoDescription', "")
 
-        # --- NEW: Extract Source ---
         row['Source'] = get_combined_source_value(guid, asset, child_to_parents, public_refs, rival_rewards, quest_item_map)
-        # ---------------------------
 
         buffs_node = asset.find('.//Effect/Buffs')
         buff_guids = [i.find('GUID').text.strip() for i in buffs_node.findall('Item') if i.find('GUID') is not None] if buffs_node is not None else []
