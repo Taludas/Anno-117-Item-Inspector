@@ -41,11 +41,11 @@ Every item entry is broken down into two distinct sections:
     - Tkinter (usually included with Python)
   - Installation:
     - Clone the repository
-    - Run the extract_assets_resolve_pools_buffs_conditions_sources.py script to generate a fresh scv file - update the game assets.xml and language files in the data folder if necessary.
-    - Run the application anno117_item_inspector.py
+    - Run the extract_assets_resolve_pools_buffs_conditions_sources.py script to generate a fresh csv file - update the game assets.xml and language files in the data folder if necessary (after game update).
+    - Run the script anno117_item_inspector.py
 
 # Known Issues
-- Currently (v1.4 of the game) there are two items introduced into the assets with the Marvelous Mosaic cDLC, which indicate their sources to be the Hall of Fame, but Ubisoft confirmed, that there are no new HoF items with the update. As the script cannot differentiate between server-site implemented HoF items and non-server site implemented HoF items, the Item Inspector displays these items, even though they are not (yet) obtainable, also indicated by their missing (therefore defaulting to the placeholder hooded) in-game icon.
+- Currently (v1.5 of the game) there are two items - first introduced into the assets with the Marvelous Mosaic cDLC and now moved to DLC01 - which indicate their sources to be the Hall of Fame, but Ubisoft has not yet updated the Hall of Fame to include new content after the first DLC. As the script cannot differentiate between server-site implemented HoF items and non-server site implemented HoF items, the Item Inspector displays these items, even though they are not (yet) obtainable.
 
 # Credits
 - DuxVitae for the idea of extracting item data to a csv file.

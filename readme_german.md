@@ -25,7 +25,7 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 - Quellen: Alle Itemquellen (Händler, Verträge, Rewardpools, Questbelohnungen, Festivals oder spezifische Forschung) mit Angabe der Wahrscheinlichkeiten, sofern zutreffend. Bewegt den Mauszeiger über die Überschrift „Item-Quelle“, um eine Legende zur Interpretation der Symbole in der Liste anzuzeigen.
 
 ## Filter-System
-- Suche über mehrere Kategorien: Filtert Gegenstände nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle.
+- Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle.
 - Intelligente "Effektzusammenführung": Eine einheitliche Filterlogik, die ähnliche Attribute über verschiedene Datentypen hinweg zusammenführt (Attribut alleine, Attribut durch geändertes Bedürfnis, extra Attribute durch Bereichseffekte).
 - Spielversionsverlauf: Filtern der Items, die in bestimmten Spielversionen eingeführt wurden (für zukünftige DLC-Veröffentlichungen).
 - "Intelligente" Suchleiste: manuell kann nach (Teilen des) Namen des Items, GUID, (Teilen des) Namens der Effekte, Zielen usw. gesucht werden. Einfach eingeben, wonach gesucht wird, und die Eingabetaste drücken oder die Suchschaltfläche betätigen.
@@ -39,11 +39,11 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
     - Tkinter (in der Regel in Python enthalten)
   - Installation:
     - Das Repository klonen
-    - Ausführen des Skripts in der Konsole: "extract_assets_resolve_pools_buffs_conditions_sources.py" ausführen, um eine aktualisierte SCV-Datei zu generieren, davor gegebenenfalls die Datei „assets.xml“ und die Sprachdateien im data-Ordner updaten, wenn eine neue Game Version rausgekommen ist.
+    - Ausführen des Skripts "extract_assets_resolve_pools_buffs_conditions_sources.py" in der Konsole, um eine aktualisierte CSV-Datei zu generieren, davor gegebenenfalls die Datei „assets.xml“ und die Sprachdateien im data-Ordner updaten, wenn eine neue Game Version rausgekommen ist.
     - Ausführen des Skripts "anno117_item_inspector.py" startet das Programm.
 
 # Known Issues
-- Derzeit (in Version 1.4 des Spiels) gibt es zwei Items, die mit dem cDLC "Meisterhafte Mosaike" in die Assets aufgenommen wurden und deren Quelle als Ruhmeshalle angegeben ist. Ubisoft hat jedoch bestätigt, dass es mit dem Update keine neuen Ruhmeshallen-Items gibt. Da das Skript nicht zwischen serverseitig implementierten Ruhmeshallen-Items und nicht serverseitig implementierten Ruhmeshallen-Items unterscheiden kann, zeigt der Item Inspector diese Items an, obwohl sie (noch) nicht erhältlich sind, was auch durch das fehlende (und daher das standardmäßig als Platzhalter verwendete Kaputzen-) Symbol in der App angezeigt wird.
+- Derzeit (in Version 1.5 des Spiels) gibt es zwei Items, die zum ersten Mal mit dem cDLC "Meisterhafte Mosaike" in die Assets aufgenommen wurden, nun auf DLC01 geschoben wurden und deren Quelle als Ruhmeshalle angegeben ist. Ubisoft hat jedoch bestätigt, dass es mit dem Update keine neuen Ruhmeshallen-Items gibt. Da das Skript nicht zwischen serverseitig implementierten Ruhmeshallen-Items und nicht serverseitig implementierten Ruhmeshallen-Items unterscheiden kann, zeigt der Item Inspector diese Items an, obwohl sie (noch) nicht erhältlich sind.
 
 # Credits
 - DuxVitae für die Idee, Item-Daten in eine CSV-Datei zu extrahieren.
