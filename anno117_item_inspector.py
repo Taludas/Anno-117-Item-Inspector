@@ -46,6 +46,10 @@ RARITY_LOCA_MAPPING = {
     "Unique": "-6914484556772811597"
 }
 
+# Fixed display order for the rarity filter dropdown, regardless of language.
+# Any rarity not listed here (e.g. "None", "Uncommon") sorts alphabetically at the end.
+RARITY_ORDER = ["Common", "Rare", "Epic", "Legendary", "Unique"]
+
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
@@ -357,9 +361,9 @@ REWARD_POOL_MAPPING = {
     "145046": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6914762194635081755"],
     "145047": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6915564870584412590"],
     "145048": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6916763202365380332"],
-    "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6906931485680097276", "-6906931485680097276"],
-    "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915741635554061343", "-6915741635554061343"],
-    "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6909604399726531068", "-6909604399726531068"],
+    "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6915178130906922013", "-6906931485680097276"],
+    "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915178130906922013", "-6915741635554061343"],
+    "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6915178130906922013", "-6909604399726531068"],
     "95375": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_caeso.png", "-6911896607082319713"],
     "95439": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647"],
     "95440": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_rival_tarragon.png", "-6907715955237745360"],
@@ -1087,70 +1091,80 @@ class ItemBrowserApp:
         top_frame = tk.Frame(self.root, pady=10, padx=10, bg=BG_MAIN)
         top_frame.pack(side=tk.TOP, fill=tk.X)
 
-        # Create two separate rows
+        # Three rows: primary filters | source+NPC | search+buttons
         row1 = tk.Frame(top_frame, bg=BG_MAIN)
         row1.pack(side=tk.TOP, fill=tk.X, pady=(0, 5))
 
         row2 = tk.Frame(top_frame, bg=BG_MAIN)
-        row2.pack(side=tk.TOP, fill=tk.X)
+        row2.pack(side=tk.TOP, fill=tk.X, pady=(0, 5))
 
-        # --- ROW 1 ---
+        tk.Frame(top_frame, bg="#444444", height=1).pack(side=tk.TOP, fill=tk.X, pady=(0, 5))
+
+        row3 = tk.Frame(top_frame, bg=BG_MAIN)
+        row3.pack(side=tk.TOP, fill=tk.X)
+
+        # --- ROW 1 --- Primary filters; widths scaled up proportionally to fill space freed by moving Source
         tk.Label(row1, text="Language:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.lang_var = tk.StringVar(value=self.current_language)
-        ttk.Combobox(row1, textvariable=self.lang_var, values=LANGUAGES, state="readonly", width=17).pack(side=tk.LEFT, padx=(0, 8))
+        ttk.Combobox(row1, textvariable=self.lang_var, values=LANGUAGES, state="readonly", width=23).pack(side=tk.LEFT, padx=(0, 8))
         self.lang_var.trace("w", lambda *args: self.on_language_change())
 
         tk.Label(row1, text="Slot:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.alloc_var = tk.StringVar(value="All")
-        self.alloc_combo = ttk.Combobox(row1, textvariable=self.alloc_var, state="readonly", width=5)
+        self.alloc_combo = ttk.Combobox(row1, textvariable=self.alloc_var, state="readonly", width=7)
         self.alloc_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_slot_dropdown()
         self.alloc_var.trace("w", lambda *args: self.refresh_table())
 
         tk.Label(row1, text="Rarity:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.rarity_var = tk.StringVar(value="All")
-        self.rarity_combo = ttk.Combobox(row1, textvariable=self.rarity_var, state="readonly", width=10)
+        self.rarity_combo = ttk.Combobox(row1, textvariable=self.rarity_var, state="readonly", width=14)
         self.rarity_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_rarity_dropdown()
         self.rarity_var.trace("w", lambda *args: self.refresh_table())
 
         tk.Label(row1, text="Niche:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.niche_var = tk.StringVar(value="All")
-        self.niche_combo = ttk.Combobox(row1, textvariable=self.niche_var, state="readonly", width=10)
+        self.niche_combo = ttk.Combobox(row1, textvariable=self.niche_var, state="readonly", width=14)
         self.niche_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_niche_dropdown()
         self.niche_var.trace("w", lambda *args: self.refresh_table())
 
         tk.Label(row1, text="Target:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.target_var = tk.StringVar(value="All")
-        self.target_combo = ttk.Combobox(row1, textvariable=self.target_var, state="readonly", width=30)
+        self.target_combo = ttk.Combobox(row1, textvariable=self.target_var, state="readonly", width=41)
         self.target_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_target_list()
         self.target_var.trace("w", lambda *args: self.refresh_table())
 
         tk.Label(row1, text="Effect:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.effect_var = tk.StringVar(value="All")
-        self.effect_combo = ttk.Combobox(row1, textvariable=self.effect_var, state="readonly", width=37)
+        self.effect_combo = ttk.Combobox(row1, textvariable=self.effect_var, state="readonly", width=51)
         self.effect_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_effect_dropdown()
         self.effect_var.trace("w", lambda *args: self.refresh_table())
 
-        tk.Label(row1, text="Source:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
+        # --- ROW 2 --- Source category + NPC/Type sub-filter
+        tk.Label(row2, text="Source:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.source_var = tk.StringVar(value="All")
-        self.source_combo = ttk.Combobox(row1, textvariable=self.source_var, state="readonly", width=40)
+        self.source_combo = ttk.Combobox(row2, textvariable=self.source_var, state="readonly", width=40)
         self.source_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.update_source_dropdown()
-        self.source_var.trace("w", lambda *args: self.refresh_table())
+        self.source_var.trace("w", lambda *args: self.on_source_change())
 
-        # --- ROW 2 ---
-        tk.Label(row2, text="Search:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
+        tk.Label(row2, text="NPC / Type:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
+        self.source_npc_var = tk.StringVar(value="All")
+        self.source_npc_combo = ttk.Combobox(row2, textvariable=self.source_npc_var, state="disabled", width=40)
+        self.source_npc_combo['values'] = ["All"]
+        self.source_npc_combo.pack(side=tk.LEFT, padx=(0, 8))
+        self.source_npc_var.trace("w", lambda *args: self.on_source_npc_change())
+
+        # --- ROW 3 --- Search and action buttons
+        tk.Label(row3, text="Search:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
         self.search_var = tk.StringVar()
 
-        # 1. Assign the Entry to self.search_entry
-        self.search_entry = tk.Entry(row2, textvariable=self.search_var, width=50)
+        self.search_entry = tk.Entry(row3, textvariable=self.search_var, width=50)
         self.search_entry.pack(side=tk.LEFT)
-
-        # 2. Bind the ENTER key to the ENTRY widget, not the StringVar
         self.search_entry.bind("<Return>", lambda e: self.refresh_table())
 
         # Dynamic search: fires after 300ms idle, only when ≥3 chars or empty
@@ -1164,27 +1178,22 @@ class ItemBrowserApp:
 
         self.search_var.trace("w", on_search_change)
 
-        # 3. The search button
-        search_btn = tk.Button(row2, text="🔍", command=self.refresh_table, bg=BG_SECTION, fg=FG_MAIN, cursor="hand2")
+        search_btn = tk.Button(row3, text="🔍", command=self.refresh_table, bg=BG_SECTION, fg=FG_MAIN, cursor="hand2")
         search_btn.pack(side=tk.LEFT, padx=5)
 
-        # The Clear Button
-        clear_btn = tk.Button(row2, text="Clear All", command=self.clear_filters, bg=BG_SECTION, fg=FG_MAIN, cursor="hand2")
+        clear_btn = tk.Button(row3, text="Clear All", command=self.clear_filters, bg=BG_SECTION, fg=FG_MAIN, cursor="hand2")
         clear_btn.pack(side=tk.LEFT, padx=5)
 
-        # The Default Language Change Button
-        lang_btn = tk.Button(row2, text="Default Language", command=self.change_language_request, bg=BG_SECTION, fg="#ffd700", cursor="hand2")
+        lang_btn = tk.Button(row3, text="Default Language", command=self.change_language_request, bg=BG_SECTION, fg="#ffd700", cursor="hand2")
         lang_btn.pack(side=tk.LEFT, padx=5)
 
-        # The Version Filter Button
-        self.setup_dlc_filter_button(row2)
+        self.setup_dlc_filter_button(row3)
 
-        # Ko-fi Button (Right Aligned)
         def open_kofi():
             webbrowser.open("https://ko-fi.com/W7W8L558T")
 
         kofi_btn = tk.Button(
-            row2,
+            row3,
             text="☕ Support me on Ko-fi!",
             command=open_kofi,
             bg="#5F032E",
@@ -1274,14 +1283,19 @@ class ItemBrowserApp:
         self.target_combo['values'] = ["All"] + sorted(list(unique_names))
 
     def update_rarity_dropdown(self):
-        display_names = []
         self.rarity_display_to_raw = {}
         for raw in self.filter_rarities:
             loca_id = RARITY_LOCA_MAPPING.get(raw)
-            _, name = self.resolve_loca_and_icon(loca_id, raw) if loca_id else raw
-            display_names.append(name)
+            _, name = self.resolve_loca_and_icon(loca_id, raw) if loca_id else (None, raw)
             self.rarity_display_to_raw[name] = raw
-        self.rarity_combo['values'] = ["All"] + sorted(display_names)
+        def _rarity_sort_key(display_name):
+            raw = self.rarity_display_to_raw[display_name]
+            try:
+                return (0, RARITY_ORDER.index(raw))
+            except ValueError:
+                return (1, display_name)
+        sorted_names = sorted(self.rarity_display_to_raw.keys(), key=_rarity_sort_key)
+        self.rarity_combo['values'] = ["All"] + sorted_names
 
     def update_slot_dropdown(self):
         display_names = []
@@ -1295,20 +1309,38 @@ class ItemBrowserApp:
 
     def update_source_dropdown(self):
         display_names = []
-        # Change this to store LISTS of raw IDs: { "Contracts": ["POOL_123", "POOL_456"], ... }
         self.source_display_to_raw = {}
+        # {category_display_name: {sub_display_name: [raw_ids]}}
+        self.source_npc_options = {}
         clean_pattern = re.compile(r'<[^>]*>|\[S?IMG:[^\]]*\]')
+
+        def _clean(s):
+            s = clean_pattern.sub('', str(s))
+            return s.replace(" • ", "").replace(" - ", " ").strip(" -").strip()
 
         for raw in self.filter_sources_raw:
             raw_str = str(raw).strip()
             name = ""
+            sub_name = None
 
             if raw_str.startswith("POOL_"):
                 guid = raw_str.replace("POOL_", "")
                 mapping = REWARD_POOL_MAPPING.get(guid)
                 if mapping and len(mapping) > 1:
-                    # Resolve name using the OasisId (mapping[1])
                     name = self.localization_map.get(str(mapping[1]), guid)
+                    # Resolve NPC/type sub-name from the mapping structure:
+                    # len==3, mapping[1]!=mapping[2]  → Festival type (3rd element is the type)
+                    # len==4                           → Trade/Shipping (NPC name at index 3)
+                    # len==5                           → Quest (NPC at index 3, difficulty at index 4)
+                    if len(mapping) == 3 and mapping[1] != mapping[2]:
+                        sub_name = self.localization_map.get(str(mapping[2]), "")
+                    elif len(mapping) >= 4:
+                        npc = self.localization_map.get(str(mapping[3]), "")
+                        if len(mapping) >= 5:
+                            difficulty = self.localization_map.get(str(mapping[4]), "")
+                            sub_name = f"{npc} – {difficulty}" if npc and difficulty else npc
+                        else:
+                            sub_name = npc
             else:
                 mapping = SOURCE_LABELS.get(raw_str)
                 if mapping and isinstance(mapping, list) and len(mapping) > 1:
@@ -1316,23 +1348,51 @@ class ItemBrowserApp:
                 else:
                     _, name = self.resolve_loca_and_icon(raw_str, raw_str)
 
-            # Final Cleaning
-            name = clean_pattern.sub('', str(name))
-            name = name.replace(" • ", "").replace(" - ", " ").strip(" -").strip()
+            name = _clean(name)
+            if sub_name:
+                sub_name = _clean(sub_name)
 
             if name:
                 if name not in display_names:
                     display_names.append(name)
 
-                # IMPORTANT: Append to a list so "Contracts" holds ALL matching POOL IDs
                 if name not in self.source_display_to_raw:
                     self.source_display_to_raw[name] = []
-
-                # Avoid duplicates in the list
                 if raw not in self.source_display_to_raw[name]:
                     self.source_display_to_raw[name].append(raw)
 
+                if sub_name:
+                    if name not in self.source_npc_options:
+                        self.source_npc_options[name] = {}
+                    if sub_name not in self.source_npc_options[name]:
+                        self.source_npc_options[name][sub_name] = []
+                    if raw not in self.source_npc_options[name][sub_name]:
+                        self.source_npc_options[name][sub_name].append(raw)
+
         self.source_combo['values'] = ["All"] + sorted(display_names)
+
+    def update_source_npc_dropdown(self):
+        category = self.source_var.get()
+        sub_options = self.source_npc_options.get(category, {}) if category != "All" else {}
+        if sub_options:
+            self.source_npc_combo['values'] = ["All"] + sorted(sub_options.keys())
+            self.source_npc_combo.config(state="readonly")
+        else:
+            self.source_npc_combo['values'] = ["All"]
+            self.source_npc_combo.config(state="disabled")
+        self.source_npc_display_to_raw = sub_options
+
+    def on_source_change(self):
+        # Reset NPC sub-filter without triggering an extra table refresh
+        self._suppress_npc_refresh = True
+        self.source_npc_var.set("All")
+        self._suppress_npc_refresh = False
+        self.update_source_npc_dropdown()
+        self.refresh_table()
+
+    def on_source_npc_change(self):
+        if not getattr(self, '_suppress_npc_refresh', False):
+            self.refresh_table()
 
     # Sort treeview content when a column header is clicked.
     def sort_column(self, col, reverse):
@@ -1498,6 +1558,7 @@ class ItemBrowserApp:
         self.target_var.set("All")
         self.niche_var.set("All")
         self.effect_var.set("All")
+        # source_var trace calls on_source_change which resets source_npc_var automatically
         self.source_var.set("All")
 
         # Clear search bar
@@ -1705,6 +1766,8 @@ class ItemBrowserApp:
             current_niche_raw = self.niche_display_to_raw.get(self.niche_var.get())
             current_eff_raw = self.effect_display_to_raw.get(self.effect_var.get())
             current_source_raw = self.source_display_to_raw.get(self.source_var.get())
+            # Save NPC sub-filter as its raw pool IDs so it survives localization changes
+            current_npc_pool_ids = getattr(self, 'source_npc_display_to_raw', {}).get(self.source_npc_var.get(), [])
 
             # 2. Sync the language variable (in case it wasn't set in on_language_change)
             self.current_language = self.lang_var.get().lower()
@@ -1738,6 +1801,18 @@ class ItemBrowserApp:
             restore_selection(self.niche_var, self.niche_display_to_raw, current_niche_raw)
             restore_selection(self.effect_var, self.effect_display_to_raw, current_eff_raw)
             restore_selection(self.source_var, self.source_display_to_raw, current_source_raw)
+
+            # Rebuild NPC dropdown for the restored category, then restore NPC selection
+            self.update_source_npc_dropdown()
+            if current_npc_pool_ids:
+                npc_options = getattr(self, 'source_npc_display_to_raw', {})
+                restored_npc = next(
+                    (n for n, ids in npc_options.items() if any(i in ids for i in current_npc_pool_ids)),
+                    "All"
+                )
+                self._suppress_npc_refresh = True
+                self.source_npc_var.set(restored_npc)
+                self._suppress_npc_refresh = False
 
             # Refresh
             self.refresh_table()
@@ -1860,12 +1935,15 @@ class ItemBrowserApp:
                     continue
 
             if source_name != "All":
-                # Use the string 'source_name' as the key to get the list of IDs
                 allowed_ids = self.source_display_to_raw.get(source_name, [])
-
-                # Safety check: ensure it's a list
                 if not isinstance(allowed_ids, list):
                     allowed_ids = [allowed_ids]
+
+                # Narrow to NPC/Type sub-filter when active
+                npc_name = self.source_npc_var.get()
+                if npc_name != "All":
+                    npc_ids = getattr(self, 'source_npc_display_to_raw', {}).get(npc_name, [])
+                    allowed_ids = [id_ for id_ in allowed_ids if id_ in npc_ids]
 
                 item_source_raw = item.get('Source', '')
                 source_parts = [p.strip() for p in item_source_raw.split('|') if p.strip()]
