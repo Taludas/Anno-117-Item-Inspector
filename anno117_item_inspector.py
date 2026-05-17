@@ -424,7 +424,17 @@ class ItemBrowserApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Anno 117 Item Inspector" + f' v{_version.__VERSION__}')
-        self.root.iconbitmap(resource_path("data/ui/anno117_item_inspector.ico"))
+        # Tk on Linux/macOS cannot consume .ico via iconbitmap, so decode the
+        # icon with Pillow and pass it through iconphoto on non-Windows.
+        icon_path = resource_path("data/ui/anno117_item_inspector.ico")
+        try:
+            if platform.system() == "Windows":
+                self.root.iconbitmap(icon_path)
+            elif os.path.exists(icon_path):
+                self._app_icon = ImageTk.PhotoImage(Image.open(icon_path))
+                self.root.iconphoto(True, self._app_icon)
+        except Exception as e:
+            print(f"[icon] could not load app icon: {e}")
         self.root.geometry("1440x900")
         self.root.configure(bg=BG_MAIN)
 
@@ -461,6 +471,9 @@ class ItemBrowserApp:
             """Registers a font file with the Windows system for the current process."""
             if not os.path.exists(font_path):
                 print(f"Font not found: {font_path}")
+                return False
+
+            if platform.system() != "Windows":
                 return False
 
             # GDI AddFontResourceExW constant
