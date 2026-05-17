@@ -25,7 +25,7 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 - Quellen: Alle Itemquellen (Händler, Verträge, Rewardpools, Questbelohnungen, Festivals oder spezifische Forschung) mit Angabe der Wahrscheinlichkeiten, sofern zutreffend. Bewegt den Mauszeiger über die Überschrift „Item-Quelle“, um eine Legende zur Interpretation der Symbole in der Liste anzuzeigen.
 
 ## Filter-System
-- Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle.
+- Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle (steuerbar über zwei Dropdown-Menüs zur Auswahl der genauen Quelle).
 - Intelligente "Effektzusammenführung": Eine einheitliche Filterlogik, die ähnliche Attribute über verschiedene Datentypen hinweg zusammenführt (Attribut alleine, Attribut durch geändertes Bedürfnis, extra Attribute durch Bereichseffekte).
 - Spielversionsverlauf: Filtern der Items, die in bestimmten Spielversionen eingeführt wurden (für zukünftige DLC-Veröffentlichungen).
 - "Intelligente" Suchleiste: manuell kann nach (Teilen des) Namen des Items, GUID, (Teilen des) Namens der Effekte, Zielen usw. gesucht werden. Einfach eingeben, wonach gesucht wird, und die Eingabetaste drücken oder die Suchschaltfläche betätigen.
@@ -43,11 +43,10 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
     - Ausführen des Skripts "anno117_item_inspector.py" startet das Programm.
 
 # Known Issues
-- Derzeit (in Version 1.5 des Spiels) gibt es zwei Items, die zum ersten Mal mit dem cDLC "Meisterhafte Mosaike" in die Assets aufgenommen wurden, nun auf DLC01 geschoben wurden und deren Quelle als Ruhmeshalle angegeben ist. Ubisoft hat jedoch bestätigt, dass es mit dem Update keine neuen Ruhmeshallen-Items gibt. Da das Skript nicht zwischen serverseitig implementierten Ruhmeshallen-Items und nicht serverseitig implementierten Ruhmeshallen-Items unterscheiden kann, zeigt der Item Inspector diese Items an, obwohl sie (noch) nicht erhältlich sind.
 
 # Credits
 - DuxVitae für die Idee, Item-Daten in eine CSV-Datei zu extrahieren.
-- Google Gemini für die Programmierung des Großteils dieses Projekts.
+- Google Gemini und Claude Code für die Programmierung des Großteils dieses Projekts.
 
 # License
 Dieses Projekt nutzt die Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) Lizenz.

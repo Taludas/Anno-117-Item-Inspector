@@ -27,7 +27,7 @@ Every item entry is broken down into two distinct sections:
 - Acquisition: All Item Sources (Traders, Contracts, Reward Pools, Quest Rewards, or specific Research) with probabilities where applicable. Hover over the Item Source Header to get a legend for interpreting the icons in the list.
 
 ## Filtering System
-- Multi-Category Search: Filter items by Rarity, Allocation, Niche, Target, Effects and Source.
+- Multi-Category Search: Filter items by Rarity, Allocation, Niche, Target, Effects and Source (controllable via two drop-down menus for specifying the exact source).
 - Smart Effect Merging: A unified filtering logic that merges similar attributes across different data types.
 - Game Version history: Filter for items introduced in specific game versions (for future DLC releases)
 - "Intelligent" Search Bar: You can manually search for (parts of the) item name, GUID, (parts of the) effect names, targets etc. Just type in what you are looking for and hit Enter or press the search button.
@@ -45,11 +45,10 @@ Every item entry is broken down into two distinct sections:
     - Run the script anno117_item_inspector.py
 
 # Known Issues
-- Currently (v1.5 of the game) there are two items - first introduced into the assets with the Marvelous Mosaic cDLC and now moved to DLC01 - which indicate their sources to be the Hall of Fame, but Ubisoft has not yet updated the Hall of Fame to include new content after the first DLC. As the script cannot differentiate between server-site implemented HoF items and non-server site implemented HoF items, the Item Inspector displays these items, even though they are not (yet) obtainable.
 
 # Credits
 - DuxVitae for the idea of extracting item data to a csv file.
-- Google Gemini for coding the majority of this project
+- Google Gemini and Claude Code for coding the majority of this project
 
 # License
 This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
