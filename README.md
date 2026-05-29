@@ -25,6 +25,7 @@ Every item entry is broken down into two distinct sections:
 - Boost Logic: Specific Boost Conditions and the corresponding Boost Buffs for legendary items.
 - Item Costs
 - Acquisition: All Item Sources (Traders, Contracts, Reward Pools, Quest Rewards, or specific Research) with probabilities where applicable. Hover over the Item Source Header to get a legend for interpreting the icons in the list.
+- for modders: right click menu to copy GUID to clipboard or export complete Item XML code to clipboard/xml file.
 
 ## Filtering System
 - Multi-Category Search: Filter items by Rarity, Allocation, Niche, Target, Effects and Source (controllable via two drop-down menus for specifying the exact source).

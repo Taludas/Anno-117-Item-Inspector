@@ -23,6 +23,7 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 - Boost-Logik: Spezifische Boost-Bedingungen und die entsprechenden Boost-Buffs für legendäre Items.
 - Kaufkosten
 - Quellen: Alle Itemquellen (Händler, Verträge, Rewardpools, Questbelohnungen, Festivals oder spezifische Forschung) mit Angabe der Wahrscheinlichkeiten, sofern zutreffend. Bewegt den Mauszeiger über die Überschrift „Item-Quelle“, um eine Legende zur Interpretation der Symbole in der Liste anzuzeigen.
+- Für Modder: Klicke mit der rechten Maustaste auf ein Item in der linken Spalte, um die GUID in die Zwischenablage zu kopieren oder den vollständigen Item-XML-Code in die Zwischenablage und in eine separate xml Datei zu exportieren.
 
 ## Filter-System
 - Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle (steuerbar über zwei Dropdown-Menüs zur Auswahl der genauen Quelle).

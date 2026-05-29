@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog
+import copy
 from PIL import Image, ImageTk
 import csv
 import xml.etree.ElementTree as ET
@@ -100,7 +101,7 @@ BUFF_EFFECT_MAPPING = {
     "AccuracyCatapultModuleUpgrage": ["data/ui/fhd/base/icon_content/military/icon_2d_accuracy.png", "-6903547229044160126"],
     "AccuracyUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_accuracy.png", "-6914510932562426253"],
     "ActiveTradePriceInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_percentage.png", "-6904910338903030922"],
-    "AddedFertility": ["data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png", "-6909929033293673440", "-6907770522750495863"],
+    "AddedFertility": ["data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png", "-6911374437279007671"],
     "AdditionalLoadingSpeedInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_ship_civilian.png", "-6913245221430448853"],
     "AdditionalMoneyIncome": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6907832455942731395"],
     "AdditionalOutput": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_goods.png", "-6899820196143793484"],
@@ -428,21 +429,12 @@ class ItemBrowserApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Anno 117 Item Inspector" + f' v{_version.__VERSION__}')
-        # Tk on Linux/macOS cannot consume .ico via iconbitmap, so decode the
-        # icon with Pillow and pass it through iconphoto on non-Windows.
-        icon_path = resource_path("data/ui/anno117_item_inspector.ico")
-        try:
-            if platform.system() == "Windows":
-                self.root.iconbitmap(icon_path)
-            elif os.path.exists(icon_path):
-                self._app_icon = ImageTk.PhotoImage(Image.open(icon_path))
-                self.root.iconphoto(True, self._app_icon)
-        except Exception as e:
-            print(f"[icon] could not load app icon: {e}")
+        self.root.iconbitmap(resource_path("data/ui/anno117_item_inspector.ico"))
         self.root.geometry("1440x900")
         self.root.configure(bg=BG_MAIN)
 
         # Initialize all your dictionaries and lists
+        self.assets_root = None
         self.items_data = []
         self.localization_map = {}
         self.asset_guid_to_loca_id = {}
@@ -475,9 +467,6 @@ class ItemBrowserApp:
             """Registers a font file with the Windows system for the current process."""
             if not os.path.exists(font_path):
                 print(f"Font not found: {font_path}")
-                return False
-
-            if platform.system() != "Windows":
                 return False
 
             # GDI AddFontResourceExW constant
@@ -641,7 +630,8 @@ class ItemBrowserApp:
         if not os.path.exists(xml_path): return
         try:
             tree = ET.parse(xml_path)
-            root = tree.getroot()
+            self.assets_root = tree.getroot()
+            root = self.assets_root
             for asset in root.findall('.//Asset'):
                 guid_node = asset.find('./Values/Standard/GUID')
                 if guid_node is None: continue
@@ -1675,6 +1665,8 @@ class ItemBrowserApp:
         self.tree_menu = tk.Menu(self.tree, tearoff=0, bg=BG_SECTION, fg=FG_MAIN)
         self.tree_menu.add_command(label="Copy Name", command=self.copy_tree_name)
         self.tree_menu.add_command(label="Copy GUID", command=self.copy_tree_guid)
+        self.tree_menu.add_separator()
+        self.tree_menu.add_command(label="Export to XML", command=self.export_selected_item_xml)
 
         # Bind right-click
         self.tree.bind("<Button-3>", lambda e: self.tree_menu.post(e.x_root, e.y_root))
@@ -1733,6 +1725,66 @@ class ItemBrowserApp:
             guid = self.tree.item(selected[0])['values'][1]
             self.root.clipboard_clear()
             self.root.clipboard_append(guid)
+
+    def export_selected_item_xml(self):
+        selected = self.tree.selection()
+        if not selected or self.assets_root is None:
+            return
+
+        guid = selected[0]
+
+        # Find the main item asset
+        item_asset = None
+        for asset in self.assets_root.findall('.//Asset'):
+            g_node = asset.find('./Values/Standard/GUID')
+            if g_node is not None and g_node.text.strip() == guid:
+                item_asset = asset
+                break
+
+        if item_asset is None:
+            return
+
+        # Collect the main asset plus all referenced buff assets
+        export_list = [copy.deepcopy(item_asset)]
+        related_guids = set()
+
+        for path in [
+            './Values/Item/Buff',
+            './/Buffs/Item/GUID',
+            './/BoostBuffs/Item/GUID',
+            './Values/Item/EffectTargetGuid',
+            './Values/Item/EffectTargets/Item/GUID',
+        ]:
+            for node in item_asset.findall(path):
+                if node.text and node.text.strip().replace('-', '').isdigit():
+                    related_guids.add(node.text.strip())
+
+        if related_guids:
+            for asset in self.assets_root.findall('.//Asset'):
+                g_node = asset.find('./Values/Standard/GUID')
+                if g_node is not None and g_node.text.strip() in related_guids:
+                    export_list.append(copy.deepcopy(asset))
+
+        root_export = ET.Element("Assets")
+        for asset in export_list:
+            root_export.append(asset)
+
+        tree_to_save = ET.ElementTree(root_export)
+        if hasattr(ET, 'indent'):
+            ET.indent(tree_to_save, space="  ", level=0)
+
+        xml_str = "<?xml version='1.0' encoding='utf-8'?>\n" + ET.tostring(root_export, encoding="unicode")
+        self.root.clipboard_clear()
+        self.root.clipboard_append(xml_str)
+
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".xml",
+            filetypes=[("XML files", "*.xml")],
+            initialfile=f"Export_Item_{guid}.xml",
+            title="Export Item Data"
+        )
+        if file_path:
+            tree_to_save.write(file_path, encoding="utf-8", xml_declaration=True)
 
     # LOGIC for Language change
     def on_language_change(self, event=None):
@@ -2837,9 +2889,10 @@ class ItemBrowserApp:
 
             # --- NEW with DLC01: Formating for Fertility Items: Append merged fertility line (icon + loca name left, percent right) ---
             if fertility_guid is not None:
-                f_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png"
                 f_name = self.get_resolved_name(fertility_guid)
-                left = f"[SIMG:{f_icon}] {f_name}" if f_icon else f_name
+                f_icon, f_text = self.resolve_loca_and_icon(BUFF_EFFECT_MAPPING.get("AddedFertility"), "AddedFertility")
+                label = f"{f_text} {f_name}".strip()
+                left = f"[SIMG:{f_icon}] {label}" if f_icon else label
                 pct = fertility_pct if fertility_pct is not None else "+100%"
                 all_lines.append(f"{left}\t{pct}")
 
