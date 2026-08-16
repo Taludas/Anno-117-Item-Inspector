@@ -5,7 +5,7 @@ a = Analysis(
     ['anno117_item_inspector.py'],
     pathex=[],
     binaries=[],
-    datas=[('data', 'data'), ('items_export_with_effects.csv', '.')],
+    datas=[('items_export_with_effects.csv', '.'), ('data', 'data'), ('app_icon.ico', '.'), ('data/fonts', 'data/fonts')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

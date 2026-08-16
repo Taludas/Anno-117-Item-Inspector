@@ -9,7 +9,8 @@ UPGRADE_PARENTS = [
     "RecruitmentUpgrade", "AqueductUpgrade", "WarehouseUpgrade",
     "IrrigationUpgrade", "HealthUpgrade", "VehicleUpgrade",
     "TradeShipUpgrade", "MovementUpgrade", "UnitUpgrade",
-    "ItemContainerUpgrade", "SellableUpgrade", "BuildingUpgrade", "MetaUnitBuff", "RepairCraneUpgrade", "MetaEconomyBuff", "AreaPassiveTradeUpgrade", "AreaMaintenanceUpgrade", "AreaFestivalAttributeUpgrade"
+    "ItemContainerUpgrade", "SellableUpgrade", "BuildingUpgrade", "MetaUnitBuff", "RepairCraneUpgrade", "MetaEconomyBuff", "AreaPassiveTradeUpgrade", "AreaMaintenanceUpgrade", "AreaFestivalAttributeUpgrade",
+    "AreaBuff", "AreaNeedAttributeBuff"
 ]
 
 ATTRIBUTES_OF_INTEREST = [
@@ -229,7 +230,10 @@ def parse_value_node(node):
                 return sub_node.text.strip()
         return None
 
-    target_node = node.find("AmountOrPercent") if node.find("AmountOrPercent") is not None else node
+    wrapper_node = node.find("AmountOrPercent")
+    if wrapper_node is None:
+        wrapper_node = node.find("ValueOrPercent")
+    target_node = wrapper_node if wrapper_node is not None else node
     val_child = target_node.find("Value")
 
     raw_val = None
@@ -255,7 +259,7 @@ def parse_value_node(node):
             val_fmt = str(int(val_num)) if val_num.is_integer() else str(val_num)
 
             # Tags whose value is a GUID reference — never prepend a sign
-            GUID_VALUE_TAGS = ["AddedFertility"]
+            GUID_VALUE_TAGS = ["AddedFertility", "GenerateLimitedLodeFertility"]
 
             if tag_name in REDUCTION_TAGS and val_num > 0:
                 final_val = f"-{val_fmt}"
@@ -402,6 +406,24 @@ def parse_condition_node(cond_node, assets_map):
         if state == "0": state = "War"
         val_str = f"{state} | {get_text_safe(data_node, 'Profile2')}"
 
+    elif template == "ConditionFestivalActive":
+        val_str = get_text_safe(data_node, "Festival", "")
+
+    elif template == "ConditionRaceOutcome":
+        # NOTE: space-separated, not "|" -- the app's top-level parser splits the whole
+        # condition string on "|" for its own filter/scope syntax, so a literal "|" here
+        # would get silently cut apart before rendering. The app re-inserts a "|" itself.
+        position = get_text_safe(data_node, "CompareRaceFinishPosition/Value", None)
+        event_guid = get_text_safe(data_node, "CompareEventGuid/Value", None)
+        val_str = " ".join(filter(None, [position, event_guid]))
+
+    elif template == "ConditionCompareVariable":
+        # Space-separated -- see the ConditionRaceOutcome note above about "|" colliding
+        # with the app's top-level condition-string parser.
+        variable = get_text_safe(data_node, "VariableToCheck", "")
+        compare_val = get_text_safe(data_node, "SecondVariable/Values/BoolVariableOrValue/BoolValue", None)
+        val_str = f"{variable} {compare_val}" if compare_val is not None else variable
+
     op_str = f"{op} " if op else ""
     scope = get_text_safe(data_node, "CounterScope", "0")
     scope_str = f" | {scope}" if scope != "0" else ""
@@ -480,6 +502,58 @@ def resolve_single_buff_asset(asset_node, assets_map, visited_guids, prefix=""):
                                 extracted_effects.extend(sub_effects)
                 continue
 
+            if effect_name == "GoodConsumptionUpgrade":
+                for item in effect_node.findall("Item"):
+                    product = get_text_safe(item, "ProvidedNeedProduct", None)
+                    percent = get_text_safe(item, "AmountInPercent", None)
+                    if product and percent:
+                        extracted_effects.append(f"{prefix}GoodConsumptionUpgrade: {product} {percent}%")
+                continue
+
+            if effect_name == "GenerateLimitedLodeFertility":
+                fertility_guid = effect_node.text.strip() if effect_node.text else None
+                amount_node = parent_node.find("GenerateLimitedLodeAmount")
+                minutes_node = parent_node.find("GenerateLimitedLodeMinutes")
+                amount = amount_node.text.strip() if amount_node is not None and amount_node.text else None
+                minutes = minutes_node.text.strip() if minutes_node is not None and minutes_node.text else None
+                if fertility_guid and amount and minutes:
+                    extracted_effects.append(f"{prefix}GenerateLimitedLode: {fertility_guid} {amount} {minutes}")
+                continue
+
+            if effect_name in ("GenerateLimitedLodeAmount", "GenerateLimitedLodeMinutes"):
+                # Merged into GenerateLimitedLodeFertility above (sibling tags) -- skip standalone.
+                continue
+
+            if effect_name == "RadiusEffectRangeUpgrade":
+                val_str = parse_value_node(effect_node)
+                target_guid = None
+                target_node = parent_node.find("RadiusEffectRangeTarget")
+                if target_node is not None:
+                    item_node = target_node.find("Item")
+                    if item_node is not None:
+                        target_guid = get_text_safe(item_node, "Target", None)
+                if val_str:
+                    if target_guid:
+                        extracted_effects.append(f"{prefix}RadiusEffectRangeUpgrade: {target_guid} {val_str}")
+                    else:
+                        extracted_effects.append(f"{prefix}RadiusEffectRangeUpgrade: {val_str}")
+                continue
+
+            if effect_name == "RadiusEffectRangeTarget":
+                # Merged into RadiusEffectRangeUpgrade above (its sibling tag) -- skip standalone.
+                continue
+
+            if effect_name == "ReplaceInputs":
+                for item in effect_node.findall("Item"):
+                    old_input = get_text_safe(item, "OldInput", None)
+                    new_input = get_text_safe(item, "NewInput", None)
+                    if old_input and new_input:
+                        extracted_effects.append(f"{prefix}ReplaceInputs: {old_input} -> {new_input}")
+                    elif old_input:
+                        # No NewInput given -- the input good is no longer required at all.
+                        extracted_effects.append(f"{prefix}SelfSupplyInput: {old_input}")
+                continue
+
             if effect_name == "AdditionalOutput":
                 for item in effect_node.findall("Item"):
                     force = get_text_safe(item, "ForceProductSameAsFactoryOutput", "0")
@@ -515,12 +589,29 @@ def resolve_single_buff_asset(asset_node, assets_map, visited_guids, prefix=""):
                                 if val_str:
                                     extracted_effects.append(f"{prefix}ChangeNeedAttributesOf {target_guid}: {attr} {val_str}")
 
-            elif effect_name == "AdditionalAttributes":
+            elif effect_name in ("AdditionalAttributes", "BonusAttributes"):
                 for attr in ATTRIBUTES_OF_INTEREST:
                     attr_node = effect_node.find(attr)
                     if attr_node is not None:
                         val_str = parse_value_node(attr_node)
                         if val_str: extracted_effects.append(f"{prefix}{attr}: {val_str}")
+
+            elif effect_name == "PassiveTradeReward":
+                for item in effect_node.findall("Item"):
+                    reward_product = get_text_safe(item, "RewardProduct", None)
+                    reward_amount = get_text_safe(item, "RewardAmount", None)
+                    sold_product = get_text_safe(item, "SoldProduct", None)
+                    sold_amount = get_text_safe(item, "SoldAmount", None)
+                    if reward_product and sold_product:
+                        extracted_effects.append(f"{prefix}PassiveTradeReward: {reward_amount} {reward_product} {sold_amount} {sold_product}")
+
+            elif effect_name == "AdditionalNeedsDemand":
+                needs_node = effect_node.find("Needs")
+                if needs_node is not None:
+                    for item in needs_node.findall("Item"):
+                        need_guid = get_text_safe(item, "Need", None)
+                        if need_guid:
+                            extracted_effects.append(f"{prefix}AdditionalNeedsDemand: {need_guid}")
             else:
                 val_str = parse_value_node(effect_node)
                 if val_str: extracted_effects.append(f"{prefix}{effect_name}: {val_str}")
@@ -537,6 +628,15 @@ def get_full_buff_description(guid, assets_map):
         return f"Unknown GUID ({guid})"
     effects = resolve_single_buff_asset(assets_map[guid], assets_map, set())
     return " | ".join(effects) if effects else ""
+
+def get_mythic_effect_description(effect_guid, assets_map):
+    """Resolves a Item/MythicEffect GUID (an 'Effect' template asset) into its buff effects."""
+    if not effect_guid or effect_guid not in assets_map:
+        return ""
+    effect_asset = assets_map[effect_guid]
+    buffs_node = effect_asset.find('.//Effect/Buffs')
+    buff_guids = [i.find('GUID').text.strip() for i in buffs_node.findall('Item') if i.find('GUID') is not None] if buffs_node is not None else []
+    return " + ".join(filter(None, [get_full_buff_description(bg, assets_map) for bg in buff_guids]))
 
 # --- Main Extraction Script ---
 def extract_xml_to_csv(xml_file_path, csv_file_path):
@@ -587,7 +687,7 @@ def extract_xml_to_csv(xml_file_path, csv_file_path):
         return results
 
     headers = [
-        'GUID', 'Icon', 'Name', 'InfoDescription', 'Buff', 'Buff Effects', 'BoostBuff', 'BoostBuff Effects', 'Boost Hint', 'Boost Condition', 'Targets', 'Source', 'Allocation', 'Rarity', 'Niche', 'Price', 'IsMetaItem', 'Origin', 'ObsidianPrice'
+        'GUID', 'Icon', 'Name', 'InfoDescription', 'Buff', 'Buff Effects', 'BoostBuff', 'BoostBuff Effects', 'Boost Hint', 'Boost Condition', 'Targets', 'Source', 'Allocation', 'Rarity', 'Niche', 'Price', 'IsMetaItem', 'Origin', 'ObsidianPrice', 'NeededPrestige', 'MythicEffect', 'MythicEffect Effects', 'MythicEffect Targets'
     ]
     extracted_data = []
     EXCLUDED_ICON = "data/ui/fhd/base/icon_content/items_specialist/unique/icon_3d_specialist_hooded_01.png"
@@ -603,7 +703,7 @@ def extract_xml_to_csv(xml_file_path, csv_file_path):
 
         icon_node = asset.find('.//IconFilename')
         icon_val = icon_node.text if (icon_node is not None and icon_node.text) else ""
-        if icon_val == EXCLUDED_ICON or get_text_safe(item_node, 'Rarity') == "Quest" or get_text_safe(item_node, 'Niche') == "None":
+        if icon_val == EXCLUDED_ICON or get_text_safe(item_node, 'Rarity') == "Quest" or get_text_safe(item_node, 'Niche') == "None" or get_text_safe(item_node, 'Origin') == "Testing":
             continue
 
         raw_rarity = get_text_safe(item_node, 'Rarity', 'Common')
@@ -619,6 +719,14 @@ def extract_xml_to_csv(xml_file_path, csv_file_path):
 
         row['Price'] = get_text_safe(item_node, 'TradePrice', '')
         row['Origin'] = get_text_safe(item_node, 'Origin', '')
+        row['NeededPrestige'] = get_text_safe(item_node, 'NeededPrestige', '')
+        row['MythicEffect'] = get_text_safe(item_node, 'MythicEffect', '')
+        row['MythicEffect Effects'] = get_mythic_effect_description(row['MythicEffect'], assets_map) if row['MythicEffect'] else ''
+        row['MythicEffect Targets'] = ''
+        if row['MythicEffect'] and row['MythicEffect'] in assets_map:
+            me_targets_node = assets_map[row['MythicEffect']].find('.//Effect/Targets')
+            me_raw_targets = [i.find('GUID').text.strip() for i in me_targets_node.findall('Item') if i.find('GUID') is not None] if me_targets_node is not None else []
+            row['MythicEffect Targets'] = "|".join(resolve_with_structure(me_raw_targets))
         try:
             row['ObsidianPrice'] = str(round(int(row['Price']) / 4 / 42)) if row['Price'] else ''
         except (ValueError, ZeroDivisionError):

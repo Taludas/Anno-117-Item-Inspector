@@ -21,16 +21,17 @@ Every item entry is broken down into two distinct sections:
 
 ### Deep Dive Details
 - Targets: Which buildings or units are affected - for multi-target items (using Asset Pools), hover over the light blue underlined Asset Pool name to see all individual targets. Click to pin the tooltip.
+- Heroic Effects: Heroic-tier items have a second, island-wide "Heroic Effect" in addition to their regular buff, shown in its own section with its own affected buildings and buffs.
 - Buffs & Values: All item effects covered, with value percentages in a nicely presented layout.
 - Boost Logic: Specific Boost Conditions and the corresponding Boost Buffs for legendary items.
 - Item Costs
-- Acquisition: All Item Sources (Traders, Contracts, Reward Pools, Quest Rewards, or specific Research) with probabilities where applicable. Hover over the Item Source Header to get a legend for interpreting the icons in the list.
+- Acquisition: All Item Sources (Traders, Contracts, Reward Pools, Quest Rewards, Festivals, Honoured Guests visitor ships, or specific Research) with probabilities where applicable. Hover over the Item Source Header to get a legend for interpreting the icons in the list.
 - for modders: right click menu to copy GUID to clipboard or export complete Item XML code to clipboard/xml file.
 
 ## Filtering System
 - Multi-Category Search: Filter items by Rarity, Allocation, Niche, Target, Effects and Source (controllable via two drop-down menus for specifying the exact source).
 - Smart Effect Merging: A unified filtering logic that merges similar attributes across different data types.
-- Game Version history: Filter for items introduced in specific game versions (for future DLC releases)
+- Game Version history: Filter for items introduced in specific game versions or DLC releases.
 - "Intelligent" Search Bar: You can manually search for (parts of the) item name, GUID, (parts of the) effect names, targets etc. Just type in what you are looking for and hit Enter or press the search button.
 - Clear all Filters by pressing the "Clear All" Button.
 
@@ -48,7 +49,7 @@ Every item entry is broken down into two distinct sections:
 # Known Issues
 
 # Credits
-- DuxVitae for the idea of extracting item data to a csv file.
+- DuxVitae for the idea of extracting item data to a csv file and his [Asset Extractor project](https://github.com/anno-mods/asset-extractor).
 - Google Gemini and Claude Code for coding the majority of this project
 
 # License

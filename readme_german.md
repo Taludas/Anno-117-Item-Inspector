@@ -19,16 +19,17 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 
 ### Deep Dive Details
 - Beeinflusste Gebäude/Einheiten: Welche Gebäude oder Einheiten werden beeinflusst – bei Items mit mehreren Zielen (unter Verwendung von Asset-Pools) kann der Mauszeiger über den hellblau unterstrichenen Namen des Asset-Pools bewegt werden, um alle einzelnen Ziele anzuzeigen. Durch einen Klick auf den Namen kann der Infotip angeheftet werden (zum Scrollen bei z.B. Macrobius).
+- Heldenhafte Effekte: Heldenhafte Items verfügen zusätzlich zu ihrem regulären Buff über einen zweiten, inselweiten „Heldenhaften Effekt“, der in einem eigenen Abschnitt mit den davon betroffenen Gebäuden und Buffs angezeigt wird.
 - Buffs und Werte: Alle Itemeffekte werden mit ihren prozentualen Werten in einem übersichtlichen Layout dargestellt.
 - Boost-Logik: Spezifische Boost-Bedingungen und die entsprechenden Boost-Buffs für legendäre Items.
 - Kaufkosten
-- Quellen: Alle Itemquellen (Händler, Verträge, Rewardpools, Questbelohnungen, Festivals oder spezifische Forschung) mit Angabe der Wahrscheinlichkeiten, sofern zutreffend. Bewegt den Mauszeiger über die Überschrift „Item-Quelle“, um eine Legende zur Interpretation der Symbole in der Liste anzuzeigen.
+- Quellen: Alle Itemquellen (Händler, Verträge, Rewardpools, Questbelohnungen, Festivals, Ehrengäste-Besucherschiffe oder spezifische Forschung) mit Angabe der Wahrscheinlichkeiten, sofern zutreffend. Bewegt den Mauszeiger über die Überschrift „Item-Quelle“, um eine Legende zur Interpretation der Symbole in der Liste anzuzeigen.
 - Für Modder: Klicke mit der rechten Maustaste auf ein Item in der linken Spalte, um die GUID in die Zwischenablage zu kopieren oder den vollständigen Item-XML-Code in die Zwischenablage und in eine separate xml Datei zu exportieren.
 
 ## Filter-System
 - Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle (steuerbar über zwei Dropdown-Menüs zur Auswahl der genauen Quelle).
 - Intelligente "Effektzusammenführung": Eine einheitliche Filterlogik, die ähnliche Attribute über verschiedene Datentypen hinweg zusammenführt (Attribut alleine, Attribut durch geändertes Bedürfnis, extra Attribute durch Bereichseffekte).
-- Spielversionsverlauf: Filtern der Items, die in bestimmten Spielversionen eingeführt wurden (für zukünftige DLC-Veröffentlichungen).
+- Spielversionsverlauf: Filtert Items, die in bestimmten Spielversionen oder DLC-Veröffentlichungen eingeführt wurden.
 - "Intelligente" Suchleiste: manuell kann nach (Teilen des) Namen des Items, GUID, (Teilen des) Namens der Effekte, Zielen usw. gesucht werden. Einfach eingeben, wonach gesucht wird, und die Eingabetaste drücken oder die Suchschaltfläche betätigen.
 - Durch den "Clear All" Button kann man den Filter komplett zurücksetzen.
 
@@ -46,7 +47,7 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 # Known Issues
 
 # Credits
-- DuxVitae für die Idee, Item-Daten in eine CSV-Datei zu extrahieren.
+- DuxVitae für die Idee, Item-Daten in eine CSV-Datei zu extrahieren, sowie für sein [Asset Extractor Projekt](https://github.com/anno-mods/asset-extractor).
 - Google Gemini und Claude Code für die Programmierung des Großteils dieses Projekts.
 
 # License

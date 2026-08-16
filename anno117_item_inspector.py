@@ -35,6 +35,7 @@ RARITY_COLORS = {
     "Epic": "#8032a8",
     "Legendary": "#d4af37",
     "Unique": "#eba117",
+    "Mythic": "#cb643c",
     "None": "#333333"
 }
 
@@ -44,12 +45,13 @@ RARITY_LOCA_MAPPING = {
     "Rare": "-6905062142041500517",
     "Epic": "-6907577562514031859",
     "Legendary": "-6909465036342822366",
-    "Unique": "-6914484556772811597"
+    "Unique": "-6914484556772811597",
+    "Mythic": "-6907082968620178096"
 }
 
 # Fixed display order for the rarity filter dropdown, regardless of language.
 # Any rarity not listed here (e.g. "None", "Uncommon") sorts alphabetically at the end.
-RARITY_ORDER = ["Common", "Rare", "Epic", "Legendary", "Unique"]
+RARITY_ORDER = ["Common", "Rare", "Epic", "Legendary", "Unique", "Mythic"]
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -109,6 +111,11 @@ BUFF_EFFECT_MAPPING = {
     "AdditionalWorkforces": ["data/ui/fhd/base/icon_content/generic/icon_2d_meta_profile.png", "-6902792103058113405"],
     "AqueductConsumedWaterUpgrade": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_irrigation_water_capacity_1.png", "-6900173698993465429"],
     "AqueductWaterSupplyUpgrade": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_irrigation_water_capacity_1.png", "-6901410119100201615"],
+    "DistributorConsumedWaterUpgrade": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_irrigation_water_capacity_1.png", "-6900173698993465429"],
+    "GoodConsumptionUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_consumption.png", "-6916926126237868583"],
+    # Only used for the effect dropdown/filter label -- the actual line rendering builds a
+    # full custom sentence in res_emb and doesn't consult this mapping.
+    "GenerateLimitedLode": ["data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png", "-6910834639284735326"],
     "ArmorUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_defense_armor.png", "-6916173326961563427"],
     "AttackCone_BallistaModule": ["data/ui/fhd/base/icon_content/generic/icon_2d_arrow_stylized_down.png", "-6908156295089722167", "-6906254771419500991"],
     "AttackCone_CatapultModule": ["data/ui/fhd/base/icon_content/generic/icon_2d_arrow_stylized_down.png", "-6908156295089722167", "-6904022497762596337"],
@@ -175,9 +182,16 @@ BUFF_EFFECT_MAPPING = {
     "Prestige": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6911554866663245776"],
     "ProductivityUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_productivity.png", "-6901457306120429160"],
     "ProvidedNeedUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_consumption.png", "-6906821818431502107"],
+    "RadiusEffectRangeUpgrade": ["data/ui/fhd/base/icon_content/items_general/icon_2d_item_scope_radius.png", "-6906345630532600075"],
+    "RadiusEffectRangeTarget": ["data/ui/fhd/base/icon_content/items_general/icon_2d_item_scope_radius.png", "-6906345630532600075"],
+    "FestivalEffectDurationPercentageUpgrade": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6917495746025386252"],
+    "AdditionalNeedsDemand": ["data/ui/fhd/base/icon_content/generic/icon_2d_additional_need_attributes.png", "-6913499004383754082"],
     "RecruitmentCostInPercent": ["data/ui/fhd/base/icon_content/construction_tools/icon_2d_construction_materials.png", "-6900175465122901010"],
     "RecruitmentSpeedInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_remaining_time.png", "-6912203919785395737"],
     "ReplaceInputs": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_rotation.png", "-6909767605057018144"],
+    # Only used for the effect dropdown/filter label -- the line rendering builds a full
+    # custom sentence in res_emb ("Self-supply {}") and doesn't consult this mapping.
+    "SelfSupplyInput": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_rotation.png", "-6902431379744152273"],
     "ReplaceWorkforce": ["data/ui/fhd/base/icon_content/construction_tools/icon_2d_tools.png", "-6900271494650358300"],
     "ResolverRangeUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_patrol_range.png", "-6899682999703418604"],
     "ResolverRepairDurationUpgrade": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_rebuild_time.png", "-6908683155652934058"],
@@ -226,7 +240,7 @@ SLOT_LOCA_MAPPING = {
 
 # Compare Ops Boost Hints
 COMPARE_OPS = {
-    "AtLeast": "≥", "AtMost": "≤", "Equals": "=", "LessThen": "<", "MoreThen": ">"
+    "AtLeast": "≥", "AtMost": "≤", "Equals": "=", "LessThan": "<", "MoreThan": ">"
 }
 
 # Conditions Boost Hints
@@ -242,8 +256,13 @@ CONDITION_TYPES = {
     "ConditionWarState": "-6916305455916138439",
     "ConditionDominantPatron": "-6917281781830473807",
     "ConditionInStorage": ["-6904656400857447148", "-6916792298682888435"],
-    "ConditionTradeRouteCount": "-6915569607474692589"
+    "ConditionTradeRouteCount": "-6915569607474692589",
+    "ConditionFestivalActive": ["-6911236995181305030", "-6908773579491322283"],
+    "ConditionRaceOutcome": "-6899894517186160753"
 }
+
+# "All" - shown for ConditionFestivalActive when no specific festival GUID is set (any festival qualifies)
+FESTIVAL_ANY_ID = "-6915762395677959303"
 
 # No Religion Condition
 RELIGION_ZERO_ID = "-6899884938127726030"
@@ -362,9 +381,9 @@ REWARD_POOL_MAPPING = {
     "145046": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6914762194635081755"],
     "145047": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6915564870584412590"],
     "145048": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6916763202365380332"],
-    "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6915178130906922013", "-6906931485680097276"],
-    "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915178130906922013", "-6915741635554061343"],
-    "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6915178130906922013", "-6909604399726531068"],
+    "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6906931485680097276", "-6906931485680097276"],
+    "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915741635554061343", "-6915741635554061343"],
+    "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6909604399726531068", "-6909604399726531068"],
     "95375": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_caeso.png", "-6911896607082319713"],
     "95439": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647"],
     "95440": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_rival_tarragon.png", "-6907715955237745360"],
@@ -396,7 +415,14 @@ REWARD_POOL_MAPPING = {
     "122545": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6907991623289664677"],
     "122546": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6900196985132589583"],
     "122547": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6914573601432067141"],
-    "145050": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6913008330424928700"]
+    "145050": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6913008330424928700"],
+    # Visitors feature (Prestige-gated "Honoured Guests" ship): one RewardPool per rarity tier.
+    "173298": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Rare"]],
+    "173299": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Epic"]],
+    "173300": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Legendary"]],
+    "173301": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Mythic"]],
+    # Repeatable "Racer Specialist" research reward (DLC02 Circus Maximus tech tree)
+    "158539": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png", ["-6913855173603915663", "-6915178130906922013"], "-6906646074400544567", "-6915178130906922013"]
 }
 
 REWARD_POOL_CATEGORY_ORDER = {
@@ -406,7 +432,8 @@ REWARD_POOL_CATEGORY_ORDER = {
     "icon_2d_loading_ramp_ship":     3,  # Ship / Rivals
     "icon_2d_research_economic":     4,  # Research
     "icon_2d_research_civic":        4,
-    "icon_2d_research_military":     4
+    "icon_2d_research_military":     4,
+    "icon_2d_prestige":              5,  # Visitors
 }
 
 # Source Labels
@@ -416,13 +443,28 @@ SOURCE_LABELS = {
     "Quest": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_quest_tracker.png", "-6905698394117185352"]
 }
 
+# Effect tags that intentionally share a BUFF_EFFECT_MAPPING display label with another tag
+# (same underlying concept, different upgrade-parent path). The effect filter dropdown only
+# keeps one raw key per display name, so selecting that name would otherwise silently miss
+# items using the aliased tag -- this lets the filter match treat them as equivalent.
+EFFECT_TAG_ALIASES = {
+    "DistributorConsumedWaterUpgrade": "AqueductConsumedWaterUpgrade"
+}
+
 # DLC Icons
 DLC_ICONS = {
     "base": ["data/ui/fhd/base/icon_content/generic/icon_3d_game_logo.png", "-6917415429012198504"],
-    "cdlc01": ["data/ui/fhd/base/icon_content/cdlc/icon_3d_cdlc_category_01_mosaic.png", "-6909335020213265304"],
     "dlc01": ["data/ui/fhd/base/icon_content/dlc/icon_3d_dlc_category_volcano.png", "-6917386513941705145"],
     "dlc02": ["data/ui/fhd/base/icon_content/dlc/icon_3d_dlc_category_circus_maximus.png", "-6915867658126559590"],
     "dlc03": ["data/ui/fhd/base/icon_content/dlc/icon_3d_dlc_category_egypt.png", "-6901020047715601345"]
+}
+
+# Values/Item/Origin -> DLC_ICONS key. This is the authoritative source for which version an item belongs to (icon paths are packaging artifacts, not reliable e.g. Mythic items all reuse generically-pathed icons regardless of their DLC).
+ORIGIN_TO_DLC_KEY = {
+    "": "base",
+    "DLC01": "dlc01",
+    "DLC02": "dlc02",
+    "DLC03": "dlc03"
 }
 
 class ItemBrowserApp:
@@ -440,6 +482,8 @@ class ItemBrowserApp:
         self.asset_guid_to_loca_id = {}
         self.asset_guid_to_icon = {}
         self.asset_pool_first_item = {}
+        self.asset_pool_members = {}
+        self.asset_associated_region = {}
         self.inheritance_lookup = {}
         self.target_display_to_guid = {}
         self.effect_display_to_raw = {}
@@ -581,11 +625,7 @@ class ItemBrowserApp:
             lang_window.destroy()
 
         for lang in LANGUAGES:
-            btn = tk.Button(lang_window,
-                            text=lang.replace('_', ' ').title(),
-                            command=lambda l=lang: set_lang(l),
-                            bg=BG_SECTION, fg=FG_MAIN, font=FONT_BODY,
-                            activebackground=FG_MAIN, activeforeground=BG_MAIN)
+            btn = tk.Button(lang_window, text=lang.replace('_', ' ').title(), command=lambda l=lang: set_lang(l), bg=BG_SECTION, fg=FG_MAIN, font=FONT_BODY, activebackground=FG_MAIN, activeforeground=BG_MAIN)
             btn.pack(fill="x", padx=20, pady=2)
 
         # Pause until user clicks a button
@@ -653,11 +693,20 @@ class ItemBrowserApp:
                 if icon_node is not None and icon_node.text:
                     self.asset_guid_to_icon[guid] = icon_node.text.strip()
 
+                region_node = asset.find('./Values/Building/AssociatedRegions')
+                if region_node is not None and region_node.text:
+                    self.asset_associated_region[guid] = region_node.text.strip()
+
                 template_node = asset.find('./Template')
                 if template_node is not None and template_node.text and template_node.text.strip() == "AssetPoolNamed":
                     child_asset = asset.find('./Values/AssetPool/AssetList/Item/Asset')
                     if child_asset is not None and child_asset.text:
                         self.asset_pool_first_item[guid] = child_asset.text.strip()
+
+                if template_node is not None and template_node.text and template_node.text.strip() in ("AssetPool", "AssetPoolNamed"):
+                    members = [a.text.strip() for a in asset.findall('./Values/AssetPool/AssetList/Item/Asset') if a.text]
+                    if members:
+                        self.asset_pool_members[guid] = members
 
         except Exception as e:
             print(f"Error indexing assets: {e}")
@@ -691,7 +740,7 @@ class ItemBrowserApp:
                     if row['Allocation']: self.filter_allocations.add(row['Allocation'])
                     if row['Niche'] and row['Niche'] != "None": self.filter_niches_raw.add(row['Niche'])
 
-                    for col in ['Buff Effects', 'BoostBuff Effects']:
+                    for col in ['Buff Effects', 'BoostBuff Effects', 'MythicEffect Effects']:
                         val = row.get(col, '')
                         if val and val != "None":
                             found = re.findall(r'(\w+|-?\d{15,20})', val)
@@ -737,10 +786,13 @@ class ItemBrowserApp:
         # 3. Resolve via Inheritance
         current_guid = guid
         visited = set()
-        is_inherited = False
 
-        suffix_id = "-6903427160198155951"
-        suffix_text = f" ({self.localization_map.get(suffix_id, 'Base')})"
+        # Roman is the implicit default and stays unlabeled; only Celtic buildings get a suffix,
+        # driven by the requested asset's own Values/Building/AssociatedRegions tag - not by
+        # whether its name happened to be inherited from a base asset (many Celtic wall/gate
+        # variants have no OasisId of their own and always resolve via inheritance).
+        CELTIC_ID = "-6903427160198155951"
+        celtic_suffix = f" ({self.localization_map.get(CELTIC_ID, 'Celtic').strip()})" if self.asset_associated_region.get(guid) == "Celtic" else ""
 
         while current_guid:
             if current_guid in visited: break
@@ -749,14 +801,12 @@ class ItemBrowserApp:
             loca_id = self.asset_guid_to_loca_id.get(current_guid)
             if loca_id:
                 name = self.localization_map.get(loca_id, current_guid)
-                # Apply suffix if we found the name via inheritance
-                res = f"{name}{suffix_text}" if is_inherited else name
+                res = f"{name}{celtic_suffix}"
                 self.name_resolution_cache[guid] = res
                 return res
 
-            # Move up the inheritance tree and mark that we are now looking at a parent
+            # Move up the inheritance tree
             current_guid = self.inheritance_lookup.get(current_guid)
-            is_inherited = True
 
         res = f"Unknown ({guid})"
         self.name_resolution_cache[guid] = res
@@ -800,13 +850,19 @@ class ItemBrowserApp:
 
     # Create a unique key for the specific path and size
     def get_icon_photo(self, icon_path, size=(25, 25)):
+        # An empty path (e.g. an AssetPool target with no icon of its own) would otherwise
+        # resolve to BASE_ICON_PATH itself -- os.path.exists() is true for that directory,
+        # so Image.open() would blow up trying to read it as a file.
+        if not icon_path:
+            return None
+
         cache_key = (icon_path, size)
         if cache_key in self.photo_image_cache:
             return self.photo_image_cache[cache_key]
 
         # Standardize path
         full_path = resource_path(os.path.join(BASE_ICON_PATH, icon_path.replace("\\", "/").lstrip("/")))
-        if not os.path.exists(full_path):
+        if not os.path.exists(full_path) or not os.path.isfile(full_path):
             return None
 
         try:
@@ -821,18 +877,13 @@ class ItemBrowserApp:
 
     # Map item's game version from mentioning dlcs in icon path
     def get_dlc_key_from_path(self, icon_path, origin=""):
-        # Origin column takes priority if populated
-        if origin:
-            origin_lower = origin.lower()
-            if "CDLC01" in origin_lower: return "cdlc01"
-            if "DLC01"  in origin_lower: return "dlc01"
-            if "DLC02"  in origin_lower: return "dlc02"
-            if "DLC03"  in origin_lower: return "dlc03"
+        # Values/Item/Origin is the authoritative source -- always trust it when present.
+        if origin.strip() in ORIGIN_TO_DLC_KEY:
+            return ORIGIN_TO_DLC_KEY[origin.strip()]
 
-        # Fallback: infer from icon path as before
+        # Fallback for the rare case Origin is missing/unrecognized: infer from icon path.
         if not icon_path: return "base"
         path_lower = icon_path.lower().replace('\\', '/')
-        if "data/ui/fhd/cdlc01" in path_lower: return "cdlc01"
         if "data/ui/fhd/dlc01"  in path_lower: return "dlc01"
         if "data/ui/fhd/dlc02"  in path_lower: return "dlc02"
         if "data/ui/fhd/dlc03"  in path_lower: return "dlc03"
@@ -874,7 +925,9 @@ class ItemBrowserApp:
                 part = " ".join([self.localization_map.get(i, i) for i in o])
             else:
                 part = self.localization_map.get(o, str(o))
-            loc_parts.append(part.replace("{}", "").strip())
+            # Some loca strings are "{}-Text" (e.g. ProvidedNeedUpgrade's "{}-Bedürfnis erfüllt")
+            # -- once the placeholder is gone, strip the now-dangling leading "-" too.
+            loc_parts.append(part.replace("{}", "").strip().lstrip("-").strip())
 
         loc_text = " ".join(loc_parts) if loc_parts else default_text
 
@@ -945,8 +998,10 @@ class ItemBrowserApp:
 
             def process_mapping(mapping):
                 pending_icon = None
+                real_content_count = 0  # excludes the synthetic leading "-" placeholder
                 for i, item in enumerate(mapping):
-                    if item.endswith('.png'):
+                    # A list item (e.g. combined legend-only OasisIDs) isn't a lookup key for the inline text - it just falls through to the dash-placeholder branch.
+                    if isinstance(item, str) and item.endswith('.png'):
                         pending_icon = item
                     else:
                         # Determine sizing: First icon/ID pair is small (SIMG)
@@ -959,8 +1014,14 @@ class ItemBrowserApp:
                             continue
 
                         loc_txt = self.localization_map.get(item, item).replace("{}", "").strip()
-                        segment = f"[{tag}:{pending_icon}] {loc_txt}" if pending_icon else loc_txt
+                        if pending_icon:
+                            # Icon-attached segments are already visually separated by their icon.
+                            segment = f"[{tag}:{pending_icon}] {loc_txt}"
+                        else:
+                            # Plain segments get a separating dash, except the first one right after the synthetic leading "-" (which already reads fine alone).
+                            segment = f"- {loc_txt}" if real_content_count >= 1 else loc_txt
                         line_segments.append(segment)
+                        real_content_count += 1
                         pending_icon = None
 
             # CASE 1: Reward Pools & Percentage entries
@@ -1029,7 +1090,10 @@ class ItemBrowserApp:
                 if not mapping or len(mapping) < 2: continue
                 icon_path, text_id = mapping[0], mapping[1]
                 if icon_path not in seen_icons:
-                    raw_loc = self.localization_map.get(text_id, text_id)
+                    if isinstance(text_id, list):
+                        raw_loc = " ".join(self.localization_map.get(t, t) for t in text_id)
+                    else:
+                        raw_loc = self.localization_map.get(text_id, text_id)
                     clean_loc = re.sub(r'<[^>]+>', '', raw_loc).replace("{}", "").strip()
                     if clean_loc and clean_loc != text_id:
                         unique_entries.append(f"• [SIMG:{resource_path(icon_path)}] {clean_loc}")
@@ -1239,7 +1303,7 @@ class ItemBrowserApp:
                 if mapping_entry:
                     oid_to_use = str(mapping_entry[1]).strip() if isinstance(mapping_entry, list) else str(mapping_entry).strip()
                     _, name = self.resolve_loca_and_icon(oid_to_use, base_key)
-                    clean_name = name.replace("{}", "").replace(":", "").strip()
+                    clean_name = re.sub(r'\s+', ' ', name.replace("{}", "").replace(":", "")).strip().rstrip("!").strip()
                     if clean_name not in display_names:
                         display_names.append(clean_name)
                         self.effect_display_to_raw[clean_name] = base_key
@@ -1248,7 +1312,7 @@ class ItemBrowserApp:
             # Case 2: Additional Effects (OasisID)
             if raw_str == target_add_eff_id:
                 _, name = self.resolve_loca_and_icon(ADDITIONAL_EFFECTS_ID, "Additional Effects")
-                clean_name = name.replace("{}", "").replace(":", "").strip()
+                clean_name = re.sub(r'\s+', ' ', name.replace("{}", "").replace(":", "")).strip().rstrip("!").strip()
                 if clean_name not in display_names:
                     display_names.append(clean_name)
                     self.effect_display_to_raw[clean_name] = target_add_eff_id
@@ -1261,7 +1325,7 @@ class ItemBrowserApp:
             else:
                 name = self.localization_map.get(raw_str, raw_str)
 
-            clean_name = name.replace("{}", "").replace(":", "").strip()
+            clean_name = re.sub(r'\s+', ' ', name.replace("{}", "").replace(":", "")).strip().rstrip("!").strip()
             if clean_name not in display_names:
                 display_names.append(clean_name)
                 self.effect_display_to_raw[clean_name] = raw_str
@@ -1330,14 +1394,21 @@ class ItemBrowserApp:
                 guid = raw_str.replace("POOL_", "")
                 mapping = REWARD_POOL_MAPPING.get(guid)
                 if mapping and len(mapping) > 1:
-                    name = self.localization_map.get(str(mapping[1]), guid)
+                    if isinstance(mapping[1], list):
+                        name = self.resolve_oasis_list(mapping[1])
+                    else:
+                        name = self.localization_map.get(str(mapping[1]), guid)
                     # Resolve NPC/type sub-name from the mapping structure:
                     # len==3, mapping[1]!=mapping[2]  → Festival type (3rd element is the type)
-                    # len==4                           → Trade/Shipping (NPC name at index 3)
-                    # len==5                           → Quest (NPC at index 3, difficulty at index 4)
+                    # len==4                          → Trade/Shipping (NPC name at index 3)
+                    # len==5                          → Quest (NPC at index 3, difficulty at index 4)
+                    # Guard: skip if index 3 just repeats a value already shown in the category
+                    # name itself (e.g. the Hippodrome research pool's legend list at index 1
+                    # contains the same "Research" id again at index 3) - that isn't a real sub-type.
+                    label_ids = mapping[1] if isinstance(mapping[1], list) else [mapping[1]]
                     if len(mapping) == 3 and mapping[1] != mapping[2]:
                         sub_name = self.localization_map.get(str(mapping[2]), "")
-                    elif len(mapping) >= 4:
+                    elif len(mapping) >= 4 and mapping[3] not in label_ids:
                         npc = self.localization_map.get(str(mapping[3]), "")
                         if len(mapping) >= 5:
                             difficulty = self.localization_map.get(str(mapping[4]), "")
@@ -1512,21 +1583,9 @@ class ItemBrowserApp:
         counts = {k: 0 for k in DLC_ICONS.keys()}
         counts["all"] = len(current_filtered_items)
 
-        # Get keys to check against (everything except base)
-        dlc_keys = [k for k in DLC_ICONS.keys() if k != "base"]
-
         for item in current_filtered_items:
-            path = str(item.get('Icon', '')).lower().replace('\\', '/')
-            found_dlc = False
-
-            for dlc in dlc_keys:
-                if f"/{dlc}/" in path:
-                    counts[dlc] += 1
-                    found_dlc = True
-                    break
-
-            if not found_dlc:
-                counts["base"] += 1
+            dlc_key = ORIGIN_TO_DLC_KEY.get(str(item.get('Origin', '')).strip(), "base")
+            counts[dlc_key] = counts.get(dlc_key, 0) + 1
 
         return counts
 
@@ -1556,6 +1615,9 @@ class ItemBrowserApp:
 
     # Reset dropdowns to "All"
     def clear_filters(self):
+        # Each var.set() below fires its own trace-bound refresh_table() call - suppress those
+        # and do a single refresh at the end instead, same fix as the language-swap flicker.
+        self._suppress_refresh = True
         self.rarity_var.set("All")
         self.alloc_var.set("All")
         self.target_var.set("All")
@@ -1566,12 +1628,17 @@ class ItemBrowserApp:
 
         # Clear search bar
         self.search_var.set("")
+        # on_search_change just scheduled its own delayed refresh - cancel it, we refresh once below
+        if getattr(self, '_search_after_id', None):
+            self.root.after_cancel(self._search_after_id)
+            self._search_after_id = None
 
         # Reset Version/DLC Filter
         self.current_dlc_filter = "all"
 
-        # Refresh the table with the reset values
-        self.root.after_idle(self.refresh_table)
+        self._suppress_refresh = False
+        # Refresh the table once with the reset values
+        self.refresh_table()
 
     #Draws the offset gradient background with 128x128 icon considerations, and the new text fields.
     def draw_header_gradient(self, hex_color, rarity_raw, name, desc):
@@ -1680,9 +1747,7 @@ class ItemBrowserApp:
         self.header_canvas.pack(fill=tk.X, padx=0, pady=0)
 
         # PACK SCROLLBAR BEFORE TEXT
-        v_scroll = tk.Scrollbar(self.detail_container, orient=tk.VERTICAL,
-                                bg=BG_MAIN, activebackground=BG_SECTION,
-                                troughcolor=BG_MAIN, bd=0, highlightthickness=0)
+        v_scroll = tk.Scrollbar(self.detail_container, orient=tk.VERTICAL, bg=BG_MAIN, activebackground=BG_SECTION, troughcolor=BG_MAIN, bd=0, highlightthickness=0)
         v_scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
         self.details_text = tk.Text(
@@ -1710,6 +1775,8 @@ class ItemBrowserApp:
         self.details_text.tag_configure("section_bg", background=BG_SECTION)
         self.details_text.tag_configure("half_space", font=FONT_HALF_SPACE)
         self.details_text.tag_configure("multiple_targets", font=FONT_UI_BOLD, foreground="#6ab1ff", underline=True)
+        # The widget itself uses wrap=NONE (needed for the tab-aligned effect columns), but long resolved text (e.g. an expanded AssetPool member list) needs to wrap instead of running off the right edge - this tag opts specific runs back into word wrap.
+        self.details_text.tag_configure("wrap_word", wrap=tk.WORD)
 
     # Right click copy GUID/Name in the right panel
     def copy_tree_name(self):
@@ -1793,10 +1860,6 @@ class ItemBrowserApp:
             return
         self._language_swap_in_progress = True
 
-        # 1. Capture current state immediately
-        selected = self.tree.selection()
-        current_guid = selected[0] if selected else None
-
         # 1.1 Determine if we are doing a Hard Reset BEFORE we start changing things
         is_hard_reset = not os.path.exists(CONFIG_FILE)
         if is_hard_reset:
@@ -1819,10 +1882,12 @@ class ItemBrowserApp:
         # 3. Schedule the heavy work for 100ms from now
         # This gives the OS/Tkinter time to hide the dropdown and draw the overlay
         self.root.update()
-        self.root.after(100, lambda: self._execute_language_swap(current_guid))
+        self.root.after(100, self._execute_language_swap)
 
-    def _execute_language_swap(self, current_guid):
+    def _execute_language_swap(self):
         """Internal method to handle the heavy processing"""
+        # Restoring 6+ filter dropdowns below each fire a var.set() trace that would otherwise call refresh_table() (and re-select, re-flashing the header) on its own; suppress those and do exactly one refresh once everything is restored.
+        self._suppress_refresh = True
         try:
             # 1. Capture current filter state before reloading
             current_rarity_raw = self.rarity_display_to_raw.get(self.rarity_var.get())
@@ -1879,14 +1944,9 @@ class ItemBrowserApp:
                 self.source_npc_var.set(restored_npc)
                 self._suppress_npc_refresh = False
 
-            # Refresh
+            # Refresh - its own internal selection restore (captured from the tree's still untouched selection at its start) already re-selects, scrolls into view, and fires on_item_select via <<TreeviewSelect>>.
+            self._suppress_refresh = False
             self.refresh_table()
-
-            # Restore selection in Treeview
-            if current_guid and self.tree.exists(current_guid):
-                self.tree.selection_set(current_guid)
-                self.tree.see(current_guid)
-                self.on_item_select(None)
 
         except Exception as e:
             import traceback
@@ -1907,6 +1967,10 @@ class ItemBrowserApp:
 
     # LOGIC for what happens on a table refresh - when filtering, changing language, selecting another item
     def refresh_table(self):
+        # While restoring filter state after a language swap, each var.set() call would otherwise trigger its own full refresh (and re-select, re-flashing the header).
+        if getattr(self, '_suppress_refresh', False):
+            return
+
         # 1. CAPTURE CURRENT SELECTION
         selected = self.tree.selection()
         prev_selected_guid = selected[0] if selected else None
@@ -1949,6 +2013,7 @@ class ItemBrowserApp:
                 # 1. Gather all raw strings from the effect columns
                 raw_eff_str = (item.get('Buff Effects', '') + "|" +
                             item.get('BoostBuff Effects', '') + "|" +
+                            item.get('MythicEffect Effects', '') + "|" +
                             item.get('Effects', '')).strip()
 
                 target_add_eff_id = ADDITIONAL_EFFECTS_ID[1] if isinstance(ADDITIONAL_EFFECTS_ID, list) else ADDITIONAL_EFFECTS_ID
@@ -1960,6 +2025,9 @@ class ItemBrowserApp:
                     # Handles "Key: Value" or "ID Value"
                     base_key = re.split(r'[:\s]', p)[0].strip()
                     item_search_terms.append(base_key.lower())
+                    alias = EFFECT_TAG_ALIASES.get(base_key)
+                    if alias:
+                        item_search_terms.append(alias.lower())
 
                     # --- Case A: ChangeNeedAttributesOf (Already working) ---
                     if "ChangeNeedAttributesOf" in p:
@@ -2085,14 +2153,18 @@ class ItemBrowserApp:
 
                     if not found_match:
                         # 4c. Effects (Check raw text AND localized dropdown names)
-                        eff_raw = (item.get('Buff Effects', '') + "|" + item.get('BoostBuff Effects', '')).strip()
+                        eff_raw = (item.get('Buff Effects', '') + "|" + item.get('BoostBuff Effects', '') + "|" + item.get('MythicEffect Effects', '')).strip()
                         if eff_raw and eff_raw != "None":
                             if s_query in eff_raw.lower():
                                 found_match = True
                             else:
-                                # Check if the search term matches the localized name of the effect
+                                # Check if the search term matches the localized name of the effect.
+                                # raw_id is always the dropdown's first-seen ("canonical") key, so
+                                # also check any tag that aliases to it (e.g. Distributor->Aqueduct).
                                 for disp_name, raw_id in getattr(self, 'effect_display_to_raw', {}).items():
-                                    if s_query in disp_name.lower() and raw_id in eff_raw:
+                                    if s_query not in disp_name.lower():
+                                        continue
+                                    if raw_id in eff_raw or any(v == raw_id and k in eff_raw for k, v in EFFECT_TAG_ALIASES.items()):
                                         found_match = True
                                         break
 
@@ -2103,19 +2175,11 @@ class ItemBrowserApp:
             # If it reached here, it passed all text/dropdown filters!
             pre_dlc_list.append(item)
 
-            # DLC / VERSION FILTER
+            # DLC / VERSION FILTER (authoritative on Values/Item/Origin, not the icon path)
             if self.current_dlc_filter != "all":
-                raw_path = str(item.get('Icon', '')).lower().replace('\\', '/')
-
-                if self.current_dlc_filter == "base":
-                    # Dynamic check against your DLC_ICONS mapping
-                    other_dlcs = [k for k in DLC_ICONS.keys() if k != "base"]
-                    if any(f"/{tag}/" in raw_path for tag in other_dlcs):
-                        is_dlc_match = False
-                else:
-                    # Specific DLC check
-                    if f"/{self.current_dlc_filter}/" not in raw_path and not raw_path.startswith(f"{self.current_dlc_filter}/"):
-                        is_dlc_match = False
+                item_dlc_key = ORIGIN_TO_DLC_KEY.get(str(item.get('Origin', '')).strip(), "base")
+                if item_dlc_key != self.current_dlc_filter:
+                    is_dlc_match = False
 
             # Now this is safe because is_dlc_match is guaranteed to exist
             if is_dlc_match:
@@ -2179,7 +2243,16 @@ class ItemBrowserApp:
                         return " ".join([self.localization_map.get(o, o).replace("{}", "").strip() for o in oid])
                     return self.localization_map.get(oid, oid).replace("{}", "").strip()
                 res = self.get_resolved_name(g)
-                return res if not res.startswith("Unknown") else g
+                if not res.startswith("Unknown"):
+                    return res
+                # No OasisID of its own (common for AssetPools) - fall back to listing the resolved names of its individual members instead of a bare GUID.
+                members = self.asset_pool_members.get(g)
+                if members:
+                    member_names = [self.get_resolved_name(mg) for mg in members]
+                    member_names = [n for n in member_names if not n.startswith("Unknown")]
+                    if member_names:
+                        return ", ".join(member_names)
+                return g
             return re.sub(r'(?<![+\d\-.])\b-?\d{4,20}\b(?![%])', r_g, str(text))
 
         parts = [p.strip() for p in raw_condition.split('|') if p.strip()]
@@ -2197,7 +2270,7 @@ class ItemBrowserApp:
                 left, right = left.strip(), right.strip()
 
                 loc_label = ""
-                if left == "ConditionPlayerCounter": loc_label = ""
+                if left in ("ConditionPlayerCounter", "ConditionCompareVariable"): loc_label = ""
                 elif left in CONDITION_TYPES: loc_label = self.resolve_oasis_list(CONDITION_TYPES[left])
                 elif left in MODULE_MAPPING: loc_label = self.resolve_oasis_list(MODULE_MAPPING[left])
                 else: loc_label = resolve_all_guids(left)
@@ -2215,6 +2288,20 @@ class ItemBrowserApp:
 
                 if left == "ConditionReligion" and right.strip() == "0":
                     right = self.resolve_oasis_list(RELIGION_ZERO_ID)
+
+                if left == "ConditionFestivalActive" and not right.strip():
+                    right = self.resolve_oasis_list(FESTIVAL_ANY_ID)
+
+                if left == "ConditionCompareVariable":
+                    var_name, _, bool_val = right.strip().partition(' ')
+                    var_name = re.sub(r'(?<!^)(?=[A-Z])', ' ', var_name.strip()).strip()
+                    check = "✓" if bool_val.strip() == "1" else "✗"
+                    var_icon = "data/ui/fhd/base/icon_content/quest_tracker/icon_2d_quest_tracker.png"
+                    right = f"[SIMG:{var_icon}] {var_name} {check}"
+
+                if left == "ConditionRaceOutcome":
+                    position, _, event_guid = right.strip().partition(' ')
+                    right = f"{position} | {event_guid}".strip()
 
                 if "PopulationByGroup" in right:
                     right = right.replace("PopulationByGroup", "").strip()
@@ -2397,29 +2484,19 @@ class ItemBrowserApp:
         self._hide_timer = None
 
     # Helper to split Target GUIDs and resolve names with variant preservation.
+    # get_resolved_name() already appends the "(Celtic)" suffix (via Values/Building/AssociatedRegions)
+    # where applicable, so no extra region handling is needed here.
     def get_target_info(self, group):
-        SFX = ["-6903427160198155951", "154567"]
-
-        def get_variant_name(name, count):
-            if count == 0: return name
-            sid = SFX[count-1] if (count-1) < len(SFX) else None
-            return f"{name} ({self.localization_map.get(sid, sid).strip()})" if sid else f"{name} ({count+1})"
-
         if ":" in group:
             p_guid, m_str = group.split(":", 1)
             p_name = self.get_resolved_name(p_guid)
 
             sub_guids = [m.strip() for m in m_str.split(";") if m.strip()]
             resolved_sub_targets = []
-            counts = {}
 
             for m_guid in sub_guids:
-                m_name = self.get_resolved_name(m_guid)
-                if m_name.startswith("Unknown"): continue
-
-                c = counts.get(m_name, 0)
-                v_name = get_variant_name(m_name, c)
-                counts[m_name] = c + 1
+                v_name = self.get_resolved_name(m_guid)
+                if v_name.startswith("Unknown"): continue
 
                 icon_path = self.get_target_icon(m_guid)
                 # Ensure each line is its own discrete unit
@@ -2454,8 +2531,14 @@ class ItemBrowserApp:
             icon = self.asset_guid_to_icon.get(current_guid, "")
             if icon: return icon
 
-            # Check for AssetPool fallback if no direct icon
+            # Check for AssetPool fallback if no direct icon (AssetPoolNamed pools are
+            # indexed by first-item only; plain AssetPools -- e.g. ChangeNeedAttributesOf
+            # targets -- are indexed by their full member list, so fall back to its first entry)
             first_child_guid = self.asset_pool_first_item.get(current_guid)
+            if not first_child_guid:
+                members = self.asset_pool_members.get(current_guid)
+                if members:
+                    first_child_guid = members[0]
             if first_child_guid:
                 child_current = first_child_guid
                 child_visited = set()
@@ -2505,6 +2588,7 @@ class ItemBrowserApp:
         alloc_raw = data.get('Allocation', '').strip()
         is_ship = alloc_raw.lower() in ["ships", "ship"]
         prefix = "ship" if is_ship else "villa"
+        # No dedicated background art ships for Unique; reuse the Legendary frame.
         rarity_key = "legendary" if rarity_raw == "Unique" else rarity_raw.lower()
 
         bg_img = self.get_icon_image(f"data/ui/4k/base/features/goods_items/item_{prefix}_{rarity_key}_color.png", size)
@@ -2599,71 +2683,11 @@ class ItemBrowserApp:
         # Record the start index here and only close it after all effects are done.
         merged_start = self.details_text.index(tk.INSERT)
 
-        # 1. Target Rendering (Bold, Hover restricted to Villas)
-        target_raw = data.get('Targets', '').strip()
-        if target_raw and target_raw != "None":
-            target_oid = "-6899655277052108454" if alloc_raw == "Villa" else "-6915573523070985148"
-            target_label = self.localization_map.get(target_oid, "Influences").replace(":", "").strip()
-            raw_groups = [g.strip() for g in target_raw.split('|') if g.strip()]
-
-            if alloc_raw == "Villa":
-                # VILLA: [Icons/Names] [Label]
-                for i, group in enumerate(raw_groups):
-                    p_name, sub_text = self.get_target_info(group)
-                    t_icon = self.get_target_icon(group)
-                    icon_tag = f"[SIMG:{t_icon}] " if t_icon else ""
-
-                    tag = f"tg_hv_{i}"
-                    active_style = "multiple_targets" if sub_text else "single_targets"
-
-                    self.insert_text_with_icons(self.details_text, icon_tag, (active_style, "section_bg"))
-                    self.details_text.insert(tk.END, p_name, (tag, active_style, "section_bg"))
-
-                    # Only bind tooltip if there is actual sub_text
-                    if sub_text:
-                        self.details_text.tag_bind(tag, "<Enter>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=False))
-                        # Hover to hide (only if not pinned)
-                        self.details_text.tag_bind(tag, "<Leave>", self.hide_target_tooltip)
-                        # Click to pin
-                        self.details_text.tag_bind(tag, "<Button-1>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=True))
-                        self.details_text.tag_bind(tag, "<Enter>", lambda e: self.details_text.config(cursor="hand2"), add="+")
-                        self.details_text.tag_bind(tag, "<Leave>", lambda e: self.details_text.config(cursor="arrow"), add="+")
-                    else:
-                        # Explicitly bind to hide tooltip to ensure no old tooltip persists
-                        self.details_text.tag_bind(tag, "<Enter>", lambda e: self.hide_target_tooltip(e))
-
-                    if i < len(raw_groups) - 1:
-                        self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
-
-                # "Residences in range:"
-                self.details_text.insert(tk.END, f" {target_label}:\n", ("single_targets", "section_bg"))
-
-            else:
-                # SHIP: [Label] [Icons/Names]
-                self.details_text.insert(tk.END, f"{target_label} ", ("single_targets", "section_bg"))
-                for i, group in enumerate(raw_groups):
-                    p_name, _ = self.get_target_info(group)
-
-                    t_icon = self.get_target_icon(group, is_ship=True)
-                    icon_tag = f"[SIMG:{t_icon}] " if t_icon else ""
-
-                    tag = f"sh_hv_{i}"
-                    # Clear potential old ship hover tags
-                    self.details_text.tag_unbind(tag, "<Enter>")
-
-                    self.insert_text_with_icons(self.details_text, icon_tag, ("single_targets", "section_bg"))
-                    self.details_text.insert(tk.END, p_name, ("single_targets", "section_bg"))
-
-                    if i < len(raw_groups) - 1:
-                        self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
-
-                self.details_text.insert(tk.END, ":\n", ("single_targets", "section_bg"))
-
-            self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
+        # The merged container's closing tag_add("section_bg", merged_start, merged_end) below blankets the whole range, so track the Mythic/regular separator's range here to punch the shading back out of it afterwards (it should show the plain BG_MAIN background).
+        mythic_gap_ranges = []
 
         # Complex String Formatting
-        add_eff_text = _, add_eff_text = self.resolve_loca_and_icon(ADDITIONAL_EFFECTS_ID, "Additional Effects")
-
+        # Hoisted above the Mythic Effect block (which needs insert_effect_block/res_emb to render first, on top) and the regular Target/Buff rendering below it.
         def res_emb(text):
             if not text or text == "None": return "None"
 
@@ -2742,7 +2766,7 @@ class ItemBrowserApp:
                     for guid, lines in grouped_data.items():
                         # Resolve Target Name & Icon from Asset Data (Step 2)
                         t_name = self.get_resolved_name(guid)
-                        t_icon = self.asset_guid_to_icon.get(str(guid), "")
+                        t_icon = self.get_target_icon(guid)
                         target_str = f"[SIMG:{t_icon}] {t_name}"
 
                         # Build the header line + all indented attributes
@@ -2783,6 +2807,13 @@ class ItemBrowserApp:
                     attr_lines = []
                     for a in resolved_attrs.split(','):
                         a = re.sub(r':\s*', ' ', a).strip()
+                        # If the value itself carries its own icon tag (e.g. a resolved product GUID), split right before that tag so the icon stays glued to the value on the right instead of trailing off the label on the left.
+                        icon_tags = list(re.finditer(r'\[(?:IMG|SIMG)[:\s].*?\]', a))
+                        if len(icon_tags) >= 2:
+                            split_pos = icon_tags[-1].start()
+                            left, right = a[:split_pos].strip(), a[split_pos:].strip()
+                            attr_lines.append(f"\t- {left}\t{right}")
+                            continue
                         subp = a.rsplit(' ', 1)
                         if len(subp) == 2:
                             attr_lines.append(f"\t- {subp[0]}\t{subp[1]}")
@@ -2791,14 +2822,95 @@ class ItemBrowserApp:
                     return header_with_icon + ":\n" + "\n".join(attr_lines)
                 return header_with_icon
 
-            # 4. SPECIAL CASE: AdditionalOutput
+            # 4. SPECIAL CASE: ReplaceInputs (Old Input Icon+Name -> New Input Icon+Name)
+            elif "ReplaceInputs" in text:
+                mapping_val = BUFF_EFFECT_MAPPING.get("ReplaceInputs")
+                header_icon, header_text = self.resolve_loca_and_icon(mapping_val, "Replace Goods")
+                header_with_icon = f"[SIMG:{header_icon}] {header_text}:"
+
+                raw_data = text.replace("ReplaceInputs:", "").strip()
+                if "->" in raw_data:
+                    old_guid, new_guid = [p.strip() for p in raw_data.split("->", 1)]
+                else:
+                    old_guid, new_guid = raw_data.strip(), ""
+
+                old_icon = self.asset_guid_to_icon.get(old_guid)
+                old_name = self.get_resolved_name(old_guid)
+                new_icon = self.asset_guid_to_icon.get(new_guid)
+                new_name = self.get_resolved_name(new_guid)
+
+                arrow_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_arrow_right.png"
+                sub_line = f"\t- [SIMG:{old_icon}] {old_name} [SIMG:{arrow_icon}] [SIMG:{new_icon}] {new_name}"
+                return f"{header_with_icon}\n{sub_line}"
+
+            # 5. SPECIAL CASE: SelfSupplyInput ("Self-supply {OldInput}" - a ReplaceInputs variant where NewInput is absent, meaning the input good is no longer required)
+            elif "SelfSupplyInput" in text:
+                old_guid = text.replace("SelfSupplyInput:", "").strip()
+                old_icon = self.asset_guid_to_icon.get(old_guid)
+                old_name = self.get_resolved_name(old_guid)
+                old_str = f"[SIMG:{old_icon}] {old_name}" if old_icon else old_name
+
+                template = self.localization_map.get("-6902431379744152273", "Self-supply {}")
+                seg = template.split("{}")
+                if len(seg) == 2:
+                    header_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_generic_rotation.png"
+                    return f"[SIMG:{header_icon}] {seg[0]}{old_str}{seg[1]}"
+                return text
+
+            # 6. SPECIAL CASE: PassiveTradeReward ("{Amount}t {Reward} gained, for every {Amount}t {Sold} sold")
+            elif "PassiveTradeReward" in text:
+                raw_data = text.replace("PassiveTradeReward:", "").strip()
+                parts = raw_data.split()
+                if len(parts) == 4:
+                    reward_amount, reward_product, sold_amount, sold_product = parts
+
+                    reward_icon = self.asset_guid_to_icon.get(reward_product)
+                    reward_name = self.get_resolved_name(reward_product)
+                    reward_str = f"[SIMG:{reward_icon}] {reward_name}" if reward_icon else reward_name
+
+                    sold_icon = self.asset_guid_to_icon.get(sold_product)
+                    sold_name = self.get_resolved_name(sold_product)
+                    sold_str = f"[SIMG:{sold_icon}] {sold_name}" if sold_icon else sold_name
+
+                    template = self.localization_map.get("-6908854636596559606", "{}t {} gained, for every {}t {} sold")
+                    seg = template.split("{}")
+                    if len(seg) == 5:
+                        header_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_ship_civilian.png"
+                        sentence = "".join([seg[0], reward_amount, seg[1], reward_str, seg[2], sold_amount, seg[3], sold_str, seg[4]])
+                        return f"[SIMG:{header_icon}] {sentence}"
+                return text
+
+            # 7. SPECIAL CASE: GenerateLimitedLode ("Replenishes {Amount}t of {Fertility} every {Minutes} minutes")
+            elif "GenerateLimitedLode" in text:
+                raw_data = text.replace("GenerateLimitedLode:", "").strip()
+                parts = raw_data.split()
+                if len(parts) == 3:
+                    fertility_guid, amount, minutes = parts
+
+                    f_icon = self.get_target_icon(fertility_guid)
+                    f_name = self.get_resolved_name(fertility_guid)
+                    fertility_str = f"[SIMG:{f_icon}] {f_name}" if f_icon else f_name
+
+                    template = self.localization_map.get("-6906475771278835665", "Replenishes {}t of {} every {} minutes")
+                    seg = template.split("{}")
+                    if len(seg) == 4:
+                        header_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png"
+                        # The German source text reorders its arguments (minutes first); every other language keeps the English amount/fertility/minutes order.
+                        if self.current_language == "german":
+                            sentence = "".join([seg[0], minutes, seg[1], amount, seg[2], fertility_str, seg[3]])
+                        else:
+                            sentence = "".join([seg[0], amount, seg[1], fertility_str, seg[2], minutes, seg[3]])
+                        return f"[SIMG:{header_icon}] {sentence}"
+                return text
+
+            # 8. SPECIAL CASE: AdditionalOutput
             elif "AdditionalOutput" in text:
                 # 1. Resolve Header using BUFF_EFFECT_MAPPING entry
                 # Entry: ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_goods.png", "-6899820196143793484"]
                 mapping_val = BUFF_EFFECT_MAPPING.get("AdditionalOutput")
                 header_icon, header_text = self.resolve_loca_and_icon(mapping_val, "Additional Output")
 
-                header_with_icon = f"[SIMG:{header_icon}] {header_text}"
+                header_with_icon = f"[SIMG:{header_icon}] {header_text}:"
 
                 # 2. Parse the CSV Data (e.g., "AdditionalOutput: 31697 1/10")
                 raw_data = text.replace("AdditionalOutput:", "").strip()
@@ -2827,7 +2939,19 @@ class ItemBrowserApp:
 
                 return f"{header_with_icon}\n{sub_line}"
 
-            # 5. FINAL FALLBACK: Standard Effects (e.g., AttackPower: 10%)
+            # 9. SPECIAL CASE: GoodConsumptionUpgrade (same shape as the generic fallback below, just keeping the trailing colon that fallback headers otherwise strip)
+            elif "GoodConsumptionUpgrade" in text:
+                mapping_val = BUFF_EFFECT_MAPPING.get("GoodConsumptionUpgrade")
+                header_icon, header_text = self.resolve_loca_and_icon(mapping_val, "Goods Consumption")
+                header_with_icon = f"[SIMG:{header_icon}] {header_text}:"
+
+                raw_val = text.split(':', 1)[1].strip() if ':' in text else ""
+                localized_val = localize_generic(raw_val)
+                if localized_val:
+                    return f"{header_with_icon}\t{localized_val}"
+                return header_with_icon
+
+            # 10. FINAL FALLBACK: Standard Effects (e.g., AttackPower: 10%)
             # Split into Key and Value
             parts = text.split(':', 1)
             tech_key = parts[0].strip()
@@ -2844,7 +2968,7 @@ class ItemBrowserApp:
                 if not loc_name.startswith("Unknown"):
                     loc_title = loc_name
 
-            title = loc_title.replace("{}", "").replace(":", "").strip()
+            title = loc_title.replace("{}", "").replace(":", "").strip().rstrip("!").strip()
             header_with_icon = f"[SIMG:{icon_path}] {title}" if icon_path else title
 
             # Localize the Value (important for OasisIDs in generic values)
@@ -2871,11 +2995,14 @@ class ItemBrowserApp:
             fertility_guid = None
             fertility_pct = None
             filtered_raw_list = []
+            additional_output_entries = []
             for e in raw_list:
                 if e.startswith("AddedFertility:"):
                     fertility_guid = e.split(":", 1)[1].strip()
                 elif e.startswith("FertilityPercent:"):
                     fertility_pct = e.split(":", 1)[1].strip()
+                elif "AdditionalOutput:" in e:
+                    additional_output_entries.append(e)
                 else:
                     filtered_raw_list.append(e)
             raw_list = filtered_raw_list
@@ -2887,11 +3014,24 @@ class ItemBrowserApp:
                 if not resolved or resolved == "None": continue
                 all_lines.extend(resolved.split('\n'))
 
+            # --- Merge multiple AdditionalOutput entries under a single shared header ---
+            if additional_output_entries:
+                resolved_chunks = [res_emb(e) for e in additional_output_entries]
+                resolved_chunks = [c for c in resolved_chunks if c and c != "None"]
+                if resolved_chunks:
+                    all_lines.append(resolved_chunks[0].split('\n', 1)[0])
+                    for chunk in resolved_chunks:
+                        parts = chunk.split('\n', 1)
+                        if len(parts) == 2:
+                            all_lines.append(parts[1])
+
             # --- NEW with DLC01: Formating for Fertility Items: Append merged fertility line (icon + loca name left, percent right) ---
             if fertility_guid is not None:
                 f_name = self.get_resolved_name(fertility_guid)
                 f_icon, f_text = self.resolve_loca_and_icon(BUFF_EFFECT_MAPPING.get("AddedFertility"), "AddedFertility")
-                label = f"{f_text} {f_name}".strip()
+                specific_icon = self.get_target_icon(fertility_guid)
+                name_str = f"[SIMG:{specific_icon}] {f_name}" if specific_icon else f_name
+                label = f"{f_text} {name_str}".strip()
                 left = f"[SIMG:{f_icon}] {label}" if f_icon else label
                 pct = fertility_pct if fertility_pct is not None else "+100%"
                 all_lines.append(f"{left}\t{pct}")
@@ -2928,8 +3068,7 @@ class ItemBrowserApp:
                         self.insert_text_with_icons(self.details_text, f"{line}\n", (target_tag))
 
                 # Dynamic Spacing
-                # We only add a half-space if the NEXT line is NOT an indented bullet.
-                # This naturally glues bullets to their header while keeping standard effects separated.
+                # We only add a half-space if the NEXT line is NOT an indented bullet. This naturally glues bullets to their header while keeping standard effects separated.
                 if i < len(processed_lines) - 1:
                     next_line = processed_lines[i + 1]
                     if not next_line.startswith('\t-'):
@@ -2942,15 +3081,153 @@ class ItemBrowserApp:
             end_idx = self.details_text.index(tk.INSERT)
             self.details_text.tag_add("section_bg", start_idx, end_idx)
 
+        # 1. Mythic Effect Rendering (on top, directly above the regular item effect)
+        mythic_fx_raw = data.get('MythicEffect Effects', '').strip()
+        if mythic_fx_raw and mythic_fx_raw != "None":
+            mythic_icon = "data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png"
+            mythic_header_text = self.localization_map.get("-6914281733318516038", "Heroic Effect").upper()
+
+            header_frame = tk.Frame(self.details_text, bg=BG_MAIN, width=790, height=25)
+            header_frame.pack_propagate(False)
+
+            img_m = self.get_icon_image(mythic_icon, (25, 25))
+            if img_m:
+                ph_m = ImageTk.PhotoImage(img_m)
+                self.icon_cache[f"mythic_hdr_{len(self.icon_cache)}"] = ph_m
+                tk.Label(header_frame, image=ph_m, bg=BG_MAIN).pack(side=tk.LEFT)
+
+            tk.Label(header_frame, text=f" {mythic_header_text}", font=FONT_UI_BOLD, fg=FG_MAIN, bg=BG_MAIN).pack(side=tk.LEFT)
+
+            # Force the frame's geometry to settle at its full fixed width before embedding it - otherwise Tk can embed it at a stale/smaller size (since nothing anchors the right edge like the Niche/Allocation row does),
+            # leaving a sliver of the row underneath showing through with the wrong (shaded-panel) background color.
+            header_frame.update_idletasks()
+
+            gap_start = self.details_text.index(tk.INSERT)
+            self.details_text.window_create(tk.END, window=header_frame)
+            self.details_text.insert(tk.END, "\n")
+            self.details_text.insert(tk.END, "\n", ("half_space",))
+            mythic_gap_ranges.append((gap_start, self.details_text.index(tk.INSERT)))
+
+            mythic_target_raw = data.get('MythicEffect Targets', '').strip()
+            if mythic_target_raw and mythic_target_raw != "None":
+                mt_groups = [g.strip() for g in mythic_target_raw.split('|') if g.strip()]
+            else:
+                # AreaBuff-backed Mythic effects have no explicit Targets (they apply island-wide by construction), but the "on Island:" label should still show on its own.
+                mt_groups = []
+
+            on_island_label = self.localization_map.get("-6914791532715520795", "on Island:")
+            if on_island_label and not mt_groups:
+                # Only capitalize when it opens the line (no target names before it).
+                on_island_label = on_island_label[0].upper() + on_island_label[1:]
+
+            for i, group in enumerate(mt_groups):
+                p_name, sub_text = self.get_target_info(group)
+                t_icon = self.get_target_icon(group)
+                icon_tag = f"[SIMG:{t_icon}] " if t_icon else ""
+
+                tag = f"myth_tg_{i}"
+                active_style = "multiple_targets" if sub_text else "single_targets"
+
+                self.insert_text_with_icons(self.details_text, icon_tag, (active_style, "section_bg"))
+                self.details_text.insert(tk.END, p_name, (tag, active_style, "section_bg"))
+
+                # Only bind tooltip if there is actual sub_text (i.e. it's an Asset Pool)
+                if sub_text:
+                    self.details_text.tag_bind(tag, "<Enter>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=False))
+                    self.details_text.tag_bind(tag, "<Leave>", self.hide_target_tooltip)
+                    self.details_text.tag_bind(tag, "<Button-1>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=True))
+                    self.details_text.tag_bind(tag, "<Enter>", lambda e: self.details_text.config(cursor="hand2"), add="+")
+                    self.details_text.tag_bind(tag, "<Leave>", lambda e: self.details_text.config(cursor="arrow"), add="+")
+                else:
+                    self.details_text.tag_bind(tag, "<Enter>", lambda e: self.hide_target_tooltip(e))
+
+                if i < len(mt_groups) - 1:
+                    self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
+
+            label_line = f" {on_island_label}\n" if mt_groups else f"{on_island_label}\n"
+            self.details_text.insert(tk.END, label_line, ("single_targets", "section_bg"))
+            self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
+
+            insert_effect_block(mythic_fx_raw)
+
+            # Separator between the Mythic Effect and the regular item effect, on the plain BG_MAIN background so it visually breaks the shaded panel.
+            gap_start = self.details_text.index(tk.INSERT)
+            self.details_text.insert(tk.END, big_sep)
+            mythic_gap_ranges.append((gap_start, self.details_text.index(tk.INSERT)))
+
+        # 2. Target Rendering (Bold, Hover restricted to Villas)
+        target_raw = data.get('Targets', '').strip()
+        if target_raw and target_raw != "None":
+            target_oid = "-6899655277052108454" if alloc_raw == "Villa" else "-6915573523070985148"
+            target_label = self.localization_map.get(target_oid, "Influences").replace(":", "").strip()
+            raw_groups = [g.strip() for g in target_raw.split('|') if g.strip()]
+
+            if alloc_raw == "Villa":
+                # VILLA: [Icons/Names] [Label]
+                for i, group in enumerate(raw_groups):
+                    p_name, sub_text = self.get_target_info(group)
+                    t_icon = self.get_target_icon(group)
+                    icon_tag = f"[SIMG:{t_icon}] " if t_icon else ""
+
+                    tag = f"tg_hv_{i}"
+                    active_style = "multiple_targets" if sub_text else "single_targets"
+
+                    self.insert_text_with_icons(self.details_text, icon_tag, (active_style, "section_bg"))
+                    self.details_text.insert(tk.END, p_name, (tag, active_style, "section_bg"))
+
+                    # Only bind tooltip if there is actual sub_text
+                    if sub_text:
+                        self.details_text.tag_bind(tag, "<Enter>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=False))
+                        # Hover to hide (only if not pinned)
+                        self.details_text.tag_bind(tag, "<Leave>", self.hide_target_tooltip)
+                        # Click to pin
+                        self.details_text.tag_bind(tag, "<Button-1>", lambda e, s=sub_text: self.show_target_tooltip(e, s, pinned=True))
+                        self.details_text.tag_bind(tag, "<Enter>", lambda e: self.details_text.config(cursor="hand2"), add="+")
+                        self.details_text.tag_bind(tag, "<Leave>", lambda e: self.details_text.config(cursor="arrow"), add="+")
+                    else:
+                        # Explicitly bind to hide tooltip to ensure no old tooltip persists
+                        self.details_text.tag_bind(tag, "<Enter>", lambda e: self.hide_target_tooltip(e))
+
+                    if i < len(raw_groups) - 1:
+                        self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
+
+                # "Residences in range:"
+                self.details_text.insert(tk.END, f" {target_label}:\n", ("single_targets", "section_bg"))
+
+            else:
+                # SHIP: [Label] [Icons/Names]
+                self.details_text.insert(tk.END, f"{target_label} ", ("single_targets", "section_bg"))
+                for i, group in enumerate(raw_groups):
+                    p_name, _ = self.get_target_info(group)
+
+                    t_icon = self.get_target_icon(group, is_ship=True)
+                    icon_tag = f"[SIMG:{t_icon}] " if t_icon else ""
+
+                    tag = f"sh_hv_{i}"
+                    # Clear potential old ship hover tags
+                    self.details_text.tag_unbind(tag, "<Enter>")
+
+                    self.insert_text_with_icons(self.details_text, icon_tag, ("single_targets", "section_bg"))
+                    self.details_text.insert(tk.END, p_name, ("single_targets", "section_bg"))
+
+                    if i < len(raw_groups) - 1:
+                        self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
+
+                self.details_text.insert(tk.END, ":\n", ("single_targets", "section_bg"))
+
+            self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
+
         insert_effect_block(data.get('Buff Effects', ''))
 
-        # 2. Effect Rendering (Second part of the merged box)
+        # 3. Effect Rendering (Second part of the merged box)
         eff_raw = data.get('Effects', '').strip()
         insert_effect_block(eff_raw)
 
         # --- CLOSE MERGED CONTAINER ---
         merged_end = self.details_text.index(tk.INSERT)
         self.details_text.tag_add("section_bg", merged_start, merged_end)
+        for gap_start, gap_end in mythic_gap_ranges:
+            self.details_text.tag_remove("section_bg", gap_start, gap_end)
         self.details_text.insert(tk.END, "\n") # Outer gap after the merged box
 
         # --- BOOST CONDITION Section ---
@@ -2981,8 +3258,9 @@ class ItemBrowserApp:
             self.details_text.window_create(tk.END, window=header_frame)
             self.details_text.insert(tk.END, "\n")
 
-            # Apply the boost_header tag style to the hint text
-            self.details_text.insert(tk.END, f"{localized_hint} ({formatted_condition})\n\n")
+            # Apply the boost_header tag style to the hint text (icons only render via insert_text_with_icons -- formatted_condition may embed [SIMG:...] tags now).
+            # "wrap_word" keeps long resolved text (e.g. an expanded AssetPool member list) from running off the right edge of the widget (which is wrap=NONE overall).
+            self.insert_text_with_icons(self.details_text, f"{localized_hint} ({formatted_condition})\n\n", ("wrap_word",))
 
             # 4. Process the effects
             s_b = data.get('BoostBuff Effects', '').strip()
@@ -3005,6 +3283,11 @@ class ItemBrowserApp:
             currency_icon = self.asset_guid_to_icon.get("29293", "")
             left_label = price_label
             left_icon = self.asset_guid_to_icon.get("107517", "")
+        elif rarity_raw == "Mythic":
+            pr_val = data.get('NeededPrestige', '0') or '0'
+            currency_icon = "data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png"
+            left_label = self.localization_map.get("-6911554866663245776", "Prestige").strip()
+            left_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_visitor_prestigious.png"
         elif is_obsidian_item:
             pr_val = data.get('ObsidianPrice', '0')
             currency_icon = self.asset_guid_to_icon.get("145102", "")
@@ -3094,12 +3377,14 @@ class ItemBrowserApp:
                 "data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png": "-6915651869812775825",
                 "data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png": "-6914021190765224130",
                 "data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png": "-6904030652562679494",
-                "data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png": "-6908773579491322283"
+                "data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png": "-6908773579491322283",
+                "data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png": "-6904119188857235835"
             }
             RESEARCH_ICONS = {
                 "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png",
                 "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png",
-                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png"
+                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png",
+                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png"
             }
 
             item_stats = []
