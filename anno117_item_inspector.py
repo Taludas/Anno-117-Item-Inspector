@@ -11,6 +11,9 @@ import json
 import sys
 import platform
 import ctypes
+import threading
+import urllib.request
+import urllib.error
 import _version
 
 # Visual Styles
@@ -86,6 +89,8 @@ BASE_ICON_PATH = '.'
 CSV_FILE = resource_path('items_export_with_effects.csv')
 ASSETS_XML = resource_path('data/base/config/export/assets.xml')
 LOCA_PATH_TEMPLATE = resource_path('data/base/config/gui/texts_{}.xml')
+
+GITHUB_REPO = "Taludas/Anno-117-Item-Inspector"
 
 LANGUAGES = [
     'english', 'german', 'french', 'italian', 'spanish', 'russian', 'polish', 'japanese', 'korean', 'brazilian', 'simplified_chinese', 'traditional_chinese'
@@ -574,6 +579,68 @@ class ItemBrowserApp:
             if hasattr(self, 'startup_overlay'):
                 self.startup_overlay.destroy()
             self.root.config(cursor="")
+
+        # 5. Check GitHub for a newer release (network I/O runs off the UI thread, result marshalled back via root.after)
+        self.check_for_updates()
+
+    # Fetches the latest GitHub release in a background thread and prompts the user if it's newer than this build.
+    # Fails silently (no internet, no releases yet, rate limiting, etc.) - this is a courtesy check, not a requirement.
+    def check_for_updates(self):
+        def worker():
+            try:
+                url = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
+                req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "Anno117ItemInspector"})
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+                latest_tag = str(data.get("tag_name", "")).strip()
+                release_url = data.get("html_url") or f"https://github.com/{GITHUB_REPO}/releases/latest"
+                if latest_tag:
+                    self.root.after(0, lambda: self._handle_update_check_result(latest_tag, release_url))
+            except Exception:
+                pass
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _handle_update_check_result(self, latest_tag, release_url):
+        def parse_version(v):
+            parts = re.findall(r'\d+', v)
+            return tuple(int(p) for p in parts) if parts else (0,)
+
+        current_v = parse_version(_version.__VERSION__)
+        latest_v = parse_version(latest_tag)
+        pad = max(len(current_v), len(latest_v))
+        current_v += (0,) * (pad - len(current_v))
+        latest_v += (0,) * (pad - len(latest_v))
+
+        if latest_v > current_v:
+            self._show_update_prompt(latest_tag, release_url)
+
+    # Custom centered prompt matching the app's existing dialog style (messagebox doesn't center/theme well)
+    def _show_update_prompt(self, latest_tag, release_url):
+        prompt = tk.Toplevel(self.root)
+        prompt.overrideredirect(True)
+        prompt.configure(bg=BG_MAIN, highlightbackground="#ffd700", highlightthickness=2)
+
+        self.root.update_idletasks()
+        p_w, p_h = 420, 170
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (p_w // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (p_h // 2)
+        prompt.geometry(f"{p_w}x{p_h}+{x}+{y}")
+        prompt.attributes("-topmost", True)
+        prompt.grab_set()
+
+        tk.Label(prompt, text="Update Available", font=FONT_HEADER, bg=BG_MAIN, fg="#ffd700").pack(pady=(20, 10))
+        tk.Label(prompt, text=f"A newer version ({latest_tag}) is available.\nYou are currently running v{_version.__VERSION__}.",
+                 font=FONT_BODY, bg=BG_MAIN, fg=FG_MAIN, justify="center").pack()
+
+        btn_frame = tk.Frame(prompt, bg=BG_MAIN)
+        btn_frame.pack(pady=20)
+
+        def download():
+            webbrowser.open(release_url)
+            prompt.destroy()
+
+        tk.Button(btn_frame, text=" Download ", command=download, bg=BG_SECTION, fg=FG_MAIN, width=12).pack(side=tk.LEFT, padx=10)
+        tk.Button(btn_frame, text=" Later ", command=prompt.destroy, bg=BG_SECTION, fg=FG_MAIN, width=12).pack(side=tk.LEFT, padx=10)
 
     # User defines default language on first start of the app
     def get_or_set_language(self):
@@ -1337,16 +1404,17 @@ class ItemBrowserApp:
         self.target_display_to_guid = {}
         EX_POOLS = ["38995", "26600", "140478", "29318"]
         for item in self.items_data:
-            raw_t = item['Targets']
-            active_ex = [p for p in EX_POOLS if f"{p}:" in raw_t or raw_t == p]
-            raw_f = raw_t.replace('|', ';').replace(':', ';')
-            guids = [g.strip() for g in raw_f.split(';') if g.strip()]
-            for g in guids:
-                if any(g != p for p in active_ex) and g not in EX_POOLS: continue
-                name = self.get_resolved_name(g)
-                if not name.startswith("Unknown"):
-                    unique_names.add(name)
-                    self.target_display_to_guid[name] = g
+            for raw_t in (item['Targets'], item.get('MythicEffect Targets', '')):
+                if not raw_t or raw_t == "None": continue
+                active_ex = [p for p in EX_POOLS if f"{p}:" in raw_t or raw_t == p]
+                raw_f = raw_t.replace('|', ';').replace(':', ';')
+                guids = [g.strip() for g in raw_f.split(';') if g.strip()]
+                for g in guids:
+                    if any(g != p for p in active_ex) and g not in EX_POOLS: continue
+                    name = self.get_resolved_name(g)
+                    if not name.startswith("Unknown"):
+                        unique_names.add(name)
+                        self.target_display_to_guid[name] = g
         self.target_combo['values'] = ["All"] + sorted(list(unique_names))
 
     def update_rarity_dropdown(self):
@@ -2006,7 +2074,8 @@ class ItemBrowserApp:
             if niche_disp != "All" and item['Niche'] != niche_raw_filter: continue
 
             if target_name != "All":
-                t_guids = item['Targets'].replace('|', ';').replace(':', ';').split(';')
+                combined_targets = item['Targets'] + ";" + item.get('MythicEffect Targets', '')
+                t_guids = combined_targets.replace('|', ';').replace(':', ';').split(';')
                 if target_guid_filter not in [t.strip() for t in t_guids]: continue
 
             if eff_disp != "All" and eff_raw_filter is not None:
