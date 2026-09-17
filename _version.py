@@ -1,3 +1,3 @@
 
 # version number
-__VERSION__ = '2.0.0.1'
+__VERSION__ = '2.1.0.0'

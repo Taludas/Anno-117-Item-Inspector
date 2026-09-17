@@ -5,6 +5,10 @@
       <Text>Total Combined Power</Text>
     </Text>
     <Text>
+      <LineId>-6917528447925658078</LineId>
+      <Text>Cultist of Kosmos</Text>
+    </Text>
+    <Text>
       <LineId>-6917528174128565175</LineId>
       <Text>Lupine Vexillum</Text>
     </Text>
@@ -14,7 +18,7 @@
     </Text>
     <Text>
       <LineId>-6917527737424887558</LineId>
-      <Text>$Are you sure you want to delete this stamp?</Text>
+      <Text>Are you sure you want to delete this stamp?</Text>
     </Text>
     <Text>
       <LineId>-6917527270257816981</LineId>
@@ -638,6 +642,10 @@ You have been soundly defeated at the very first hurdle.</Text>
       <Text>For conducting shady business.</Text>
     </Text>
     <Text>
+      <LineId>-6917455011374782714</LineId>
+      <Text>Fayence Mosaic Pavement</Text>
+    </Text>
+    <Text>
       <LineId>-6917454424223847407</LineId>
       <Text>Not with the conducting of the ceremony... but with more mundane matters, perhaps. </Text>
     </Text>
@@ -881,6 +889,10 @@ You keep talking until finally the alderman grow exhausted. They beg your pardon
 And it is in the interest of any patron that the ledgers reflect their champion's potential. Time to get Hiero's name out there (now that you actually know what it is...).</Text>
     </Text>
     <Text>
+      <LineId>-6917423724286312825</LineId>
+      <Text>May the father of gods grant clear skies to all who entrust their fate to the waves.</Text>
+    </Text>
+    <Text>
       <LineId>-6917423607725532806</LineId>
       <Text>Continue</Text>
     </Text>
@@ -991,6 +1003,10 @@ And it is in the interest of any patron that the ledgers reflect their champion'
     <Text>
       <LineId>-6917406446592203990</LineId>
       <Text>I hope Emperor Calidus doesn't find out. </Text>
+    </Text>
+    <Text>
+      <LineId>-6917404982136601864</LineId>
+      <Text>Hero</Text>
     </Text>
     <Text>
       <LineId>-6917404563245870145</LineId>
@@ -1485,6 +1501,10 @@ You may need to implement countermeasures.</Text>
       <Text>A warm, thick cloak woven by skilled Scathach weavers, gifted to you as a token of peace.</Text>
     </Text>
     <Text>
+      <LineId>-6917351453684188900</LineId>
+      <Text>Bring your command of all the resources of Aegyptus to bear in the Emperor's great folly, the restoration of the Great Pyramids of Keeops. After all what greater display of imperial power, than to put its own stamp on the wonder of all wonders of the world.</Text>
+    </Text>
+    <Text>
       <LineId>-6917351418695188279</LineId>
       <Text>Continue</Text>
     </Text>
@@ -1810,7 +1830,7 @@ You may need to implement countermeasures.</Text>
     </Text>
     <Text>
       <LineId>-6917314961146315631</LineId>
-      <Text>Cargo Weight Slowdown</Text>
+      <Text>Cargo Weight Speed Reduction:</Text>
     </Text>
     <Text>
       <LineId>-6917314628868568797</LineId>
@@ -2103,6 +2123,10 @@ He rolls the manuscript closed and says, after a judicious pause, "It is rather 
     <Text>
       <LineId>-6917279095435815613</LineId>
       <Text>Come to try the Kykeon? </Text>
+    </Text>
+    <Text>
+      <LineId>-6917278297170030236</LineId>
+      <Text>Channel Capacity</Text>
     </Text>
     <Text>
       <LineId>-6917278226456222098</LineId>
@@ -2474,6 +2498,10 @@ He rolls the manuscript closed and says, after a judicious pause, "It is rather 
     <Text>
       <LineId>-6917229207711636316</LineId>
       <Text>Sorry Anctius, Emperor's orders. </Text>
+    </Text>
+    <Text>
+      <LineId>-6917228727050753934</LineId>
+      <Text>Sort By Current Stock</Text>
     </Text>
     <Text>
       <LineId>-6917227925351102651</LineId>
@@ -3813,6 +3841,10 @@ He won't inspire the masses, but he won't cause much trouble either.</Text>
     <Text>
       <LineId>-6917060331233505006</LineId>
       <Text>An Ankh full of mystery.</Text>
+    </Text>
+    <Text>
+      <LineId>-6917060133121349789</LineId>
+      <Text>Discover the beauty of this southern part of your Empire.</Text>
     </Text>
     <Text>
       <LineId>-6917059943460080720</LineId>
@@ -5460,6 +5492,10 @@ Someone who might be your friend, on a nearby island</Text>
       <Text>Test it with your finger, did you? Do you think it's sabotage? Or else low-grade supplies?</Text>
     </Text>
     <Text>
+      <LineId>-6916857104984102566</LineId>
+      <Text>$TBD Music02</Text>
+    </Text>
+    <Text>
       <LineId>-6916854809780512240</LineId>
       <Text>Total Prestige Costs</Text>
     </Text>
@@ -6198,6 +6234,10 @@ Hiero looks up at that, suddenly self-conscious.&lt;b&gt;That was convincing!&lt
     <Text>
       <LineId>-6916761420899166770</LineId>
       <Text>Scores</Text>
+    </Text>
+    <Text>
+      <LineId>-6916760577088536022</LineId>
+      <Text>Didymus</Text>
     </Text>
     <Text>
       <LineId>-6916760413579713094</LineId>
@@ -7033,6 +7073,10 @@ Business is booming as of late, the shortage of war captives a by-product of the
       <Text>Wrest Aegyptus from father... just imagine.</Text>
     </Text>
     <Text>
+      <LineId>-6916647946742138343</LineId>
+      <Text>Statue of Penelope</Text>
+    </Text>
+    <Text>
       <LineId>-6916647822071462616</LineId>
       <Text>Toggle Filter</Text>
     </Text>
@@ -7431,6 +7475,10 @@ Unfortunately, you soon receive concerned dispatches from Albion, furious that y
     <Text>
       <LineId>-6916604516679388267</LineId>
       <Text>I do what I must to protect my business.</Text>
+    </Text>
+    <Text>
+      <LineId>-6916604252903973726</LineId>
+      <Text>Maximum contribution per player:</Text>
     </Text>
     <Text>
       <LineId>-6916603500105073623</LineId>
@@ -8630,6 +8678,10 @@ Very Slow - Governors research discoveries twice slower</Text>
       <Text>Major Monstropolis</Text>
     </Text>
     <Text>
+      <LineId>-6916449576410873221</LineId>
+      <Text>Arikhankharer</Text>
+    </Text>
+    <Text>
       <LineId>-6916449318809171962</LineId>
       <Text>Well we've no shortage of water!</Text>
     </Text>
@@ -8683,7 +8735,7 @@ Very Slow - Governors research discoveries twice slower</Text>
     </Text>
     <Text>
       <LineId>-6916439171769931341</LineId>
-      <Text>Connection limit reached</Text>
+      <Text>Cannot merge multiple water sources</Text>
     </Text>
     <Text>
       <LineId>-6916439089441438111</LineId>
@@ -8978,6 +9030,10 @@ On to the next round.</Text>
     <Text>
       <LineId>-6916403770332477583</LineId>
       <Text>Crushed them like ants under a bleeding rock! The men have tasted battle, and found it to their liking. You've given me a precious gift, Titania. Victory. Maybe I'll have her carved in yer image. </Text>
+    </Text>
+    <Text>
+      <LineId>-6916403157238160652</LineId>
+      <Text>{GetCompanyNameForParticipant(NotificationContext:GetValue('PrimaryDiplomacyParticipant').Int)} has made peace with {GetCompanyNameForParticipant(NotificationContext:GetValue('SecondaryDiplomacyParticipant').Int)}, ending the war for you as an ally.</Text>
     </Text>
     <Text>
       <LineId>-6916403020618686498</LineId>
@@ -9449,6 +9505,10 @@ When he wins a round, he mutters something to himself; when he loses a round, he
       <Text>Establish Route</Text>
     </Text>
     <Text>
+      <LineId>-6916343619425734997</LineId>
+      <Text>Obtained at great expense.</Text>
+    </Text>
+    <Text>
       <LineId>-6916342276234851513</LineId>
       <Text>Greetings, Governor. The herders of sheep on my island claim to have observed strange behaviour ever since we retrieved that fallen star. Have you noticed anything similar in your own domain?</Text>
     </Text>
@@ -9870,6 +9930,10 @@ You order the medici to release their sickest patients on to the streets, grimly
       <Text>Clad in argentum.</Text>
     </Text>
     <Text>
+      <LineId>-6916296297518162909</LineId>
+      <Text>$Shop 1</Text>
+    </Text>
+    <Text>
       <LineId>-6916296224024420367</LineId>
       <Text>Little Marcus. I hope you've grown to like Hellas. You're very far away now. </Text>
     </Text>
@@ -10002,6 +10066,10 @@ The conversation is quite heated: the Procurator appears to have taken this oppo
     <Text>
       <LineId>-6916278617117816237</LineId>
       <Text>I'm sorry the timing isn't ideal, just pay what you can.</Text>
+    </Text>
+    <Text>
+      <LineId>-6916275825263301960</LineId>
+      <Text>Aegyptian Sphinx</Text>
     </Text>
     <Text>
       <LineId>-6916275811612187280</LineId>
@@ -10253,6 +10321,10 @@ Occasus may or may not erupt, but at least your people are more productive and l
     <Text>
       <LineId>-6916244163691113040</LineId>
       <Text>I am sure Lucius' final resting place will be just as glorious when you're done. Come see me for the plans... I won't entrust them to a messenger. </Text>
+    </Text>
+    <Text>
+      <LineId>-6916243879278259133</LineId>
+      <Text>Sort By Selling Price</Text>
     </Text>
     <Text>
       <LineId>-6916243716143116787</LineId>
@@ -10681,6 +10753,10 @@ All around the table, Athr's knights rise at once in well-practiced unity. "To t
       <Text>Acquire all other Trophies.</Text>
     </Text>
     <Text>
+      <LineId>-6916185085957845974</LineId>
+      <Text>Statues</Text>
+    </Text>
+    <Text>
       <LineId>-6916184227682717940</LineId>
       <Text>Mud Bricks</Text>
     </Text>
@@ -10715,6 +10791,10 @@ All around the table, Athr's knights rise at once in well-practiced unity. "To t
     <Text>
       <LineId>-6916178409835449958</LineId>
       <Text>Continue</Text>
+    </Text>
+    <Text>
+      <LineId>-6916178050364844286</LineId>
+      <Text>A five-day celebration of Minerva, wise and watchful weaver of the gods.</Text>
     </Text>
     <Text>
       <LineId>-6916177821374521576</LineId>
@@ -11008,7 +11088,7 @@ Perhaps you should consider taking advantage of the city's new resilience.</Text
     </Text>
     <Text>
       <LineId>-6916139917934573214</LineId>
-      <Text>$Libraries</Text>
+      <Text>Libraries</Text>
     </Text>
     <Text>
       <LineId>-6916139501414882205</LineId>
@@ -11154,6 +11234,10 @@ Perhaps you should consider taking advantage of the city's new resilience.</Text
     <Text>
       <LineId>-6916122577773776931</LineId>
       <Text>I will not pretend you are my friend, not when I have evidence to the contrary. </Text>
+    </Text>
+    <Text>
+      <LineId>-6916121578727256744</LineId>
+      <Text>$TBD Music02 Fluff</Text>
     </Text>
     <Text>
       <LineId>-6916121055347132234</LineId>
@@ -11414,6 +11498,10 @@ Perhaps you should consider taking advantage of the city's new resilience.</Text
     <Text>
       <LineId>-6916093706491349385</LineId>
       <Text>Die well, Romans. Your ancestors are watching.</Text>
+    </Text>
+    <Text>
+      <LineId>-6916093480962955586</LineId>
+      <Text>Gaius</Text>
     </Text>
     <Text>
       <LineId>-6916092875844239995</LineId>
@@ -11809,6 +11897,10 @@ The imperial fleet will be here soon. Do you have enough weapons in stock?</Text
     <Text>
       <LineId>-6916038293953260347</LineId>
       <Text>You control more than three islands that offer this resource, making trade more interesting.</Text>
+    </Text>
+    <Text>
+      <LineId>-6916038037275256470</LineId>
+      <Text>Herakles</Text>
     </Text>
     <Text>
       <LineId>-6916037594385596863</LineId>
@@ -12501,6 +12593,10 @@ Marriage is a family duty, not a personal choice. It is the Roman way.</Text>
       <Text>They're in trouble.</Text>
     </Text>
     <Text>
+      <LineId>-6915947040328933788</LineId>
+      <Text>$TBD Tech 01 Description</Text>
+    </Text>
+    <Text>
       <LineId>-6915946637329392565</LineId>
       <Text>Continue</Text>
     </Text>
@@ -12783,6 +12879,10 @@ Marriage is a family duty, not a personal choice. It is the Roman way.</Text>
     <Text>
       <LineId>-6915919183988869106</LineId>
       <Text>Most goods require a production chain — a combination of multiple production buildings. Build them close to each other to ease transportation and maximize efficiency.</Text>
+    </Text>
+    <Text>
+      <LineId>-6915918724966822276</LineId>
+      <Text>$TBD Tech 01</Text>
     </Text>
     <Text>
       <LineId>-6915918232192818779</LineId>
@@ -14085,6 +14185,10 @@ Invictus</Text>
     <Text>
       <LineId>-6915755141071482029</LineId>
       <Text>&lt;b&gt;An Emperor to Crown&lt;/b&gt;</Text>
+    </Text>
+    <Text>
+      <LineId>-6915754756672735839</LineId>
+      <Text>$Campaign</Text>
     </Text>
     <Text>
       <LineId>-6915754210320888150</LineId>
@@ -15442,6 +15546,10 @@ But the pressure is beginning to take its toll. He has the look of a man who has
       <Text>Training Ground</Text>
     </Text>
     <Text>
+      <LineId>-6915593719898707256</LineId>
+      <Text>Riddle me this: which was first, serpent or crown?</Text>
+    </Text>
+    <Text>
       <LineId>-6915593444614656072</LineId>
       <Text>This decision has no effect.</Text>
     </Text>
@@ -15502,6 +15610,10 @@ Ben-Baalion wonders whether there is any significance in &lt;b&gt;you having cho
     <Text>
       <LineId>-6915585605939884519</LineId>
       <Text>Request</Text>
+    </Text>
+    <Text>
+      <LineId>-6915584736045686214</LineId>
+      <Text>Swims like a porpoise.</Text>
     </Text>
     <Text>
       <LineId>-6915584141365980829</LineId>
@@ -15574,6 +15686,10 @@ Ben-Baalion wonders whether there is any significance in &lt;b&gt;you having cho
     <Text>
       <LineId>-6915575904229833108</LineId>
       <Text>Dear me, what is this... gruel? Did you cook it yourself?</Text>
+    </Text>
+    <Text>
+      <LineId>-6915575079483112806</LineId>
+      <Text>A real son of the snake. Inherited hiss looks.</Text>
     </Text>
     <Text>
       <LineId>-6915574823677014584</LineId>
@@ -16035,6 +16151,10 @@ On to the next round.</Text>
       <Text>The Emperor will be furious.</Text>
     </Text>
     <Text>
+      <LineId>-6915517144666970833</LineId>
+      <Text>$Dungeon Entrance</Text>
+    </Text>
+    <Text>
       <LineId>-6915516533552876609</LineId>
       <Text>The Merchant is ashamed of his drunken apprentice, but still needs the wares delivered.</Text>
     </Text>
@@ -16049,6 +16169,10 @@ On to the next round.</Text>
     <Text>
       <LineId>-6915514716892915333</LineId>
       <Text>Procurator Corvinus bears a message from Rome</Text>
+    </Text>
+    <Text>
+      <LineId>-6915513805518197710</LineId>
+      <Text>Amanirenas</Text>
     </Text>
     <Text>
       <LineId>-6915513746864731262</LineId>
@@ -16479,6 +16603,10 @@ On to the next round.</Text>
       <Text>You should trade with Voada, if the celts can profit from trade they will keep hostilities low </Text>
     </Text>
     <Text>
+      <LineId>-6915460083493316396</LineId>
+      <Text>Stands and Lodges</Text>
+    </Text>
+    <Text>
       <LineId>-6915460023473284579</LineId>
       <Text>Healing Water</Text>
     </Text>
@@ -16681,6 +16809,10 @@ You've seen all you need to see, no doubt. &lt;b&gt;You got a clue!&lt;/b&gt;</T
       <Text>Ready</Text>
     </Text>
     <Text>
+      <LineId>-6915434330619559570</LineId>
+      <Text>Petrified Gorgo</Text>
+    </Text>
+    <Text>
       <LineId>-6915434194209450712</LineId>
       <Text>&lt;b&gt; Celtic Captives &lt;/b&gt;</Text>
     </Text>
@@ -16783,6 +16915,10 @@ Your bold decision has earned you a reputation throughout the Empire as a govern
     <Text>
       <LineId>-6915425000881065385</LineId>
       <Text>A military victory over Voada and the Scathach! I should be pleased with myself, shouldn't I?</Text>
+    </Text>
+    <Text>
+      <LineId>-6915424795741057228</LineId>
+      <Text>Aegyptian Blue</Text>
     </Text>
     <Text>
       <LineId>-6915424558722819793</LineId>
@@ -17890,6 +18026,10 @@ Contracts offered at their lighthouse allow you to turn a tidy profit if you com
 &lt;font color='Anno117_TextIcon_Light'&gt;&lt;b&gt;Any Colour&lt;/b&gt;&lt;/font&gt; - Highlight in the selected colour</Text>
     </Text>
     <Text>
+      <LineId>-6915305347061087526</LineId>
+      <Text>Even the Amphitheater in all its size cannot hold all the enthusiasm after a good gladiatorial game.</Text>
+    </Text>
+    <Text>
       <LineId>-6915305109069898727</LineId>
       <Text>Gatherer</Text>
     </Text>
@@ -17958,6 +18098,10 @@ If indeed a pact can be established between gods and mortals, you're determined 
     <Text>
       <LineId>-6915301289256143995</LineId>
       <Text>I pity the poor soul who gets hit by these...</Text>
+    </Text>
+    <Text>
+      <LineId>-6915300838198020183</LineId>
+      <Text>Chariots of Conquest</Text>
     </Text>
     <Text>
       <LineId>-6915299543241282209</LineId>
@@ -18126,7 +18270,7 @@ If indeed a pact can be established between gods and mortals, you're determined 
     </Text>
     <Text>
       <LineId>-6915284619992169622</LineId>
-      <Text>$Stage:</Text>
+      <Text>Stage:</Text>
     </Text>
     <Text>
       <LineId>-6915282504618166940</LineId>
@@ -19740,6 +19884,10 @@ The tension in your praetorium is palpable as the stability of your city hangs i
       <Text>Large</Text>
     </Text>
     <Text>
+      <LineId>-6915067662702023347</LineId>
+      <Text>Ironic.</Text>
+    </Text>
+    <Text>
       <LineId>-6915067079749652441</LineId>
       <Text>Concordia dislikes you choosing the Celtic path in Albion, which to her is barbarian.</Text>
     </Text>
@@ -19792,7 +19940,7 @@ You notice the same cannot be said for her undercooks, chained as they are - qui
     </Text>
     <Text>
       <LineId>-6915061230644194727</LineId>
-      <Text>Land in sight!</Text>
+      <Text>Land In Sight!</Text>
     </Text>
     <Text>
       <LineId>-6915060860125959529</LineId>
@@ -20115,6 +20263,10 @@ Ben-Baalion swallows hard, but bows in deference before leaving you alone with y
       <Text>Syracus is amused by this turn of events</Text>
     </Text>
     <Text>
+      <LineId>-6915017653190174841</LineId>
+      <Text>Who is to say that his struggle is futile?</Text>
+    </Text>
+    <Text>
       <LineId>-6915015940650977145</LineId>
       <Text>Wine</Text>
     </Text>
@@ -20137,6 +20289,10 @@ Ben-Baalion swallows hard, but bows in deference before leaving you alone with y
     <Text>
       <LineId>-6915012810092627118</LineId>
       <Text>Calling yourself a king, of all things! Rapacious monarchies have thankfully been confined to history!</Text>
+    </Text>
+    <Text>
+      <LineId>-6915011797619497034</LineId>
+      <Text>Statue of a Pharao</Text>
     </Text>
     <Text>
       <LineId>-6915010887355920078</LineId>
@@ -20542,6 +20698,10 @@ Governors possess wide discretion in these matters. Being creative with your cou
       <Text>Paldius, Ovine Authority Unquestioned</Text>
     </Text>
     <Text>
+      <LineId>-6914956853966528532</LineId>
+      <Text>Born from a splitting headache and a sculptor's hand, Athena has led many a city to greatness.</Text>
+    </Text>
+    <Text>
       <LineId>-6914956557277510909</LineId>
       <Text>%</Text>
     </Text>
@@ -20684,6 +20844,10 @@ The engineer, inspired by your trust, works tirelessly. The &lt;i&gt;naumachia&l
       <Text>Perform rituals and sacrifices for the gods</Text>
     </Text>
     <Text>
+      <LineId>-6914934984978327455</LineId>
+      <Text>The colourful stalls of Kumat, where abundant produce, sweets and spice lull the senses.</Text>
+    </Text>
+    <Text>
       <LineId>-6914934898693301501</LineId>
       <Text>Make an excuse and refuse</Text>
     </Text>
@@ -20781,6 +20945,10 @@ Corvinus is a man of great integrity and professionalism, and though understanda
     <Text>
       <LineId>-6914923149854169904</LineId>
       <Text>Armilustrium, Festival of Mars</Text>
+    </Text>
+    <Text>
+      <LineId>-6914922978553792656</LineId>
+      <Text>This one is for GOLDEN TICKETS</Text>
     </Text>
     <Text>
       <LineId>-6914922819208221441</LineId>
@@ -20881,6 +21049,10 @@ Corvinus is a man of great integrity and professionalism, and though understanda
     <Text>
       <LineId>-6914908007427094104</LineId>
       <Text>Tsk, aren't we a canny negotiator? I appreciate a Governor who knows how to seize the day. Perhaps I misjudged you.</Text>
+    </Text>
+    <Text>
+      <LineId>-6914907813324718705</LineId>
+      <Text>Scorpion</Text>
     </Text>
     <Text>
       <LineId>-6914907759994356004</LineId>
@@ -21475,7 +21647,7 @@ You are but one governor, yet the work of governing continues. Ben-Baalion and y
     </Text>
     <Text>
       <LineId>-6914838867466941840</LineId>
-      <Text>&lt;b&gt;Needs&lt;/b&gt; are sorted into &lt;b&gt;categories&lt;/b&gt; such as Food, Fashion or Public Services. &lt;b&gt;Providing one per category&lt;/b&gt; is enough to progress.</Text>
+      <Text>$&lt;b&gt;Needs&lt;/b&gt; are sorted into &lt;b&gt;categories&lt;/b&gt; such as Food, Fashion or Public Services. Choose which Need to fulfill per category, or fulfill all of them.</Text>
     </Text>
     <Text>
       <LineId>-6914837444383572085</LineId>
@@ -23023,6 +23195,10 @@ Now the Marble Lady excises her cities of wastage and excess, championing the lo
       <Text>Sigil</Text>
     </Text>
     <Text>
+      <LineId>-6914646402306888391</LineId>
+      <Text>It's an annomaly.</Text>
+    </Text>
+    <Text>
       <LineId>-6914646357226699322</LineId>
       <Text>You didn't think that through!</Text>
     </Text>
@@ -23144,6 +23320,10 @@ Now the Marble Lady excises her cities of wastage and excess, championing the lo
       <Text>What are your wider ambitions for the province, Emperor?</Text>
     </Text>
     <Text>
+      <LineId>-6914630828486199792</LineId>
+      <Text>Copy one or multiple buildings and place them or save them as stamps. </Text>
+    </Text>
+    <Text>
       <LineId>-6914630755848678966</LineId>
       <Text>Crop and animal farms also need &lt;b&gt;fields&lt;/b&gt; to be placed around them. Buildings that harvest the land itself (e.g. eel grabber), not field tiles, require the highlighted area around them to be &lt;b&gt;empty&lt;/b&gt;.</Text>
     </Text>
@@ -23206,6 +23386,10 @@ Now the Marble Lady excises her cities of wastage and excess, championing the lo
     <Text>
       <LineId>-6914622499538748502</LineId>
       <Text>I ask you.</Text>
+    </Text>
+    <Text>
+      <LineId>-6914622117586394612</LineId>
+      <Text>The beauty and wit of the wife of Odysseus was legendary: though no two sources can agree on what she looked like. </Text>
     </Text>
     <Text>
       <LineId>-6914621967066949746</LineId>
@@ -24401,7 +24585,7 @@ Procurator Corvinus takes his leave with a neat swish of his birrus.</Text>
     </Text>
     <Text>
       <LineId>-6914462560924479813</LineId>
-      <Text>$Missing Mods</Text>
+      <Text>Mods Missing</Text>
     </Text>
     <Text>
       <LineId>-6914460429734282787</LineId>
@@ -24942,6 +25126,11 @@ Before long, you hear a clatter from the 'castle gates', a host of armoured 'kni
       <Text>You dare?</Text>
     </Text>
     <Text>
+      <LineId>-6914398493366734525</LineId>
+      <Text>$Shop 2
+</Text>
+    </Text>
+    <Text>
       <LineId>-6914398078592829875</LineId>
       <Text>I believe I may have located your missing philosophers. Judging from the complaints, they are blocking your bathhouse. </Text>
     </Text>
@@ -24964,6 +25153,10 @@ Before long, you hear a clatter from the 'castle gates', a host of armoured 'kni
     <Text>
       <LineId>-6914395047682065174</LineId>
       <Text>Well.. I don't know. Seemed as if he was struggling to breathe. He was quite old, you know.</Text>
+    </Text>
+    <Text>
+      <LineId>-6914394869498198360</LineId>
+      <Text>All Monument Construction Sites</Text>
     </Text>
     <Text>
       <LineId>-6914394646166933379</LineId>
@@ -25004,6 +25197,10 @@ Before long, you hear a clatter from the 'castle gates', a host of armoured 'kni
     <Text>
       <LineId>-6914391013689239217</LineId>
       <Text>Enough!</Text>
+    </Text>
+    <Text>
+      <LineId>-6914389700048274508</LineId>
+      <Text>Your people give their thanks for good health and cleanliness. Let's hope they remember to clean up after themselves.</Text>
     </Text>
     <Text>
       <LineId>-6914389531134314254</LineId>
@@ -25521,6 +25718,10 @@ Like, who doesn’t like compliments?</Text>
     <Text>
       <LineId>-6914326080660837531</LineId>
       <Text>Military</Text>
+    </Text>
+    <Text>
+      <LineId>-6914325954984714824</LineId>
+      <Text>Cat </Text>
     </Text>
     <Text>
       <LineId>-6914325931842811476</LineId>
@@ -26109,6 +26310,10 @@ You managed to spice up a boring day at Amphitheatre, but the Emperor may not be
       <Text>The Market isn't just there to feed and swap horses, it's the only place to meet for miles around.</Text>
     </Text>
     <Text>
+      <LineId>-6914245295008559119</LineId>
+      <Text>Sisyphus</Text>
+    </Text>
+    <Text>
       <LineId>-6914245037184463665</LineId>
       <Text>Fabulous, you absolute dish. </Text>
     </Text>
@@ -26183,6 +26388,10 @@ You managed to spice up a boring day at Amphitheatre, but the Emperor may not be
     <Text>
       <LineId>-6914234570087093198</LineId>
       <Text>The Tribune's Appeal</Text>
+    </Text>
+    <Text>
+      <LineId>-6914234373307810896</LineId>
+      <Text>With great condescension, the cat allows this mortal to proclaim her eternal rule.</Text>
     </Text>
     <Text>
       <LineId>-6914234198090602405</LineId>
@@ -26315,6 +26524,10 @@ Sell {Variables:GetVariableOfComponent("TradeSellMax", QuestComponentID)}t of an
       <Text>Prefers a good standing with the Emperor</Text>
     </Text>
     <Text>
+      <LineId>-6914215383988894450</LineId>
+      <Text>Rat</Text>
+    </Text>
+    <Text>
       <LineId>-6914214999258060091</LineId>
       <Text>C'mon over here. Try lifting that, would you? Get some wind under it, if you can.</Text>
     </Text>
@@ -26385,6 +26598,10 @@ But before you can leave the bay of Carraig Mhor, you hear Voada cry out from th
     <Text>
       <LineId>-6914204508437238700</LineId>
       <Text>Follow: &lt;br/&gt;{AssetData(Conditions:QuestCondition.TargetShip).Text}</Text>
+    </Text>
+    <Text>
+      <LineId>-6914204398999891673</LineId>
+      <Text>Ancient Aegyptian</Text>
     </Text>
     <Text>
       <LineId>-6914203313657738674</LineId>
@@ -26963,6 +27180,10 @@ Tiled rooftops are durable, but will one day need further maintenance. Until the
       <Text>Arthourus, that armour you wear; is it very heavy?</Text>
     </Text>
     <Text>
+      <LineId>-6914131789859096903</LineId>
+      <Text>Statue of Asclepios</Text>
+    </Text>
+    <Text>
       <LineId>-6914131759290294765</LineId>
       <Text>Valeria awaits your return.</Text>
     </Text>
@@ -27321,7 +27542,7 @@ The sky above {Static.Tags.LocationName("ColosseumIsle", QuestComponentID)} thun
     </Text>
     <Text>
       <LineId>-6914076265948071467</LineId>
-      <Text>$Cannot Barter: Ship is full or not enough Obsidian.</Text>
+      <Text>Cannot barter: Missing obsidian or ship inventory slots.</Text>
     </Text>
     <Text>
       <LineId>-6914076009566899995</LineId>
@@ -27406,6 +27627,10 @@ The atmosphere is exuberant, in no small part thanks to you! No sign of Manx or 
     <Text>
       <LineId>-6914069035694617096</LineId>
       <Text>There are enemies nearby!</Text>
+    </Text>
+    <Text>
+      <LineId>-6914068732546884004</LineId>
+      <Text>Assign Stamp</Text>
     </Text>
     <Text>
       <LineId>-6914068055356273712</LineId>
@@ -28520,6 +28745,10 @@ Wild Nature</Text>
       <Text>Nothing will grow.</Text>
     </Text>
     <Text>
+      <LineId>-6913928890781796842</LineId>
+      <Text>$You find a room full with gold</Text>
+    </Text>
+    <Text>
       <LineId>-6913928775366482030</LineId>
       <Text>Vines</Text>
     </Text>
@@ -28675,7 +28904,7 @@ Darkness passes over Ben-Baalion's expression, but he issues your edict nonethel
     </Text>
     <Text>
       <LineId>-6913906333329408040</LineId>
-      <Text>Good Consumption</Text>
+      <Text>Consumption of Goods</Text>
     </Text>
     <Text>
       <LineId>-6913905922150610343</LineId>
@@ -29248,6 +29477,10 @@ How will you make reassurances to the crowds (and the gods)?</Text>
       <Text>Quicksave</Text>
     </Text>
     <Text>
+      <LineId>-6913834163276573165</LineId>
+      <Text>Weary Boxer</Text>
+    </Text>
+    <Text>
       <LineId>-6913834006386658779</LineId>
       <Text>praising your villa.</Text>
     </Text>
@@ -29697,7 +29930,7 @@ How will you make reassurances to the crowds (and the gods)?</Text>
     </Text>
     <Text>
       <LineId>-6913768749543118718</LineId>
-      <Text>River Delta</Text>
+      <Text>Nile Delta</Text>
     </Text>
     <Text>
       <LineId>-6913768521863815602</LineId>
@@ -30631,6 +30864,10 @@ To support this effort, the Imperial Court demands a supply of wax tablets or in
       <Text>Set sail!</Text>
     </Text>
     <Text>
+      <LineId>-6913647951932323922</LineId>
+      <Text>AEGYPTUS</Text>
+    </Text>
+    <Text>
       <LineId>-6913647327226495910</LineId>
       <Text>Calidus and.. the Lady Julia…</Text>
     </Text>
@@ -31077,6 +31314,10 @@ If you continue to govern well, and your people know about it, they'll act as yo
       <Text>Destroy 117 Wall segments.</Text>
     </Text>
     <Text>
+      <LineId>-6913593350485576016</LineId>
+      <Text>Arsenouphis</Text>
+    </Text>
+    <Text>
       <LineId>-6913593039832459545</LineId>
       <Text>Romanisation</Text>
     </Text>
@@ -31496,6 +31737,10 @@ Guv! You've more means than sens... than need, eh? Please, pay off my debts! I'l
       <Text>Procurator Corvinus</Text>
     </Text>
     <Text>
+      <LineId>-6913545523615477430</LineId>
+      <Text>Oasis Overgrowth</Text>
+    </Text>
+    <Text>
       <LineId>-6913545361744915915</LineId>
       <Text>Push hard. </Text>
     </Text>
@@ -31596,6 +31841,10 @@ Guv! You've more means than sens... than need, eh? Please, pay off my debts! I'l
     <Text>
       <LineId>-6913530716494348989</LineId>
       <Text>Salami</Text>
+    </Text>
+    <Text>
+      <LineId>-6913530675417235331</LineId>
+      <Text>Pillar of Pharos</Text>
     </Text>
     <Text>
       <LineId>-6913530580313382329</LineId>
@@ -31882,6 +32131,10 @@ Guv! You've more means than sens... than need, eh? Please, pay off my debts! I'l
     <Text>
       <LineId>-6913499823916006077</LineId>
       <Text>Host 9 Events in the Amphitheater.</Text>
+    </Text>
+    <Text>
+      <LineId>-6913499716831122342</LineId>
+      <Text>Chimera</Text>
     </Text>
     <Text>
       <LineId>-6913499514740392734</LineId>
@@ -32788,6 +33041,10 @@ None - Governors start without any ships, but already settled on an Island. All 
       <Text>A humble citizen offers you a quest.</Text>
     </Text>
     <Text>
+      <LineId>-6913393935316631037</LineId>
+      <Text>Facade and Arches</Text>
+    </Text>
+    <Text>
       <LineId>-6913393467405056808</LineId>
       <Text>I think, dear husband, we have found our sacred centre.</Text>
     </Text>
@@ -32916,6 +33173,10 @@ If you don't intervene, Voada will crush the Classis Albionis, and Finnegan will
       <Text>Increase your income by providing goods to residences with the Income attribute.</Text>
     </Text>
     <Text>
+      <LineId>-6913377643896658843</LineId>
+      <Text>Take a bow, Governor. Today is your standing Ovation.</Text>
+    </Text>
+    <Text>
       <LineId>-6913377373980034302</LineId>
       <Text>Careful.</Text>
     </Text>
@@ -33041,6 +33302,10 @@ It's a small thing, to reunite families in times of disorder.  Nevertheless, you
       <Text>Tell Ben-Baalion to be patient. </Text>
     </Text>
     <Text>
+      <LineId>-6913360284716917490</LineId>
+      <Text>Here is one tree the collegium of chairmakers could not fell.</Text>
+    </Text>
+    <Text>
       <LineId>-6913360112581708132</LineId>
       <Text>You wouldn't need to watch your back... all the time. </Text>
     </Text>
@@ -33151,6 +33416,10 @@ While this donation is entirely voluntary, the Emperor &lt;i&gt;will&lt;/i&gt; r
     <Text>
       <LineId>-6913345675525857324</LineId>
       <Text>Games at the Amphitheatre have ended.</Text>
+    </Text>
+    <Text>
+      <LineId>-6913344783229721865</LineId>
+      <Text>Wrested from the clutching fist of a cyclops, Kassandra's trusty trireme is always ready to make a swift escape.</Text>
     </Text>
     <Text>
       <LineId>-6913344716146672392</LineId>
@@ -33372,6 +33641,10 @@ Julia </Text>
     <Text>
       <LineId>-6913322620103280492</LineId>
       <Text>{AssetData(NotificationContext.CharacterGUID).Text} offers you Peace.</Text>
+    </Text>
+    <Text>
+      <LineId>-6913322004661991352</LineId>
+      <Text>Merit has granted you victory. At least that is what historians tend to say when you charge at them with a chariot. </Text>
     </Text>
     <Text>
       <LineId>-6913321624580040689</LineId>
@@ -34413,6 +34686,10 @@ Syracus grins. "The game is not yet over. After all, we can't say the culprit's 
       <Text>False Flames and Epidemics</Text>
     </Text>
     <Text>
+      <LineId>-6913193505535268697</LineId>
+      <Text>Better keep an eye on it.</Text>
+    </Text>
+    <Text>
       <LineId>-6913193364092589499</LineId>
       <Text>...The Spoils</Text>
     </Text>
@@ -34571,6 +34848,10 @@ Syracus grins. "The game is not yet over. After all, we can't say the culprit's 
       <Text>Your Procurator is here to break us to bridle. He's about to get his skull kicked in.</Text>
     </Text>
     <Text>
+      <LineId>-6913169080925935461</LineId>
+      <Text>Dynasties have come and gone before the first Hellenes set foot in the sand. These Ptolemys are children: He is Namer, first of his name.</Text>
+    </Text>
+    <Text>
       <LineId>-6913168977880339363</LineId>
       <Text>I thought I'd sit in on your assembly. You know, to help you out.</Text>
     </Text>
@@ -34594,9 +34875,10 @@ Syracus grins. "The game is not yet over. After all, we can't say the culprit's 
       <LineId>-6913166446447308525</LineId>
       <Text>Defines the consumption rate of your population
 
-Low - The population takes a while to start consuming
+Low - The population consumes less goods
 Medium - Consumption is at the default rate
-High - The population consumes at a faster rate and will crave new goods sooner. </Text>
+High - Your population consumes goods at a higher rate
+Very High -The consumption of goods is maxed out. </Text>
     </Text>
     <Text>
       <LineId>-6913165205583349189</LineId>
@@ -35850,6 +36132,10 @@ You are free to decline, but the Emperor will not be pleased.</Text>
       <Text>Capricorn Signum</Text>
     </Text>
     <Text>
+      <LineId>-6913018441848223415</LineId>
+      <Text>&lt;custom-entity tag="DefaultKey"&gt;&lt;custom-properties KeyText="Ctrl"/&gt;&lt;/custom-entity&gt; + {ShortcutManager:GetShortcutTooltipMouse(datasets.MouseButtonType.Left)} Show In Statistics</Text>
+    </Text>
+    <Text>
       <LineId>-6913017750621656146</LineId>
       <Text>It might not be in their customs, but our romanised citizens will help them adjust.</Text>
     </Text>
@@ -36702,6 +36988,10 @@ Gives the other party a &lt;b&gt;reason&lt;/b&gt; to resent you, impacting treat
       <Text>https://youtu.be/JefoOoQHjqo?si=YbCBREA7CLmfXkTa&amp;t=6</Text>
     </Text>
     <Text>
+      <LineId>-6912907413638820853</LineId>
+      <Text>There is death in life, and life in death: Spring, however fleeting, always returns.</Text>
+    </Text>
+    <Text>
       <LineId>-6912906941546201540</LineId>
       <Text>Rivals, Traders &amp; Raiders</Text>
     </Text>
@@ -37011,6 +37301,10 @@ Most on your island departed delighted, though a few of your choices did not go 
     <Text>
       <LineId>-6912865779053012705</LineId>
       <Text>Reputation Change</Text>
+    </Text>
+    <Text>
+      <LineId>-6912865687723564640</LineId>
+      <Text>III/V</Text>
     </Text>
     <Text>
       <LineId>-6912865572153983970</LineId>
@@ -37535,6 +37829,10 @@ But your point is made - Roman justice has arrived, and the one with the gladius
       <Text>Construction Cost per 10 tiles</Text>
     </Text>
     <Text>
+      <LineId>-6912794440445268793</LineId>
+      <Text>$Placeholder</Text>
+    </Text>
+    <Text>
       <LineId>-6912792381976664464</LineId>
       <Text>Rusa of Knossos, Benthic Ecclesiast</Text>
     </Text>
@@ -37819,6 +38117,10 @@ You know it. He would not. &lt;b&gt;That was convincing!&lt;/b&gt;</Text>
       <Text>They'll never understand us lot!</Text>
     </Text>
     <Text>
+      <LineId>-6912750315196765952</LineId>
+      <Text>Navigate the river channels and found your settlements in desert valleys.</Text>
+    </Text>
+    <Text>
       <LineId>-6912749891108860533</LineId>
       <Text>I say, Governor, perhaps you can help me with a little something. We keep a little pet fisherman around the house, a little novelty, you know. </Text>
     </Text>
@@ -37848,7 +38150,7 @@ You know it. He would not. &lt;b&gt;That was convincing!&lt;/b&gt;</Text>
     </Text>
     <Text>
       <LineId>-6912745169077095877</LineId>
-      <Text>$Surplus Mods</Text>
+      <Text>Surplus Mods</Text>
     </Text>
     <Text>
       <LineId>-6912744261432847306</LineId>
@@ -37863,6 +38165,10 @@ You know it. He would not. &lt;b&gt;That was convincing!&lt;/b&gt;</Text>
       <Text>If the safety of their community will not motivate them, perhaps money will. You decide to offer a reward to citizens who aid the vigiles.
 
 "Yet more coin flows out from the treasury," Ben-Baalion grumbles, but he carries out your edict. You hope that your people will remember your magnanimity.</Text>
+    </Text>
+    <Text>
+      <LineId>-6912742332017145631</LineId>
+      <Text>$challenges</Text>
     </Text>
     <Text>
       <LineId>-6912742278166164989</LineId>
@@ -38236,7 +38542,7 @@ With that, your advisor departs.</Text>
     </Text>
     <Text>
       <LineId>-6912697904047618022</LineId>
-      <Text>Exotic Goods</Text>
+      <Text>Exotic Exchanges</Text>
     </Text>
     <Text>
       <LineId>-6912697877074641711</LineId>
@@ -38401,6 +38707,10 @@ With that, your advisor departs.</Text>
     <Text>
       <LineId>-6912675949330451770</LineId>
       <Text>Selflessly stacks shellfish.</Text>
+    </Text>
+    <Text>
+      <LineId>-6912674545271857651</LineId>
+      <Text>Your people rejoice in Ceres' name; to full bellies and to safe hearths.</Text>
     </Text>
     <Text>
       <LineId>-6912674195889064891</LineId>
@@ -39107,12 +39417,20 @@ And yet, the young man in front of you will only shake his head, like a dog tryi
       <Text>Empress Julia?</Text>
     </Text>
     <Text>
+      <LineId>-6912576056217222451</LineId>
+      <Text>Kashtan Sandstone</Text>
+    </Text>
+    <Text>
       <LineId>-6912576037942208980</LineId>
       <Text>You serve well.</Text>
     </Text>
     <Text>
       <LineId>-6912575487900080078</LineId>
       <Text>Only dust remains.</Text>
+    </Text>
+    <Text>
+      <LineId>-6912575052795644471</LineId>
+      <Text>Amani</Text>
     </Text>
     <Text>
       <LineId>-6912574674252115517</LineId>
@@ -39800,6 +40118,10 @@ Minecraft</Text>
       <Text>Never thought I'd rule with the iron fist of my father, but defeating Voada could save lives.</Text>
     </Text>
     <Text>
+      <LineId>-6912472582231227099</LineId>
+      <Text>Fluid and rich, like the Delta.</Text>
+    </Text>
+    <Text>
       <LineId>-6912471573068104953</LineId>
       <Text>Biggus Dickus</Text>
     </Text>
@@ -39902,6 +40224,10 @@ Minecraft</Text>
     <Text>
       <LineId>-6912459689763921828</LineId>
       <Text>It makes you proud to be a Plebeian.</Text>
+    </Text>
+    <Text>
+      <LineId>-6912459017506477879</LineId>
+      <Text>Statue of Zeus Ombrios</Text>
     </Text>
     <Text>
       <LineId>-6912457698359354870</LineId>
@@ -42425,7 +42751,7 @@ Jittery and unreliable at first, Manx's strengths emerge as you come to know him
     </Text>
     <Text>
       <LineId>-6912117105057857977</LineId>
-      <Text>Bring Aegyptus under your crook and flail...</Text>
+      <Text>Bring Aegyptus Under Crook and Flail...</Text>
     </Text>
     <Text>
       <LineId>-6912116723275173001</LineId>
@@ -42729,6 +43055,10 @@ Seeing the &lt;i&gt;steel in your eyes&lt;/i&gt; however, she gulps and retreats
     <Text>
       <LineId>-6912074650588695385</LineId>
       <Text>As coarse and crude a meathead as ever, I see! ...How much?</Text>
+    </Text>
+    <Text>
+      <LineId>-6912074133809381809</LineId>
+      <Text>Its light disperses the fog in which sirens like to sulk.</Text>
     </Text>
     <Text>
       <LineId>-6912073951240146394</LineId>
@@ -43285,6 +43615,10 @@ Each residence contributes, so building more residences will increase your incom
       <Text>You have been offered a gift of money. Accepting or declining will have different consequences depending on the gift-giving Governor.</Text>
     </Text>
     <Text>
+      <LineId>-6911995164735854026</LineId>
+      <Text>Arena</Text>
+    </Text>
+    <Text>
       <LineId>-6911994942310387018</LineId>
       <Text>You seen the chief? Don't go telling me tales.</Text>
     </Text>
@@ -43486,6 +43820,10 @@ The previous suitors have been inoffensive sorts, but this one may prove to be r
     <Text>
       <LineId>-6911966118823199253</LineId>
       <Text>Campania</Text>
+    </Text>
+    <Text>
+      <LineId>-6911965760970415284</LineId>
+      <Text>Songs and legends never die: they come to life with every recital. </Text>
     </Text>
     <Text>
       <LineId>-6911965051463204449</LineId>
@@ -44274,6 +44612,10 @@ Instead</Text>
       <Text>Confirm to gaze at the volcano</Text>
     </Text>
     <Text>
+      <LineId>-6911859538811941363</LineId>
+      <Text>$Shop level 2</Text>
+    </Text>
+    <Text>
       <LineId>-6911859073395085734</LineId>
       <Text>I'll likely need animals for that sacrifice...</Text>
     </Text>
@@ -44392,6 +44734,10 @@ Instead</Text>
     <Text>
       <LineId>-6911843324033013768</LineId>
       <Text>Silverware</Text>
+    </Text>
+    <Text>
+      <LineId>-6911843248565962851</LineId>
+      <Text>Psenptah</Text>
     </Text>
     <Text>
       <LineId>-6911842957033760003</LineId>
@@ -46698,6 +47044,10 @@ Workforce exists per residence tier. Different production chains rely on differe
       <Text>Fresh beacons light our maps— and now must we tend to them.  </Text>
     </Text>
     <Text>
+      <LineId>-6911555902811667562</LineId>
+      <Text>Onion</Text>
+    </Text>
+    <Text>
       <LineId>-6911555508784043633</LineId>
       <Text>Why would Lucius need money from me? I'm not exactly raking it in.</Text>
     </Text>
@@ -47467,6 +47817,10 @@ You can recruit them in your island's Villa or a dedicated Barracks.</Text>
       <Text>Cannot be built on marshland</Text>
     </Text>
     <Text>
+      <LineId>-6911459220107032024</LineId>
+      <Text>$sector project</Text>
+    </Text>
+    <Text>
       <LineId>-6911458992969107961</LineId>
       <Text>The animals and priest are provided for, but we have no mola salsa—</Text>
     </Text>
@@ -47887,6 +48241,10 @@ This is the sort of thing a governor is expected to do, however. I would not rec
     <Text>
       <LineId>-6911405571863235612</LineId>
       <Text>However Raiders will never Break Alliances once they agree to one.</Text>
+    </Text>
+    <Text>
+      <LineId>-6911405254791658042</LineId>
+      <Text>Kassandra</Text>
     </Text>
     <Text>
       <LineId>-6911405105005308106</LineId>
@@ -48941,7 +49299,7 @@ Brusque as it was, that &lt;i&gt;sounded&lt;/i&gt; like she was offering a rewar
     </Text>
     <Text>
       <LineId>-6911285316512558240</LineId>
-      <Text>Please the local population and discover the richness of their culture.  </Text>
+      <Text>Choose between Kumatic and Graeco-Roman cultures when building your cities. Embrace old technologies and even older gods to get your production firing like the once-great pharaohs. Employ your local residents as uniquely Aegyptus units such as Dromedarii and Kumatic Archers.</Text>
     </Text>
     <Text>
       <LineId>-6911285215076860664</LineId>
@@ -48990,6 +49348,10 @@ Brusque as it was, that &lt;i&gt;sounded&lt;/i&gt; like she was offering a rewar
     <Text>
       <LineId>-6911280250376725140</LineId>
       <Text>Fires in our age; inevitable. Still, we should monitor fire safety in our cities.</Text>
+    </Text>
+    <Text>
+      <LineId>-6911280226947388199</LineId>
+      <Text>Sell goods to Valeria in Aegyptus</Text>
     </Text>
     <Text>
       <LineId>-6911279888101958738</LineId>
@@ -49287,6 +49649,10 @@ In the province you will also find rivals and traders that will buy specific goo
     <Text>
       <LineId>-6911244469835834471</LineId>
       <Text>My turn. </Text>
+    </Text>
+    <Text>
+      <LineId>-6911244106321589845</LineId>
+      <Text>Hera's wrath pursued the divine twins even before their birth: It was Apollo who decided to put an end to it.</Text>
     </Text>
     <Text>
       <LineId>-6911243792787645690</LineId>
@@ -49919,6 +50285,10 @@ The people go without the public baths for the day. The event goes off without i
 &lt;b&gt;What part of being a charioteer will you remind Hiero of?&lt;/b&gt;</Text>
     </Text>
     <Text>
+      <LineId>-6911165779915060810</LineId>
+      <Text>Epona, mother of mares, is honoured today, with all the wild joy of a dashing stallion.</Text>
+    </Text>
+    <Text>
       <LineId>-6911165454964114229</LineId>
       <Text>The quest can't continue without anybody taking a proper bath.</Text>
     </Text>
@@ -50457,6 +50827,10 @@ If he was to win the Imperial Races, the message would be sent, loud and clear. 
       <Text>Leave</Text>
     </Text>
     <Text>
+      <LineId>-6911093672257105018</LineId>
+      <Text>$Town Square</Text>
+    </Text>
+    <Text>
       <LineId>-6911093597156601624</LineId>
       <Text>What've ye got?</Text>
     </Text>
@@ -50603,6 +50977,10 @@ If he was to win the Imperial Races, the message would be sent, loud and clear. 
     <Text>
       <LineId>-6911076099322453835</LineId>
       <Text>I think I've hoarded enough food and drink for this week's Saturnalia. </Text>
+    </Text>
+    <Text>
+      <LineId>-6911075966885173758</LineId>
+      <Text>Stands and Platforms</Text>
     </Text>
     <Text>
       <LineId>-6911075899503983248</LineId>
@@ -51549,6 +51927,10 @@ She leads you across the bridge, where the circus with its pale terracotta roofi
       <Text>Venilia's Serenity</Text>
     </Text>
     <Text>
+      <LineId>-6910952599880506280</LineId>
+      <Text>Embrace your inner queen.</Text>
+    </Text>
+    <Text>
       <LineId>-6910951431119864133</LineId>
       <Text>Troubleshooting</Text>
     </Text>
@@ -52101,6 +52483,10 @@ Please verify your game files to avoid potential conflicts.  </Text>
       <Text>Intel XeSS Frame Generation technology uses AI to generate interpolated frames that significantly improve performance. This feature requires Intel Xe Low Latency to be enabled. XeSS Frame generation cannot be enabled while the application is in exclusive full screen mode.</Text>
     </Text>
     <Text>
+      <LineId>-6910881668447819863</LineId>
+      <Text>$Floral Meander</Text>
+    </Text>
+    <Text>
       <LineId>-6910881334868154627</LineId>
       <Text>By conscripting the able-bodied to battle the uprising, you've increased stability at the cost of reducing your available workforce.</Text>
     </Text>
@@ -52455,6 +52841,10 @@ Sparse - Islands feature few suitable building locations</Text>
       <Text>I see your potential... And yet you are untested.</Text>
     </Text>
     <Text>
+      <LineId>-6910834700163630775</LineId>
+      <Text>Track</Text>
+    </Text>
+    <Text>
       <LineId>-6910834639284735326</LineId>
       <Text>Finite Deposit</Text>
     </Text>
@@ -52707,6 +53097,10 @@ But Hiero barely listens. Perhaps he doesn't believe you believe your own words.
       <Text>The Horrors Within</Text>
     </Text>
     <Text>
+      <LineId>-6910804884340264060</LineId>
+      <Text>Nefertiti</Text>
+    </Text>
+    <Text>
       <LineId>-6910804741279834244</LineId>
       <Text>Dirt Road</Text>
     </Text>
@@ -52857,6 +53251,10 @@ The provided goods will suit Caecilia's sacrifice.</Text>
       <Text>Production Flyouts</Text>
     </Text>
     <Text>
+      <LineId>-6910783622952407699</LineId>
+      <Text>If prompted, the desert is quick to bloom.</Text>
+    </Text>
+    <Text>
       <LineId>-6910783337570182355</LineId>
       <Text>Encampments increase Attributes of nearby buildings.</Text>
     </Text>
@@ -52911,6 +53309,10 @@ The priests and tutors who receive the most tax revenue claim that the gods and 
       <Text>LEGEND</Text>
     </Text>
     <Text>
+      <LineId>-6910777884543487776</LineId>
+      <Text>A wave of people take to the streets in honour of Neptune, lord of the sea.</Text>
+    </Text>
+    <Text>
       <LineId>-6910777301380754546</LineId>
       <Text>We're in trouble now.</Text>
     </Text>
@@ -52933,6 +53335,10 @@ The priests and tutors who receive the most tax revenue claim that the gods and 
     <Text>
       <LineId>-6910775455908451593</LineId>
       <Text>Um... not now. The pox, you see, the marks on his face— he doesn't want you to see him like this. I'm sure you understand.</Text>
+    </Text>
+    <Text>
+      <LineId>-6910775418309865140</LineId>
+      <Text>ACTIVE MODS</Text>
     </Text>
     <Text>
       <LineId>-6910774862846622974</LineId>
@@ -53264,6 +53670,10 @@ Yet now Diana finds herself conflicted; she was trying to do the right thing, bu
     <Text>
       <LineId>-6910742382210261761</LineId>
       <Text>sniffing a little. she's been scared, but now a friend is comforting her. </Text>
+    </Text>
+    <Text>
+      <LineId>-6910742297588327401</LineId>
+      <Text>Randomise Name</Text>
     </Text>
     <Text>
       <LineId>-6910741533403547792</LineId>
@@ -53807,6 +54217,10 @@ Senatus Populusque Romanus</Text>
     <Text>
       <LineId>-6910672995068680010</LineId>
       <Text>Imperial Intervention</Text>
+    </Text>
+    <Text>
+      <LineId>-6910672939745686640</LineId>
+      <Text>Apollonios</Text>
     </Text>
     <Text>
       <LineId>-6910671100973635065</LineId>
@@ -54806,6 +55220,10 @@ Your Aspirant will remember your advice,, especially in times of hardship.</Text
       <Text>Move the selected ship to another location.</Text>
     </Text>
     <Text>
+      <LineId>-6910528430132806377</LineId>
+      <Text>{ShortcutManager:GetShortcutTooltipMouse(datasets.MouseButtonType.Right)} Remove</Text>
+    </Text>
+    <Text>
       <LineId>-6910528019690583353</LineId>
       <Text>Can't trust you to do as you please.</Text>
     </Text>
@@ -55235,6 +55653,10 @@ Yeah, that's the one. You being the governor, do you happen to know where he's h
       <Text>The bards remember such craven deeds well. Three epic satires were composed to lampoon this shameful retreat.</Text>
     </Text>
     <Text>
+      <LineId>-6910475673038937883</LineId>
+      <Text>Neferakhten</Text>
+    </Text>
+    <Text>
       <LineId>-6910474998907543560</LineId>
       <Text>Improved Warehouse</Text>
     </Text>
@@ -55493,6 +55915,10 @@ On the surface, his complaint seems among the most trivial so far. One of his Oc
     <Text>
       <LineId>-6910450518825965696</LineId>
       <Text>Hello again, Juliana.</Text>
+    </Text>
+    <Text>
+      <LineId>-6910449853835330244</LineId>
+      <Text>Myrrhptah</Text>
     </Text>
     <Text>
       <LineId>-6910449001120919289</LineId>
@@ -56179,7 +56605,7 @@ walks ever with the shades</Text>
     </Text>
     <Text>
       <LineId>-6910357526085333620</LineId>
-      <Text>No stamp has been created yet.</Text>
+      <Text>No stamp yet created</Text>
     </Text>
     <Text>
       <LineId>-6910357202800580085</LineId>
@@ -56244,6 +56670,10 @@ walks ever with the shades</Text>
     <Text>
       <LineId>-6910351427555009836</LineId>
       <Text>It is a Plebeian's honour to do their loyal duty, for Rome, and before the gods. With sacred reverence do they perform all that is asked, expecting precious little in return.</Text>
+    </Text>
+    <Text>
+      <LineId>-6910351341855099664</LineId>
+      <Text>Show Statistics for the Trade Route this ship is serving</Text>
     </Text>
     <Text>
       <LineId>-6910351216596156805</LineId>
@@ -57324,10 +57754,6 @@ However, to your shock, your heroes' weapons shatter and break in the clash. Des
       <Text>Hermit's Hide</Text>
     </Text>
     <Text>
-      <LineId>-6910210709237910417</LineId>
-      <Text>Cavalry Archer</Text>
-    </Text>
-    <Text>
       <LineId>-6910209500194933518</LineId>
       <Text>Preparations for the upcoming event are in full swing.</Text>
     </Text>
@@ -57844,6 +58270,10 @@ You may still be forgiven, if you're prepared to make a grand gesture. Otherwise
     <Text>
       <LineId>-6910146500515533651</LineId>
       <Text>Sage Guidance</Text>
+    </Text>
+    <Text>
+      <LineId>-6910145604364466553</LineId>
+      <Text>$Show Trade Route Statistics</Text>
     </Text>
     <Text>
       <LineId>-6910145416054094897</LineId>
@@ -59079,6 +59509,10 @@ It's your decision as ever, your grace.'</Text>
       <Text>Dinner With The Emperor</Text>
     </Text>
     <Text>
+      <LineId>-6910007487927468863</LineId>
+      <Text>$Middle Path</Text>
+    </Text>
+    <Text>
       <LineId>-6910005541237562633</LineId>
       <Text>I'm going to get him back. If he wants to bear arms, let him learn to use them. I shouldn't have trusted you. </Text>
     </Text>
@@ -60129,6 +60563,10 @@ One thing's certain: when Latium's residents are demanding expensive brooches an
     <Text>
       <LineId>-6909877451099301792</LineId>
       <Text>Another Letter from Mother</Text>
+    </Text>
+    <Text>
+      <LineId>-6909877356808431031</LineId>
+      <Text>Statue of Kore</Text>
     </Text>
     <Text>
       <LineId>-6909877025673393928</LineId>
@@ -61729,6 +62167,10 @@ MP: {Variables:GetVariableOfComponent("PMP", QuestComponentID)}/{Variables:GetVa
       <Text>The Libertus confers a reward for your beautification efforts</Text>
     </Text>
     <Text>
+      <LineId>-6909689198262972860</LineId>
+      <Text>Passive Trade</Text>
+    </Text>
+    <Text>
       <LineId>-6909688822263160069</LineId>
       <Text>"Empress" Julia considers you a neutral courtier, but Concordia expects you to see through the lies and pleasantry.</Text>
     </Text>
@@ -62424,6 +62866,10 @@ Will Hiero let his one slip-up stop him? He might not. He should not, for he has
       <Text>Your sparkling Prestige makes diplomacy with you only very slightly unappealing. Increase Prestige with Needs, Public Buildings and Ornaments.</Text>
     </Text>
     <Text>
+      <LineId>-6909605785751803557</LineId>
+      <Text>$Placeholder02 Description</Text>
+    </Text>
+    <Text>
       <LineId>-6909605156197980263</LineId>
       <Text>Thank the Plebeian and leave</Text>
     </Text>
@@ -62629,7 +63075,7 @@ Will Hiero let his one slip-up stop him? He might not. He should not, for he has
     </Text>
     <Text>
       <LineId>-6909577982203466262</LineId>
-      <Text>$No Folder</Text>
+      <Text>No Folder</Text>
     </Text>
     <Text>
       <LineId>-6909577556819005086</LineId>
@@ -62660,6 +63106,10 @@ Upgrading a residence unlocks higher resident tiers with unique needs and benefi
     <Text>
       <LineId>-6909572610706091039</LineId>
       <Text>Take my aunt around to a few of 'em and have a look-see, would you? Can't hurt to try.</Text>
+    </Text>
+    <Text>
+      <LineId>-6909572536763163402</LineId>
+      <Text>Time (mins ago)</Text>
     </Text>
     <Text>
       <LineId>-6909572238118801608</LineId>
@@ -62729,7 +63179,7 @@ Upgrading a residence unlocks higher resident tiers with unique needs and benefi
     </Text>
     <Text>
       <LineId>-6909560446699734930</LineId>
-      <Text>Joining my rebellion!? Then place your Nemes cloth upon your head, and let's us play Pharoah for once.</Text>
+      <Text>Joining my rebellion!? Then place your Nemes cloth upon your head, and let's us play Pharaoh for once.</Text>
     </Text>
     <Text>
       <LineId>-6909560181763649938</LineId>
@@ -63156,6 +63606,10 @@ Caeso Regulus Syracus</Text>
       <Text>At the Hippodrome of {Static.Tags.LocationName("HippoZone", QuestComponentID)}, people are queuing for free rations. These are part of the cost of a games, and are usually arranged by your servants, but something has gone amiss with the delivery: the matter at hand now falls to you. 
 
 &lt;b&gt;What sort of rations will you provide?&lt;/b&gt;</Text>
+    </Text>
+    <Text>
+      <LineId>-6909506215727377000</LineId>
+      <Text>Right click to edit</Text>
     </Text>
     <Text>
       <LineId>-6909506090258852580</LineId>
@@ -63855,7 +64309,7 @@ What is next is to take over the Quadriga: the proving ground for any charioteer
     </Text>
     <Text>
       <LineId>-6909420527533985861</LineId>
-      <Text>$Aegyptian Wall Placeholder</Text>
+      <Text>Mudbrick Wall</Text>
     </Text>
     <Text>
       <LineId>-6909420277502106736</LineId>
@@ -63988,6 +64442,10 @@ What is next is to take over the Quadriga: the proving ground for any charioteer
     <Text>
       <LineId>-6909400807590863974</LineId>
       <Text>No Alliance with a raider possible, they are already in an Alliance with someone else.</Text>
+    </Text>
+    <Text>
+      <LineId>-6909400732882122990</LineId>
+      <Text>I/V</Text>
     </Text>
     <Text>
       <LineId>-6909400035995926542</LineId>
@@ -64816,7 +65274,7 @@ You've won!</Text>
     </Text>
     <Text>
       <LineId>-6909303811992343461</LineId>
-      <Text>$HoF Ornament Wall Aegyptus InfoDescription</Text>
+      <Text>Keeps the Nine-Bows from preying on the riches of the Delta.</Text>
     </Text>
     <Text>
       <LineId>-6909303741460078202</LineId>
@@ -64861,6 +65319,10 @@ You've won!</Text>
     <Text>
       <LineId>-6909299139002053188</LineId>
       <Text>Your Emperor asks you to hunt down raider ships that roam the seas and attack innocent citizens of the Empire.</Text>
+    </Text>
+    <Text>
+      <LineId>-6909298970066801849</LineId>
+      <Text>$main story egypt</Text>
     </Text>
     <Text>
       <LineId>-6909298968903730596</LineId>
@@ -65561,6 +66023,10 @@ The first woman in line is &lt;i&gt;spitting feathers&lt;/i&gt;. She claims her 
       <Text>Shoe Weaver</Text>
     </Text>
     <Text>
+      <LineId>-6909212757042004992</LineId>
+      <Text>Heresankh</Text>
+    </Text>
+    <Text>
       <LineId>-6909212541233372800</LineId>
       <Text>Apocalypse</Text>
     </Text>
@@ -65587,6 +66053,10 @@ The first woman in line is &lt;i&gt;spitting feathers&lt;/i&gt;. She claims her 
     <Text>
       <LineId>-6909210915229543116</LineId>
       <Text>Nearby Tabulus</Text>
+    </Text>
+    <Text>
+      <LineId>-6909210556666194837</LineId>
+      <Text>Statue of Leonidas</Text>
     </Text>
     <Text>
       <LineId>-6909209625407694756</LineId>
@@ -65970,6 +66440,11 @@ Never - Players are defeated when they lose their last island</Text>
       <Text>One letter from the Emperor has thrown Ben-Baalion into a right-old tizz. "The Emperor is coming!" He repeatedly exclaims, "How will we ever have enough time and resource to prepare a worthy welcome?"</Text>
     </Text>
     <Text>
+      <LineId>-6909160157312891449</LineId>
+      <Text>$Leave Shop
+</Text>
+    </Text>
+    <Text>
       <LineId>-6909159903136683077</LineId>
       <Text>Oh yes. The best. He's got ships all along the North African coast, but... he's made himself at home here.</Text>
     </Text>
@@ -66079,7 +66554,7 @@ Never - Players are defeated when they lose their last island</Text>
     </Text>
     <Text>
       <LineId>-6909144006028019080</LineId>
-      <Text>Camel Signum</Text>
+      <Text>kamel Signum</Text>
     </Text>
     <Text>
       <LineId>-6909143357159735080</LineId>
@@ -66229,6 +66704,10 @@ Select the required module in the building's panel. You will need to build a spe
     <Text>
       <LineId>-6909127812686683710</LineId>
       <Text>Vassalised Island of {Area:AreaFromID(Area.Current.ID).OwnerName}</Text>
+    </Text>
+    <Text>
+      <LineId>-6909127750421824538</LineId>
+      <Text>Blood of Sparta, daughter of Pythagoras, mother of Elpidios. </Text>
     </Text>
     <Text>
       <LineId>-6909127543294145769</LineId>
@@ -67138,6 +67617,10 @@ She picks at the scabs on her hands as she rants. There's talk &lt;i&gt;her brot
       <Text>So they do. It's safer. When in Rome, do as the... well, you know what I mean.</Text>
     </Text>
     <Text>
+      <LineId>-6909023811956970690</LineId>
+      <Text>That stings.</Text>
+    </Text>
+    <Text>
       <LineId>-6909022934683530883</LineId>
       <Text>Arm yourselves! Knives, spoons, ladles! Hand me the hot broth!</Text>
     </Text>
@@ -67415,7 +67898,7 @@ Despite the man's usual hyperbole, he really, truly &lt;i&gt;meant&lt;/i&gt; tha
     </Text>
     <Text>
       <LineId>-6908988788940861075</LineId>
-      <Text>Create stamp</Text>
+      <Text>Create Stamp</Text>
     </Text>
     <Text>
       <LineId>-6908988580895296803</LineId>
@@ -67699,6 +68182,10 @@ The audience are stirred by this display of devotion, and nothing terrible happe
     <Text>
       <LineId>-6908958173513182577</LineId>
       <Text>Goods Amount</Text>
+    </Text>
+    <Text>
+      <LineId>-6908958172603480686</LineId>
+      <Text>Whether they worship Mercury, Lugus or both, all are welcome to dance at Lugnasad.</Text>
     </Text>
     <Text>
       <LineId>-6908957626074055066</LineId>
@@ -68592,6 +69079,10 @@ Addressed to the villa of the governor.&lt;/i&gt;
     <Text>
       <LineId>-6908844845696651354</LineId>
       <Text>{AssetData(NotificationContext.CharacterGUID).Text} has destroyed one of your buildings.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908844833172140615</LineId>
+      <Text> Silanion's Mask</Text>
     </Text>
     <Text>
       <LineId>-6908844479164753892</LineId>
@@ -69662,7 +70153,7 @@ You have decided to confront them for their crime and execute the punishment you
     </Text>
     <Text>
       <LineId>-6908720872276449443</LineId>
-      <Text>If you go over the channel limit, the marsh area furthest away from the Sluice Gate will revert to marshland. Keep this in mind while planning.</Text>
+      <Text>If you exceed the channel limit, the marsh area furthest away from the Sluice Gate will revert to marshland. </Text>
     </Text>
     <Text>
       <LineId>-6908719840032684080</LineId>
@@ -69711,6 +70202,10 @@ You have decided to confront them for their crime and execute the punishment you
     <Text>
       <LineId>-6908715259960670542</LineId>
       <Text>You should show both cultures equal respect. More local population would even out the scales.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908715119643527947</LineId>
+      <Text>$TBD Music01 Fluff</Text>
     </Text>
     <Text>
       <LineId>-6908714710830755332</LineId>
@@ -69793,6 +70288,10 @@ You have decided to confront them for their crime and execute the punishment you
     <Text>
       <LineId>-6908705002450238786</LineId>
       <Text>Build {Conditions:QuestCondition.CurrentAmount}/{Conditions:QuestCondition.Amount} tree ornaments</Text>
+    </Text>
+    <Text>
+      <LineId>-6908704981493086249</LineId>
+      <Text>Gaius Iulius</Text>
     </Text>
     <Text>
       <LineId>-6908704861978928182</LineId>
@@ -70117,6 +70616,10 @@ Selecting a trader allows you to review which goods they will buy at a profit. L
     <Text>
       <LineId>-6908667894245366455</LineId>
       <Text>All these Romans want are Togas and Stolas. Why drape myself like a statue-roman? I like Bretonic trousers!</Text>
+    </Text>
+    <Text>
+      <LineId>-6908667337153531468</LineId>
+      <Text>Phoebe</Text>
     </Text>
     <Text>
       <LineId>-6908666680696645214</LineId>
@@ -70616,6 +71119,14 @@ It's all rather embarassing. &lt;b&gt;Your Hippodrome's Splendour has decreased.
       <Text>An Edict of Public Gatherings</Text>
     </Text>
     <Text>
+      <LineId>-6908612350248633957</LineId>
+      <Text>The artist, it is said, had some difficulty getting his subject to stand still.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908611645259706289</LineId>
+      <Text>Embrace local culture advantages and add their unique traits to your playstyle.</Text>
+    </Text>
+    <Text>
       <LineId>-6908611465401573968</LineId>
       <Text>"What's in the box? My friend, oh my friend. Instead ask; what isn't?" -- Kirjokansi's favourite catchphrase</Text>
     </Text>
@@ -70899,6 +71410,10 @@ Hungry rebels cause little harm, and the Emperor will be pleased by your firm co
 The distance closes, then. Voada draws her long-lost son up into her arms, and for a moment, you do not see a Celtic warrior and a Roman soldier, but a mother and a son. 
 
 But only for a moment. Voada catches your gaze, and the bearing of the Scathach chieftain settles upon her face once more. She makes a decision, then, and strides confidently towards you to declare it.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908578392850453952</LineId>
+      <Text>Kronut</Text>
     </Text>
     <Text>
       <LineId>-6908577675610028257</LineId>
@@ -71493,7 +72008,7 @@ But only for a moment. Voada catches your gaze, and the bearing of the Scathach 
     </Text>
     <Text>
       <LineId>-6908505536770437697</LineId>
-      <Text>Drainage Channels</Text>
+      <Text>Water Channels</Text>
     </Text>
     <Text>
       <LineId>-6908505325987887023</LineId>
@@ -72306,6 +72821,10 @@ He's clearly a bright young lad; must have been, to have survived in the Eternal
       <Text>Quick Chat Message 1</Text>
     </Text>
     <Text>
+      <LineId>-6908405172948674658</LineId>
+      <Text>Tannephremmis</Text>
+    </Text>
+    <Text>
       <LineId>-6908403703893799286</LineId>
       <Text>These will be fastest sieges the world has ever seen.</Text>
     </Text>
@@ -72974,6 +73493,10 @@ Hard - Caeso frequently raids Governors</Text>
       <Text>They sold you, didn't they? </Text>
     </Text>
     <Text>
+      <LineId>-6908330832908471466</LineId>
+      <Text>$Statue of Aurelian</Text>
+    </Text>
+    <Text>
       <LineId>-6908330558648638292</LineId>
       <Text>Horse Whispering</Text>
     </Text>
@@ -73007,7 +73530,7 @@ Hard - Caeso frequently raids Governors</Text>
     </Text>
     <Text>
       <LineId>-6908325713604143866</LineId>
-      <Text>$No Stamps area available. You can create new Stamps by using the copy tool and selecting multiple buildings.</Text>
+      <Text>No Stamps available. You can create Stamps by using the copy tool to select multiple buildings.</Text>
     </Text>
     <Text>
       <LineId>-6908325420182542997</LineId>
@@ -73600,6 +74123,10 @@ Your flagship is being retaken.
       <Text>Manx was clearly struggling to hold the reins of his navy in your mock battles. You graciously offered him a few words of advice before the final round.</Text>
     </Text>
     <Text>
+      <LineId>-6908244370463596455</LineId>
+      <Text>Guardian of Nehebkau</Text>
+    </Text>
+    <Text>
       <LineId>-6908243268619331015</LineId>
       <Text>Let me go!</Text>
     </Text>
@@ -73986,6 +74513,10 @@ Your flagship is being retaken.
     <Text>
       <LineId>-6908198787616954017</LineId>
       <Text>Quit Game</Text>
+    </Text>
+    <Text>
+      <LineId>-6908198354896129609</LineId>
+      <Text>Kassandra Legacy</Text>
     </Text>
     <Text>
       <LineId>-6908197616399895443</LineId>
@@ -74386,7 +74917,7 @@ Your Aspirant will remember your advice,, especially in times of hardship.
     </Text>
     <Text>
       <LineId>-6908149336901362491</LineId>
-      <Text>Camel Signum</Text>
+      <Text>Kamel Signum</Text>
     </Text>
     <Text>
       <LineId>-6908149137051521361</LineId>
@@ -74618,6 +75149,10 @@ Your Aspirant will remember your advice,, especially in times of hardship.
       <Text>Discover the Trader in the province and buy goods from them.</Text>
     </Text>
     <Text>
+      <LineId>-6908125859019801376</LineId>
+      <Text>Overfulfilling Need Categories</Text>
+    </Text>
+    <Text>
       <LineId>-6908124790509018180</LineId>
       <Text>Ave Calidus! We hail our Caesar, who will trample the Parthavans in the East! An era of conquest begins... </Text>
     </Text>
@@ -74640,6 +75175,10 @@ Your Aspirant will remember your advice,, especially in times of hardship.
     <Text>
       <LineId>-6908121962103454103</LineId>
       <Text>A dais awaits a worthy hero.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908121508199831300</LineId>
+      <Text>Temples</Text>
     </Text>
     <Text>
       <LineId>-6908121096836524004</LineId>
@@ -74671,7 +75210,7 @@ Your Aspirant will remember your advice,, especially in times of hardship.
     </Text>
     <Text>
       <LineId>-6908117475367494478</LineId>
-      <Text>&lt;i&gt;Ninth son of Decimus of the Delta.&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;After a childhood spent clambering all over Naukratis, &lt;b&gt;Marcus&lt;/b&gt;, the tyrant‘s youngest, had to be hooked from the streets to attend his lessons.&lt;br/&gt;&lt;br/&gt;Tired of his son's antics, Decimus put him to work in the imperial granaries, counting beans.&lt;br/&gt;                                                                                                           Nothing, however, could have prepared &lt;b&gt;Marcus&lt;/b&gt; for an unexpected summons that was to change his life...</Text>
+      <Text>&lt;i&gt;Ninth son of Decimus of the Delta.&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;After a childhood spent clambering all over Naukratis, &lt;b&gt;Marcus&lt;/b&gt;, the tyrant‘s youngest, had to be hooked from the streets to attend his lessons.&lt;br/&gt;&lt;br/&gt;Tired of his son's antics, Decimus put him to work in the imperial granaries, counting beans.&lt;br/&gt;&lt;br/&gt;Nothing, however, could have prepared &lt;b&gt;Marcus&lt;/b&gt; for an unexpected summons that was to change his life...</Text>
     </Text>
     <Text>
       <LineId>-6908116912108615791</LineId>
@@ -74902,6 +75441,11 @@ The crowd of expert advisors smirks.
       <Text>It's the old mare keeping me here still. No, not her, the chalk one!</Text>
     </Text>
     <Text>
+      <LineId>-6908089170128037261</LineId>
+      <Text>$Purchase Test item 1
+</Text>
+    </Text>
+    <Text>
       <LineId>-6908088974562828287</LineId>
       <Text>You decided not to light the fire. Concordia is not amused... and your Liberti need to deal with another fever outbreak.</Text>
     </Text>
@@ -75068,6 +75612,10 @@ The crowd of expert advisors smirks.
     <Text>
       <LineId>-6908067622548008036</LineId>
       <Text>Provides a public service to your residents.</Text>
+    </Text>
+    <Text>
+      <LineId>-6908067050886812749</LineId>
+      <Text>$Return to previous room</Text>
     </Text>
     <Text>
       <LineId>-6908065928442423154</LineId>
@@ -75259,7 +75807,7 @@ The crowd of expert advisors smirks.
     </Text>
     <Text>
       <LineId>-6908038231883180548</LineId>
-      <Text>Import new optional goods for the Roman Empire. </Text>
+      <Text>Aegyptus is a land of strange and alluring goods you can export to your other provinces. Vice-versa the people of Aegyptus will crave the goods made and produced elsewhere in the empire!</Text>
     </Text>
     <Text>
       <LineId>-6908037818554809606</LineId>
@@ -75387,8 +75935,7 @@ The crowd of expert advisors smirks.
     </Text>
     <Text>
       <LineId>-6908020274557756707</LineId>
-      <Text>Discover the "Basket of World" with it's big farming sector and it's rich culture.
-</Text>
+      <Text>Master the seasonal flood of the mighty river to maximise your Aegyptian productions. The rich black soils of Aegyptus produce bumper harvests that you can store up in special granaries— just watch out for rats!  </Text>
     </Text>
     <Text>
       <LineId>-6908018742039526931</LineId>
@@ -76674,6 +77221,10 @@ You are known thereafter as a Roman governor of high culture and sophistication.
       <Text>Ship Scorpion Accuracy</Text>
     </Text>
     <Text>
+      <LineId>-6907864984572476047</LineId>
+      <Text>All who caught a glimpse of her slender silhouette in the moonlight were transformed... oh deer.</Text>
+    </Text>
+    <Text>
       <LineId>-6907863035261066007</LineId>
       <Text>Volvo</Text>
     </Text>
@@ -76905,6 +77456,10 @@ You are known thereafter as a Roman governor of high culture and sophistication.
     <Text>
       <LineId>-6907830751432144961</LineId>
       <Text>Harbour Grandmastery</Text>
+    </Text>
+    <Text>
+      <LineId>-6907830269668324167</LineId>
+      <Text>$Left Path</Text>
     </Text>
     <Text>
       <LineId>-6907830166552560958</LineId>
@@ -77778,6 +78333,10 @@ Once you have the required materials, finalise construction from the building's 
       <Text>Talk to the Archimagira</Text>
     </Text>
     <Text>
+      <LineId>-6907712568253983618</LineId>
+      <Text>$Placeholder</Text>
+    </Text>
+    <Text>
       <LineId>-6907712452547085227</LineId>
       <Text>Powerful Army</Text>
     </Text>
@@ -78296,6 +78855,10 @@ You sigh. This result may require some cleaning up.</Text>
       <Text>Inferno torching Enemy</Text>
     </Text>
     <Text>
+      <LineId>-6907644525655921993</LineId>
+      <Text>Sand and copper combined conjure up the sky. </Text>
+    </Text>
+    <Text>
       <LineId>-6907644350651729917</LineId>
       <Text>Defender in debt</Text>
     </Text>
@@ -78683,7 +79246,7 @@ You sigh. This result may require some cleaning up.</Text>
     </Text>
     <Text>
       <LineId>-6907600084530569720</LineId>
-      <Text>$Required resources are missing. Construction has been placed on hold and will automatically resume once all necessary materials are available.</Text>
+      <Text>Required resources are missing. Construction has been placed on hold and will automatically resume once all necessary materials are available.</Text>
     </Text>
     <Text>
       <LineId>-6907599915559217998</LineId>
@@ -79258,6 +79821,10 @@ You sigh. This result may require some cleaning up.</Text>
       <Text>After winning, the patrician speaks highly of you at the Imperial Court.</Text>
     </Text>
     <Text>
+      <LineId>-6907528195726396904</LineId>
+      <Text>Don the silky robes of a Hellenic bureaucrat.</Text>
+    </Text>
+    <Text>
       <LineId>-6907527988249868271</LineId>
       <Text>The patrician wants you to promote Chief Glyndr.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Gaining the favour of someone so insanely rich and influential could really pay off in the long run... &lt;/b&gt;&lt;br/&gt;</Text>
     </Text>
@@ -79477,6 +80044,10 @@ What will you do with the trader?</Text>
     <Text>
       <LineId>-6907501816337115235</LineId>
       <Text>Upgrade Trading Post</Text>
+    </Text>
+    <Text>
+      <LineId>-6907501528765657486</LineId>
+      <Text>Golden Fleece</Text>
     </Text>
     <Text>
       <LineId>-6907501377023690691</LineId>
@@ -80513,6 +81084,10 @@ Your loyal clerks await the stroke of your pen, the sword that can strike at Vul
       <Text>Adjust the shadows' quality.</Text>
     </Text>
     <Text>
+      <LineId>-6907371059002989803</LineId>
+      <Text>Hollow-eyed after the fight, he remains tense, ready to spring.</Text>
+    </Text>
+    <Text>
       <LineId>-6907370579753201273</LineId>
       <Text>What's the Paternalia?</Text>
     </Text>
@@ -80542,7 +81117,7 @@ Your loyal clerks await the stroke of your pen, the sword that can strike at Vul
     </Text>
     <Text>
       <LineId>-6907367713516560925</LineId>
-      <Text>$Change Icon</Text>
+      <Text>Change Icon</Text>
     </Text>
     <Text>
       <LineId>-6907367433120151211</LineId>
@@ -81059,7 +81634,11 @@ Your people will benefit from her teaching methods for a long time to come.</Tex
     </Text>
     <Text>
       <LineId>-6907301704054667206</LineId>
-      <Text>Use the river delta to establish your trade-routes and the seasonal floods to maximize your production. </Text>
+      <Text>Experience continental Aegyptus; a unique river delta. The valleys in which you'll thrive— divided by river and rocky mountain. Master and navigate the Nile's curious currents, using adept Aegyptian river boats.</Text>
+    </Text>
+    <Text>
+      <LineId>-6907301559969204437</LineId>
+      <Text>Bless you.</Text>
     </Text>
     <Text>
       <LineId>-6907301515554867283</LineId>
@@ -81539,6 +82118,10 @@ One thing is for certain: an oath to the gods can't be taken back. The two of yo
       <Text>Your household prepares a vat of thick porridge. &lt;br/&gt; The imperial pleasure boat is on its way to pick you up.</Text>
     </Text>
     <Text>
+      <LineId>-6907242646063768013</LineId>
+      <Text>$Placeholder01 Description</Text>
+    </Text>
+    <Text>
       <LineId>-6907242453806993872</LineId>
       <Text>Bright colours to contrast with the foul weather. </Text>
     </Text>
@@ -81871,6 +82454,10 @@ One thing is for certain: an oath to the gods can't be taken back. The two of yo
     <Text>
       <LineId>-6907192912733276815</LineId>
       <Text>Load Camera Preset #1</Text>
+    </Text>
+    <Text>
+      <LineId>-6907192153873545989</LineId>
+      <Text>Experience ancient statues, temples and decorations well known from the AC Odyssey franchise</Text>
     </Text>
     <Text>
       <LineId>-6907191649747650316</LineId>
@@ -82421,7 +83008,7 @@ Ave, Praetor! </Text>
     </Text>
     <Text>
       <LineId>-6907117281270758917</LineId>
-      <Text>Increases the population attribute provided by the Market public Building to nearby residences.</Text>
+      <Text>Increases the population attribute provided by the Market public building to nearby residences.</Text>
     </Text>
     <Text>
       <LineId>-6907117253434363311</LineId>
@@ -82670,6 +83257,10 @@ Ave, Praetor! </Text>
     <Text>
       <LineId>-6907092081318550471</LineId>
       <Text>Missing Construction Materials</Text>
+    </Text>
+    <Text>
+      <LineId>-6907091937791848377</LineId>
+      <Text>Secret Stash</Text>
     </Text>
     <Text>
       <LineId>-6907091771536643437</LineId>
@@ -83811,6 +84402,10 @@ But a name can't be made in a day. Time to get Hiero's name out there (now that 
       <Text>I'm surprised Rome tolerates your existence. But I will offer truce to you.</Text>
     </Text>
     <Text>
+      <LineId>-6906945684585707803</LineId>
+      <Text>Souk</Text>
+    </Text>
+    <Text>
       <LineId>-6906945524005841361</LineId>
       <Text>Hall Of Fame</Text>
     </Text>
@@ -84278,6 +84873,10 @@ The next day, your charioteer reports the sort of gastric distress traditionally
       <Text>Them Smiths don't half work hard, but tradition don't buy you nowt.</Text>
     </Text>
     <Text>
+      <LineId>-6906892034360221666</LineId>
+      <Text>Thrice-Grated</Text>
+    </Text>
+    <Text>
       <LineId>-6906891494071130580</LineId>
       <Text>Oysters with Caviar Chain</Text>
     </Text>
@@ -84617,10 +85216,6 @@ On to the next round.</Text>
       <Text>Production is paused</Text>
     </Text>
     <Text>
-      <LineId>-6906852236957001232</LineId>
-      <Text>Unlock the power of horse archer to add a new strategic layer to your legions.</Text>
-    </Text>
-    <Text>
       <LineId>-6906851900501744979</LineId>
       <Text>Sawmill</Text>
     </Text>
@@ -84787,6 +85382,10 @@ On to the next round.</Text>
     <Text>
       <LineId>-6906834660551157287</LineId>
       <Text>Conquer an opponent's Villa.</Text>
+    </Text>
+    <Text>
+      <LineId>-6906833717803693233</LineId>
+      <Text>Grotesque Grimace</Text>
     </Text>
     <Text>
       <LineId>-6906831065210566595</LineId>
@@ -85215,6 +85814,10 @@ It's a draw! You'll need to roll again...</Text>
       <Text>Your debtor has paid off their loan.</Text>
     </Text>
     <Text>
+      <LineId>-6906785442332666240</LineId>
+      <Text>$Add to Folder</Text>
+    </Text>
+    <Text>
       <LineId>-6906785320672815656</LineId>
       <Text>INSTALLED</Text>
     </Text>
@@ -85300,6 +85903,10 @@ It's a draw! You'll need to roll again...</Text>
     <Text>
       <LineId>-6906775894792958912</LineId>
       <Text>telling old war stories</Text>
+    </Text>
+    <Text>
+      <LineId>-6906775880916874573</LineId>
+      <Text>Sort By Buying Price</Text>
     </Text>
     <Text>
       <LineId>-6906775566468328139</LineId>
@@ -85538,6 +86145,10 @@ Total population is the sum of all of your islands' population.</Text>
     <Text>
       <LineId>-6906752222248055757</LineId>
       <Text>You found a floating graveyard of shipwrecks. These must have belonged to the Roman assassins. Given the state of the ships, the Romans likely aren't in any better state. Ben-Baalion suggests you check the wrecks to ensure they match up with official records.</Text>
+    </Text>
+    <Text>
+      <LineId>-6906750850591431688</LineId>
+      <Text>Baobab</Text>
     </Text>
     <Text>
       <LineId>-6906750549872200802</LineId>
@@ -86089,6 +86700,10 @@ Ben-Baalion urges, "Proclaim an edict, ere, to address this grave pestilence bef
     <Text>
       <LineId>-6906677766986131125</LineId>
       <Text>Press any Button now!</Text>
+    </Text>
+    <Text>
+      <LineId>-6906677515347947060</LineId>
+      <Text>Each Need Category needs to be provided to upgrade a residence, causing the bar in its panel to turn green. Once you provide surplus Needs, it turns &lt;b&gt;golden&lt;/b&gt;.</Text>
     </Text>
     <Text>
       <LineId>-6906677142195521342</LineId>
@@ -86718,7 +87333,7 @@ Economic Power is based on Income across all islands.</Text>
     </Text>
     <Text>
       <LineId>-6906590933316812686</LineId>
-      <Text>Calidus is pleased to see his amphitheatre taking on shape.</Text>
+      <Text>Calidus is pleased to see his amphitheatre taking shape.</Text>
     </Text>
     <Text>
       <LineId>-6906589997652964832</LineId>
@@ -86727,6 +87342,10 @@ Economic Power is based on Income across all islands.</Text>
     <Text>
       <LineId>-6906589888015242429</LineId>
       <Text>Victuallers</Text>
+    </Text>
+    <Text>
+      <LineId>-6906589537779893964</LineId>
+      <Text>$Go to World</Text>
     </Text>
     <Text>
       <LineId>-6906589371968239890</LineId>
@@ -86767,6 +87386,10 @@ Economic Power is based on Income across all islands.</Text>
     <Text>
       <LineId>-6906584926551051683</LineId>
       <Text>Redeem Code</Text>
+    </Text>
+    <Text>
+      <LineId>-6906584905869229506</LineId>
+      <Text>Pallas Athena</Text>
     </Text>
     <Text>
       <LineId>-6906584804648118210</LineId>
@@ -86829,6 +87452,10 @@ Hiero remembers the thrill of speed. How could he have forgotten? &lt;b&gt;That 
     <Text>
       <LineId>-6906579539858476133</LineId>
       <Text>No need to put a damper on these victory celebrations... Way I see it, it was Titanius' last wish to show everyone his beautiful wife. Yes. </Text>
+    </Text>
+    <Text>
+      <LineId>-6906579464246656347</LineId>
+      <Text />
     </Text>
     <Text>
       <LineId>-6906578885491523931</LineId>
@@ -87804,6 +88431,14 @@ Afterwards, they do report an increase in vitality, and a vigorous appetite for 
       <Text>Don't worry, I'm already in up to the shins!</Text>
     </Text>
     <Text>
+      <LineId>-6906450399436532303</LineId>
+      <Text>Every additional fulfilled need grants &lt;b&gt;extra Attributes&lt;/b&gt; for a Need Category of the residence.</Text>
+    </Text>
+    <Text>
+      <LineId>-6906450284720239477</LineId>
+      <Text>Aegyptian blues and proud pillars add a touch of extravagance to your polis. Ptomely would be pleased.</Text>
+    </Text>
+    <Text>
       <LineId>-6906449795022703651</LineId>
       <Text>Whatever that farmer's problem was, it surely wasn't so important that they couldn't wait in line like the rest of their civilised compatriots. The sanctity of the queue must be respected. 
 
@@ -87844,6 +88479,10 @@ Finnegan, who was Flavius, takes an uncertain step towards the shore. Another.
     <Text>
       <LineId>-6906446969525198187</LineId>
       <Text>Copper Smelter</Text>
+    </Text>
+    <Text>
+      <LineId>-6906446725027546575</LineId>
+      <Text>Create a new stamp group first in order to assign stamps</Text>
     </Text>
     <Text>
       <LineId>-6906446641468393058</LineId>
@@ -88988,6 +89627,10 @@ Whatever the case, Hiero isn't here, not in this city, not on this island. Where
       <Text>A debarked catapult is a vulnerable catapult, is it not?</Text>
     </Text>
     <Text>
+      <LineId>-6906294429378943590</LineId>
+      <Text>Eternal Struggle</Text>
+    </Text>
+    <Text>
       <LineId>-6906293567696444166</LineId>
       <Text>Continue</Text>
     </Text>
@@ -89397,6 +90040,10 @@ The Roman crowd leaps to their feet, relishing the bloodsport, but you fear the 
       <Text>Order in Cumae</Text>
     </Text>
     <Text>
+      <LineId>-6906245201008973997</LineId>
+      <Text>Adrestia</Text>
+    </Text>
+    <Text>
       <LineId>-6906244522666789791</LineId>
       <Text>Frontline gets the view. </Text>
     </Text>
@@ -89435,6 +90082,10 @@ The Roman crowd leaps to their feet, relishing the bloodsport, but you fear the 
     <Text>
       <LineId>-6906240238853340617</LineId>
       <Text>The Procurator has received news from Quintus Anctius. But it doesn't sound like it's good news. He wants to meet you... alone, without Manx, to discuss what comes next.</Text>
+    </Text>
+    <Text>
+      <LineId>-6906240157213383981</LineId>
+      <Text>$Default</Text>
     </Text>
     <Text>
       <LineId>-6906240029245376148</LineId>
@@ -89719,7 +90370,7 @@ The Roman crowd leaps to their feet, relishing the bloodsport, but you fear the 
     </Text>
     <Text>
       <LineId>-6906213878531390714</LineId>
-      <Text>Unique Culture</Text>
+      <Text>Aegyptian Culture</Text>
     </Text>
     <Text>
       <LineId>-6906213768382411181</LineId>
@@ -91071,6 +91722,10 @@ Open the diplomacy menu to learn more about alliances, trade rights and other tr
     <Text>
       <LineId>-6906034878729452885</LineId>
       <Text>New Notae</Text>
+    </Text>
+    <Text>
+      <LineId>-6906033933537268116</LineId>
+      <Text>Mausolus</Text>
     </Text>
     <Text>
       <LineId>-6906033754110446051</LineId>
@@ -92798,6 +93453,10 @@ The city's slaves, liberti, and plebeians treat you with newfound respect. The s
       <Text>I accept this truce. Thank you.</Text>
     </Text>
     <Text>
+      <LineId>-6905819526242320351</LineId>
+      <Text>Fine glaze for perfumed feet.</Text>
+    </Text>
+    <Text>
       <LineId>-6905819207033293818</LineId>
       <Text>What yer waiting for? After all, I'm the only one here on merit.</Text>
     </Text>
@@ -92838,6 +93497,10 @@ The city's slaves, liberti, and plebeians treat you with newfound respect. The s
       <Text>Manx will never find out the truth.</Text>
     </Text>
     <Text>
+      <LineId>-6905811876364409413</LineId>
+      <Text>Argos</Text>
+    </Text>
+    <Text>
       <LineId>-6905811155074283825</LineId>
       <Text>&lt;custom-entity tag="DefaultKey"&gt;&lt;custom-properties KeyText="Ctrl"/&gt;&lt;/custom-entity&gt; + click to add to selection</Text>
     </Text>
@@ -92873,6 +93536,10 @@ The city's slaves, liberti, and plebeians treat you with newfound respect. The s
       <LineId>-6905806512923528846</LineId>
       <Text>The Emperor will certainly not refuse someone of your status.
 The provided goods will suit Caecilia's sacrifice.</Text>
+    </Text>
+    <Text>
+      <LineId>-6905806394601430060</LineId>
+      <Text>Painted Aegyptian Blue</Text>
     </Text>
     <Text>
       <LineId>-6905805966566556029</LineId>
@@ -93118,6 +93785,10 @@ Ceres Augusta</Text>
     <Text>
       <LineId>-6905776259109659185</LineId>
       <Text>disapproving. sarcastic, lingering take on "strategy". </Text>
+    </Text>
+    <Text>
+      <LineId>-6905776045430072669</LineId>
+      <Text>Elemer Flood</Text>
     </Text>
     <Text>
       <LineId>-6905775615080122745</LineId>
@@ -93734,6 +94405,10 @@ It's generally considered somewhat undignified for provincial Governors to engag
     <Text>
       <LineId>-6905690335248661467</LineId>
       <Text>Reputation Effect</Text>
+    </Text>
+    <Text>
+      <LineId>-6905689070960509323</LineId>
+      <Text>$A hungry dragon guards the door</Text>
     </Text>
     <Text>
       <LineId>-6905689059007111529</LineId>
@@ -94435,6 +95110,10 @@ However, temples stand quieter as the new teachings dispel your people's fear of
       <Text>Your City Watches can be found here.</Text>
     </Text>
     <Text>
+      <LineId>-6905595704488083294</LineId>
+      <Text>Amphora of Plenty</Text>
+    </Text>
+    <Text>
       <LineId>-6905593988092725101</LineId>
       <Text>Barbarians or not, their knowledge of edges gives us an edge.</Text>
     </Text>
@@ -94608,6 +95287,10 @@ Economic Power is based on Income across all islands.</Text>
       <Text>Fionbharr knows a thing or two about headhunting.</Text>
     </Text>
     <Text>
+      <LineId>-6905565918498491707</LineId>
+      <Text>Stage:</Text>
+    </Text>
+    <Text>
       <LineId>-6905565300860160088</LineId>
       <Text>Nice spot for a lark, isn't it? And home to myriad creatures than ourselves.</Text>
     </Text>
@@ -94641,7 +95324,7 @@ Economic Power is based on Income across all islands.</Text>
     </Text>
     <Text>
       <LineId>-6905557421099196543</LineId>
-      <Text>This was all over before me Ma was even born. Why does it matter to you? Why won't you let me be 'is wife?</Text>
+      <Text>This was all over before Ma was even born. Why does it matter to you? Why won't you let me be 'is wife?</Text>
     </Text>
     <Text>
       <LineId>-6905557325097185541</LineId>
@@ -95032,6 +95715,10 @@ Iorgwyn hopes to build a legacy that lasts - an eternal city of his own, and an 
       <Text>So when will those materials... materialise?</Text>
     </Text>
     <Text>
+      <LineId>-6905514748500404268</LineId>
+      <Text>&lt;i&gt;Hint: The required goods need to be in your island storage.&lt;/i&gt;</Text>
+    </Text>
+    <Text>
       <LineId>-6905514683895364147</LineId>
       <Text>Deny the Emperor </Text>
     </Text>
@@ -95276,6 +95963,10 @@ In the end, you hear many complaints, but at least your people are alive to comp
       <Text>No Street Connection</Text>
     </Text>
     <Text>
+      <LineId>-6905484858015228379</LineId>
+      <Text>Today your people offer their thanks to Mars, divine spear of Rome.</Text>
+    </Text>
+    <Text>
       <LineId>-6905484358825234228</LineId>
       <Text>The Plebeian will let you keep the Amphorae</Text>
     </Text>
@@ -95406,6 +96097,10 @@ In the end, you hear many complaints, but at least your people are alive to comp
     <Text>
       <LineId>-6905468710660543811</LineId>
       <Text>(I'm telling you)</Text>
+    </Text>
+    <Text>
+      <LineId>-6905468379885543931</LineId>
+      <Text>Far across the Mare Nostrum, where the blue of the Aegean meets the silver shore, the wind still carries the echoes of Kassandra. Relive a bygone era by restyling your residences and institutions. Watch as Greek myths, both monstrous and divine, rise again as majestic statues. Listen closely: you might hear a new song. </Text>
     </Text>
     <Text>
       <LineId>-6905468374528455906</LineId>
@@ -95690,6 +96385,10 @@ In the end, you hear many complaints, but at least your people are alive to comp
     <Text>
       <LineId>-6905437951640224128</LineId>
       <Text>Willing to do business with Syracus</Text>
+    </Text>
+    <Text>
+      <LineId>-6905437586450388781</LineId>
+      <Text>Sort By Trend</Text>
     </Text>
     <Text>
       <LineId>-6905437204068488847</LineId>
@@ -96092,6 +96791,10 @@ There are plans to expand to the east. We need weapons and armour to equip an ar
     <Text>
       <LineId>-6905396480305302340</LineId>
       <Text>Declare War</Text>
+    </Text>
+    <Text>
+      <LineId>-6905395929477067822</LineId>
+      <Text>Breezy white watchtowers.</Text>
     </Text>
     <Text>
       <LineId>-6905395897592902762</LineId>
@@ -96618,6 +97321,10 @@ He generously offers half his timber as tribute.</Text>
       <Text>The Empress is impressed that your efforts have increased prosperity throughout the Empire.</Text>
     </Text>
     <Text>
+      <LineId>-6905325046458746993</LineId>
+      <Text>{ShortcutManager:GetShortcutTooltip("Cosmetic")} Cosmetic Tool</Text>
+    </Text>
+    <Text>
       <LineId>-6905325036109237096</LineId>
       <Text>No more pyrrhic dancing! We want blood! </Text>
     </Text>
@@ -97109,6 +97816,10 @@ Your Reputation with the Emperor has very slightly improved!</Text>
       <Text>I would have done the same. </Text>
     </Text>
     <Text>
+      <LineId>-6905267774376330946</LineId>
+      <Text>Serapammon</Text>
+    </Text>
+    <Text>
       <LineId>-6905267742820985044</LineId>
       <Text>I know, Emperor, I saw them cheering for me.</Text>
     </Text>
@@ -97554,6 +98265,10 @@ And if you don't want to be ground into flour, you need to keep moving! The arch
     <Text>
       <LineId>-6905209550753101807</LineId>
       <Text>Nearby Grammaticus</Text>
+    </Text>
+    <Text>
+      <LineId>-6905209269426931933</LineId>
+      <Text>$Requires TestItem1 to open</Text>
     </Text>
     <Text>
       <LineId>-6905209218931309541</LineId>
@@ -98265,6 +98980,10 @@ Your Emperor, it seems, has seen fit to send you an advisor.
     <Text>
       <LineId>-6905124071691890996</LineId>
       <Text>Hi!</Text>
+    </Text>
+    <Text>
+      <LineId>-6905123990519012961</LineId>
+      <Text>Sell goods to Heron</Text>
     </Text>
     <Text>
       <LineId>-6905123825150293356</LineId>
@@ -99697,6 +100416,10 @@ Gives the other party a &lt;b&gt;reason&lt;/b&gt; to like you, impacting treatie
       <Text>Well, I should have little reason to board her.</Text>
     </Text>
     <Text>
+      <LineId>-6904943323567094302</LineId>
+      <Text>Temples from AC Odyssey</Text>
+    </Text>
+    <Text>
       <LineId>-6904942342285918251</LineId>
       <Text>Your city has grown!</Text>
     </Text>
@@ -99847,6 +100570,10 @@ Gives the other party a &lt;b&gt;reason&lt;/b&gt; to like you, impacting treatie
     <Text>
       <LineId>-6904922980601320000</LineId>
       <Text>Invocation Effects</Text>
+    </Text>
+    <Text>
+      <LineId>-6904922786242779383</LineId>
+      <Text>$You squeeze through the narrow path</Text>
     </Text>
     <Text>
       <LineId>-6904921952329911607</LineId>
@@ -100101,6 +100828,10 @@ His grin widens. "The game is not yet over. After all, we can't say the culprit'
       <Text>Supporting:</Text>
     </Text>
     <Text>
+      <LineId>-6904889259161335607</LineId>
+      <Text>Outer Walls</Text>
+    </Text>
+    <Text>
       <LineId>-6904888621034183371</LineId>
       <Text>Raider Fraternity</Text>
     </Text>
@@ -100303,6 +101034,10 @@ Requests are shown at the top left. Some request will disappear after a time, ot
       <Text>Say you need help yourself</Text>
     </Text>
     <Text>
+      <LineId>-6904864761668932234</LineId>
+      <Text>$Statue of Aurelia</Text>
+    </Text>
+    <Text>
       <LineId>-6904864443587598446</LineId>
       <Text>Workforce represents the people working in your empire. All production buildings require workforce. &lt;b&gt;You can pause them&lt;/b&gt; to reduce your workforce requirements.
 
@@ -100433,6 +101168,11 @@ Ships and military units also rely on workforce. Maintaining a large fleet or ar
     <Text>
       <LineId>-6904846251227578046</LineId>
       <Text>Defeated by the Ninth Cohort</Text>
+    </Text>
+    <Text>
+      <LineId>-6904845888007169654</LineId>
+      <Text>$Continue
+</Text>
     </Text>
     <Text>
       <LineId>-6904845133304876683</LineId>
@@ -101028,7 +101768,7 @@ An abjuring augur believes that while a simple, elemental sacrifice may suit the
     </Text>
     <Text>
       <LineId>-6904768935551532703</LineId>
-      <Text>$Mod Option Missmatches (Present / Expected)</Text>
+      <Text>Mod Option Mismatches (Present / Expected)</Text>
     </Text>
     <Text>
       <LineId>-6904768679489023421</LineId>
@@ -101258,6 +101998,10 @@ Now, lumber is always in short supply, but angering the locals may have long-las
     <Text>
       <LineId>-6904740401465555399</LineId>
       <Text>{AssetData(NotificationContext.CharacterGUID).Text} has returned to challenge the might of Rome.</Text>
+    </Text>
+    <Text>
+      <LineId>-6904738272625947892</LineId>
+      <Text>Kassandra</Text>
     </Text>
     <Text>
       <LineId>-6904736987133233648</LineId>
@@ -101496,6 +102240,10 @@ Evacuating all children will save the epidemic's most vulnerable victims, slow i
     <Text>
       <LineId>-6904706439226082463</LineId>
       <Text>Increases the maximum storage of your Islands.</Text>
+    </Text>
+    <Text>
+      <LineId>-6904706226711329729</LineId>
+      <Text>Typhon Mary</Text>
     </Text>
     <Text>
       <LineId>-6904705696397043266</LineId>
@@ -101976,6 +102724,10 @@ On to the next round.</Text>
     <Text>
       <LineId>-6904628269155210806</LineId>
       <Text>Opting to optimise your optimates?</Text>
+    </Text>
+    <Text>
+      <LineId>-6904628186749983153</LineId>
+      <Text>The essential Cycladic aesthetic.</Text>
     </Text>
     <Text>
       <LineId>-6904627927316390878</LineId>
@@ -102490,6 +103242,10 @@ And yet. The sun may set, but it always rises again. When he descends from his c
     <Text>
       <LineId>-6904565474329193397</LineId>
       <Text>Well done. I'll admit, you manage the logistics well. Ah, what a sight it will be when it is flooded for the first time! </Text>
+    </Text>
+    <Text>
+      <LineId>-6904565449131358450</LineId>
+      <Text>Echoes of Kassandra Pack</Text>
     </Text>
     <Text>
       <LineId>-6904565283600811424</LineId>
@@ -103021,6 +103777,10 @@ Normal - Traders and Rivals will purchase and sell limited amounts</Text>
       <Text>Ahem. A letter from your father arrived earlier today.</Text>
     </Text>
     <Text>
+      <LineId>-6904501554838005121</LineId>
+      <Text>Overproduce in harvest season to prepare for the negative effects of flood season.</Text>
+    </Text>
+    <Text>
       <LineId>-6904501181866339984</LineId>
       <Text>Never cross a Vestalis.</Text>
     </Text>
@@ -103299,6 +104059,10 @@ It appears Voada knows about as much as you do here. One thing is clear; this da
       <Text>Accept Calidus' Support</Text>
     </Text>
     <Text>
+      <LineId>-6904461315355529098</LineId>
+      <Text>Strange Gate</Text>
+    </Text>
+    <Text>
       <LineId>-6904460278049353253</LineId>
       <Text>— so, he's coming here to claim it for his own? With an army?</Text>
     </Text>
@@ -103391,6 +104155,10 @@ It appears Voada knows about as much as you do here. One thing is clear; this da
       <Text>Apply</Text>
     </Text>
     <Text>
+      <LineId>-6904449144741438713</LineId>
+      <Text>IV/V</Text>
+    </Text>
+    <Text>
       <LineId>-6904449096493452543</LineId>
       <Text>Roman residents appreciate the actions you take in their interest.</Text>
     </Text>
@@ -103400,7 +104168,7 @@ It appears Voada knows about as much as you do here. One thing is clear; this da
     </Text>
     <Text>
       <LineId>-6904448687964619818</LineId>
-      <Text>$HoF Ornament Wall Aegyptus Gate InfoDescription</Text>
+      <Text>Admits and administers.</Text>
     </Text>
     <Text>
       <LineId>-6904447825411724303</LineId>
@@ -103409,6 +104177,10 @@ It appears Voada knows about as much as you do here. One thing is clear; this da
     <Text>
       <LineId>-6904447520916727923</LineId>
       <Text>Armouries</Text>
+    </Text>
+    <Text>
+      <LineId>-6904445632963903373</LineId>
+      <Text>The type of extra Attribute and the amount depends on the Need Category, and is specified in its infotip.</Text>
     </Text>
     <Text>
       <LineId>-6904445465675522287</LineId>
@@ -103869,6 +104641,10 @@ Once cut, the tree will regrow over time. Deforested tiles count less towards th
 You mildly rebuke Ben-Baalion for bringing this case before you. If leaders punished every person who spoke ill of them, no time would be left in the day.</Text>
     </Text>
     <Text>
+      <LineId>-6904382027073852808</LineId>
+      <Text>Turqouise</Text>
+    </Text>
+    <Text>
       <LineId>-6904381989271107565</LineId>
       <Text>Well, I think I did the right thing with those tax -intercepting miscreants.</Text>
     </Text>
@@ -104049,6 +104825,11 @@ You mildly rebuke Ben-Baalion for bringing this case before you. If leaders puni
     <Text>
       <LineId>-6904361232932260604</LineId>
       <Text>What exactly is this sordid covenant you have going with Syracus? Go on, tell all the people here!</Text>
+    </Text>
+    <Text>
+      <LineId>-6904361049279693078</LineId>
+      <Text>$Shop 1
+</Text>
     </Text>
     <Text>
       <LineId>-6904360330223945295</LineId>
@@ -104420,6 +105201,10 @@ The patrician's fighters quickly outmaneuver and bloody your faltering gladiator
       <Text>Pyromaniac</Text>
     </Text>
     <Text>
+      <LineId>-6904305292252497858</LineId>
+      <Text>Anubion</Text>
+    </Text>
+    <Text>
       <LineId>-6904305233257376485</LineId>
       <Text>Optional: Look around the party on Lilybaion</Text>
     </Text>
@@ -104576,6 +105361,10 @@ Ben-Baalion is pleased. Slaves fighting for their own freedom will be fierce and
       <Text>A brave and noble thing to have done, ere. Alas, a very shortsighted one.</Text>
     </Text>
     <Text>
+      <LineId>-6904285505651556321</LineId>
+      <Text>As long as his bloodline continues, the phalanx still stands. </Text>
+    </Text>
+    <Text>
       <LineId>-6904284949854285637</LineId>
       <Text>Potita Calavia Flaminia, Vulcan's Augur</Text>
     </Text>
@@ -104630,6 +105419,10 @@ Ben-Baalion is pleased. Slaves fighting for their own freedom will be fierce and
     <Text>
       <LineId>-6904281280721972400</LineId>
       <Text>Ecastor!</Text>
+    </Text>
+    <Text>
+      <LineId>-6904281122134503172</LineId>
+      <Text>Anything a good governor of the Delta needs to usher in a new dawn.</Text>
     </Text>
     <Text>
       <LineId>-6904280686204585223</LineId>
@@ -105712,6 +106505,11 @@ Your lecture lands. "Someday", Hiero says, "I should like to be like you. To fin
       <Text>Asking for a ceasefire will give you time to reconsider this conflict and re-gather your forces.</Text>
     </Text>
     <Text>
+      <LineId>-6904147013270925140</LineId>
+      <Text>$Right Path
+</Text>
+    </Text>
+    <Text>
       <LineId>-6904146460634116608</LineId>
       <Text>Griffin Signum</Text>
     </Text>
@@ -106004,7 +106802,7 @@ Whatever's happening with Manx and the Procurator is a matter for another day.</
     </Text>
     <Text>
       <LineId>-6904118460594970282</LineId>
-      <Text>A whole new province awaits in scholarly Aegyptus, breadbasket of empire! Discover a bounteous river, cultural exchange between Egyptian, Greek and Roman, Pyramids ancient and modern, a divine assembly of deities, technologies, units and much much more...    </Text>
+      <Text>A whole new province awaits in Aegyptus, breadbasket of empire! Discover the fertility of the flooding Nile, the Emperor's project to restore the ancient Pyramids in Rome's image, a mystery to unravel concerning the death of a celebrity, new unity, techs, deities and much much more!</Text>
     </Text>
     <Text>
       <LineId>-6904118360227525993</LineId>
@@ -107311,6 +108109,10 @@ At sunrise the next day, they emerge. Your charioteer claims to have ridden alon
       <Text>{ShortcutManager:GetShortcutTooltipMouse(datasets.MouseButtonType.Right)} Dismiss</Text>
     </Text>
     <Text>
+      <LineId>-6903938822419631253</LineId>
+      <Text>$Sewer Systems Splendor Level Screen</Text>
+    </Text>
+    <Text>
       <LineId>-6903938135235523313</LineId>
       <Text>The Cost of War</Text>
     </Text>
@@ -108161,6 +108963,10 @@ Before long, you catch him nodding along to an Aldermen's account of the battles
 On to the next round.</Text>
     </Text>
     <Text>
+      <LineId>-6903837190907984667</LineId>
+      <Text>Hesiodd</Text>
+    </Text>
+    <Text>
       <LineId>-6903836905937086751</LineId>
       <Text>New Cohort available</Text>
     </Text>
@@ -108729,6 +109535,10 @@ Salacia's Fruit</Text>
       <Text>Calidus will want to harness that, Julia too.</Text>
     </Text>
     <Text>
+      <LineId>-6903770377998821598</LineId>
+      <Text>Heron</Text>
+    </Text>
+    <Text>
       <LineId>-6903769411764316061</LineId>
       <Text>Select your {AssetData(Conditions:QuestCondition.ExecutionObject).Text} with
 {Conditions:QuestCondition:GetAmount(ObjectiveIndex)}t {AssetData(Conditions:QuestCondition:GetDeliveryObject(ObjectiveIndex)).Text} stocked</Text>
@@ -108936,6 +109746,10 @@ Salacia's Fruit</Text>
     <Text>
       <LineId>-6903743544320720203</LineId>
       <Text>If you were the emperor, what would you buy? </Text>
+    </Text>
+    <Text>
+      <LineId>-6903743488619358953</LineId>
+      <Text>Open Trade Route Statistics</Text>
     </Text>
     <Text>
       <LineId>-6903743331391046784</LineId>
@@ -109687,6 +110501,10 @@ Vale.</Text>
 The merchant folds his hands in gratitude to you.</Text>
     </Text>
     <Text>
+      <LineId>-6903653127897960934</LineId>
+      <Text>Stock Over Time</Text>
+    </Text>
+    <Text>
       <LineId>-6903652750754219710</LineId>
       <Text>False Gods</Text>
     </Text>
@@ -109733,6 +110551,10 @@ The merchant folds his hands in gratitude to you.</Text>
     <Text>
       <LineId>-6903648076074383619</LineId>
       <Text>Poverty, I find, is found in the soul, not the circumstance. Pity not everyone sees things the way I do.</Text>
+    </Text>
+    <Text>
+      <LineId>-6903647669942840334</LineId>
+      <Text>Complete the Pyramid world wonder and benefit from its effects.</Text>
     </Text>
     <Text>
       <LineId>-6903645640738830246</LineId>
@@ -110105,6 +110927,10 @@ This knowledge might quicken the pace of recovery.
       <Text>Raise the living standard: provide culture need.</Text>
     </Text>
     <Text>
+      <LineId>-6903596510612553984</LineId>
+      <Text>An offering of thanks to the lares, the small household gods that watch over all. </Text>
+    </Text>
+    <Text>
       <LineId>-6903595871746173712</LineId>
       <Text>{AssetData(NotificationContext.CharacterGUID).Text} acknowledges the growing Splendour of your Hippodrome.</Text>
     </Text>
@@ -110364,7 +111190,7 @@ Indeed, but your judgement should dissuade future perpetrators. If it swells you
     </Text>
     <Text>
       <LineId>-6903566645810052642</LineId>
-      <Text>$Quick Copy</Text>
+      <Text>Quick Copy</Text>
     </Text>
     <Text>
       <LineId>-6903566179086864467</LineId>
@@ -111659,6 +112485,10 @@ exceptional image quality. Native AA provides AI-based anti-aliasing for maximum
       <Text>Galerius Padano</Text>
     </Text>
     <Text>
+      <LineId>-6903395723606963476</LineId>
+      <Text>Breadbasket of Empire</Text>
+    </Text>
+    <Text>
       <LineId>-6903394620375038708</LineId>
       <Text>We need food. The people are starving!</Text>
     </Text>
@@ -111887,6 +112717,10 @@ exceptional image quality. Native AA provides AI-based anti-aliasing for maximum
     <Text>
       <LineId>-6903361426378098413</LineId>
       <Text>You shook down poor Manx for all his tribe was worth in order to follow the Procurator's orders. Corvinus claims this was all for the greater good, and that things would have been much worse if the Senate had reason to be displeased...</Text>
+    </Text>
+    <Text>
+      <LineId>-6903361357858440214</LineId>
+      <Text>Today, your people shall eat, drink and be merry. Tomorrow's worries are tomorrow's problem.</Text>
     </Text>
     <Text>
       <LineId>-6903359275645768606</LineId>
@@ -112697,7 +113531,7 @@ You might want to do something before word of public dissent reaches the Imperat
     </Text>
     <Text>
       <LineId>-6903253598890873082</LineId>
-      <Text>Sea Camel</Text>
+      <Text>Sea Kamel</Text>
     </Text>
     <Text>
       <LineId>-6903253225844855408</LineId>
@@ -113123,7 +113957,7 @@ Looks like it's time to take your leave.</Text>
     </Text>
     <Text>
       <LineId>-6903205918667571422</LineId>
-      <Text>$Negative Impact of River Current:</Text>
+      <Text>Negative Impact of River Current:</Text>
     </Text>
     <Text>
       <LineId>-6903205881776766800</LineId>
@@ -113234,6 +114068,10 @@ Looks like it's time to take your leave.</Text>
       <Text>{ToolOneDataHelper.FirstPartySubscriptionServiceName} Required</Text>
     </Text>
     <Text>
+      <LineId>-6903190615198634979</LineId>
+      <Text>A true citizen of the polis.</Text>
+    </Text>
+    <Text>
       <LineId>-6903189750344356275</LineId>
       <Text>&lt;i&gt;Cn. Firmius Calidus Gaius Titanio Naso salutem plurimam dicit.
 
@@ -113270,6 +114108,10 @@ Datum primo mense imperii novi imperatoris invicti.&lt;/i&gt;</Text>
     <Text>
       <LineId>-6903188383928435919</LineId>
       <Text>Forest Area</Text>
+    </Text>
+    <Text>
+      <LineId>-6903188338237065440</LineId>
+      <Text>Statue of Kassandra</Text>
     </Text>
     <Text>
       <LineId>-6903187868544434312</LineId>
@@ -113523,7 +114365,7 @@ Before she can finish, however, she is interrupted by the sudden appearance of o
     </Text>
     <Text>
       <LineId>-6903164189240205492</LineId>
-      <Text>$Move Marker</Text>
+      <Text>Move Marker</Text>
     </Text>
     <Text>
       <LineId>-6903164024656017482</LineId>
@@ -113754,6 +114596,10 @@ Your reputation with the Emperor has slightly improved.</Text>
     <Text>
       <LineId>-6903137706468787301</LineId>
       <Text>Three more years. That's all. Got a plot of land waiting, stone's throw off the Via Flaminia.</Text>
+    </Text>
+    <Text>
+      <LineId>-6903136997684823510</LineId>
+      <Text>$Thank you for your purchase</Text>
     </Text>
     <Text>
       <LineId>-6903136751343684218</LineId>
@@ -114714,6 +115560,10 @@ With the stopper of market prices uncorked, libations flow untrammeled. But even
       <Text>I never say no to a beer. </Text>
     </Text>
     <Text>
+      <LineId>-6903016523499216768</LineId>
+      <Text>Foundation</Text>
+    </Text>
+    <Text>
       <LineId>-6903016068988150962</LineId>
       <Text>Iron Mine</Text>
     </Text>
@@ -114904,9 +115754,9 @@ Penny Pinching - Tasks hardly yield any rewards</Text>
     </Text>
     <Text>
       <LineId>-6902990791704458305</LineId>
-      <Text>Decimus Naukratius Nerva, tyrant of Aegyptus, inspires terror in the hearts of the Nilotes and his much-decimated retinue of free Greeks. He has fathered a small army of sons, all of whom serve the empire as official functionaries. His punishments are considered to be draconic even by Roman standards. 
+      <Text>Decimus Naukratius Nerva, tyrant of Aegyptus, inspires terror in the hearts of Nilotes and his much-decimated retinue of free Greeks. He has fathered a small army of sons and raised them to serve the empire. 
 
-A die-hard loyalist and avid supporter of the military, Decimus is most comfortable in the second row, where he gets to exercise control without any of the additional obligations imposed by rank. Like many of his contemporaries, he seeks to carve out a piece of eternity for himself: to be remembered, whatever it may cost.  </Text>
+Like many of his contemporaries, he seeks to carve out a piece of eternity for himself: to be remembered, no matter the cost.</Text>
     </Text>
     <Text>
       <LineId>-6902990322536048774</LineId>
@@ -115042,6 +115892,10 @@ Diana rustles around her villa to see what she can find nearby. "Here's what I c
     <Text>
       <LineId>-6902977305325793818</LineId>
       <Text>And I am... it's just that if you do defeat Syracus, there will always be another to replace him. It is, like the hole one makes in one's morning porridge.</Text>
+    </Text>
+    <Text>
+      <LineId>-6902976841680394176</LineId>
+      <Text>Wedjat</Text>
     </Text>
     <Text>
       <LineId>-6902974464478557995</LineId>
@@ -115305,6 +116159,10 @@ Or you could take matters into your own hands and &lt;i&gt;deal with them&lt;/i&
     <Text>
       <LineId>-6902944934305093137</LineId>
       <Text>I'm fairly sure you did your best.</Text>
+    </Text>
+    <Text>
+      <LineId>-6902944885688114580</LineId>
+      <Text>Pyramid Restorations</Text>
     </Text>
     <Text>
       <LineId>-6902942500761061319</LineId>
@@ -115635,6 +116493,14 @@ Your Reputation with the Emperor has increased!</Text>
       <Text>Let's see if you're still wearing that grin once your head is dangling from my saddle horn.</Text>
     </Text>
     <Text>
+      <LineId>-6902891365590916846</LineId>
+      <Text>Only for Patricians, every additional fulfilled need grants &lt;b&gt;extra Attributes&lt;/b&gt; for a Need Category of the residence.</Text>
+    </Text>
+    <Text>
+      <LineId>-6902891299601669500</LineId>
+      <Text>Randomise Banner</Text>
+    </Text>
+    <Text>
       <LineId>-6902890463528810579</LineId>
       <Text>The treasury is being emptied to help!</Text>
     </Text>
@@ -115657,6 +116523,10 @@ Your Reputation with the Emperor has increased!</Text>
     <Text>
       <LineId>-6902886412607863533</LineId>
       <Text>But... it's just porridge...</Text>
+    </Text>
+    <Text>
+      <LineId>-6902886228862540941</LineId>
+      <Text>Feed the hungry heart of your Empire.</Text>
     </Text>
     <Text>
       <LineId>-6902886143349224295</LineId>
@@ -116797,6 +117667,10 @@ Conditor's Grace</Text>
     <Text>
       <LineId>-6902733663733154161</LineId>
       <Text>She knows which bits of tradition are essential, and which are merely "nice to have".</Text>
+    </Text>
+    <Text>
+      <LineId>-6902733544012525349</LineId>
+      <Text>Skin of Kassandra herself.</Text>
     </Text>
     <Text>
       <LineId>-6902732369436490397</LineId>
@@ -118067,6 +118941,10 @@ You could hire poets and musicians to embellish and chronicle these tales. They 
       <Text>You're a bloody trouble-maker, you are. What, you think I haven't noticed? Well, as you've probably seen, I've had to check your privilege.</Text>
     </Text>
     <Text>
+      <LineId>-6902588962979035487</LineId>
+      <Text>Item Source</Text>
+    </Text>
+    <Text>
       <LineId>-6902588019260707384</LineId>
       <Text>Maybe next time don't send men, but a really angry letter?</Text>
     </Text>
@@ -118683,6 +119561,10 @@ Hard - Caeso's military fleet is large and potent</Text>
       <Text>You try to remind Hiero of the days when he was the only one still standing, a man inexhaustible, yet consumed by his passions. You recall how his horses gave their all, how they never faltered in their stride. 
 
 Hiero scratches his head, then admits he cannot recall any of it. And if he cannot, then perhaps it never happened... &lt;b&gt;That wasn't very convincing...&lt;/b&gt;</Text>
+    </Text>
+    <Text>
+      <LineId>-6902515582003110043</LineId>
+      <Text>Statue of Artemis Kalliste</Text>
     </Text>
     <Text>
       <LineId>-6902515558685902354</LineId>
@@ -119635,6 +120517,10 @@ The time is not right for me to strike this asp myself; do it in my place, and I
     <Text>
       <LineId>-6902410751492470990</LineId>
       <Text>New items in:   </Text>
+    </Text>
+    <Text>
+      <LineId>-6902409365160467168</LineId>
+      <Text>Charioteer Mosaic</Text>
     </Text>
     <Text>
       <LineId>-6902408924060722266</LineId>
@@ -120744,7 +121630,7 @@ Your Aspirant will remember your advice, especially in times of hardship.
     </Text>
     <Text>
       <LineId>-6902258922306315367</LineId>
-      <Text>$... {} more issues</Text>
+      <Text>... {} more issues</Text>
     </Text>
     <Text>
       <LineId>-6902258868364822832</LineId>
@@ -120929,6 +121815,10 @@ They stare at you hard, unsure how to react. Finally, they nod in acceptance of 
       <Text>Buildings near Stone Towers or Gates will grant additional Prestige.</Text>
     </Text>
     <Text>
+      <LineId>-6902237551429144997</LineId>
+      <Text>Isidora</Text>
+    </Text>
+    <Text>
       <LineId>-6902237521188693299</LineId>
       <Text>You 'civilise' more Celtic islands. </Text>
     </Text>
@@ -120939,6 +121829,10 @@ They stare at you hard, unsure how to react. Finally, they nod in acceptance of 
     <Text>
       <LineId>-6902236648720703473</LineId>
       <Text>Ecce! My draconian form!</Text>
+    </Text>
+    <Text>
+      <LineId>-6902236618337973290</LineId>
+      <Text>Echoes of Kassandra</Text>
     </Text>
     <Text>
       <LineId>-6902236611818932117</LineId>
@@ -122859,7 +123753,7 @@ at least &lt;b&gt;5000&lt;/b&gt; Knowledge.</Text>
     </Text>
     <Text>
       <LineId>-6901983299587746047</LineId>
-      <Text>$Edit Stamp</Text>
+      <Text>Edit Stamp</Text>
     </Text>
     <Text>
       <LineId>-6901981738657353957</LineId>
@@ -122921,6 +123815,10 @@ joined the war against {GetCompanyNameForParticipant(NotificationContext:GetValu
     <Text>
       <LineId>-6901974265623341032</LineId>
       <Text>Star of Hope</Text>
+    </Text>
+    <Text>
+      <LineId>-6901974252978020272</LineId>
+      <Text>Python and Apollo</Text>
     </Text>
     <Text>
       <LineId>-6901974194014401378</LineId>
@@ -123222,6 +124120,10 @@ Hard - Voada's military fleet is large and potent</Text>
     <Text>
       <LineId>-6901938977050556449</LineId>
       <Text>Your people consider you callous, but traders and visitors trust you to enforce the law</Text>
+    </Text>
+    <Text>
+      <LineId>-6901938967684560678</LineId>
+      <Text>V/V</Text>
     </Text>
     <Text>
       <LineId>-6901938797642592661</LineId>
@@ -123778,6 +124680,10 @@ As his patron, you, too, are cheered by the crowd. They're too far away to hear 
       <Text>Invert Axis X FPS</Text>
     </Text>
     <Text>
+      <LineId>-6901866807188454845</LineId>
+      <Text>Alexander The OK</Text>
+    </Text>
+    <Text>
       <LineId>-6901865980995926716</LineId>
       <Text>Here she is at her most vulnerable. </Text>
     </Text>
@@ -124045,6 +124951,10 @@ As such, you take to examining the centerpiece itself; an array of hearts, presu
     <Text>
       <LineId>-6901837059515238420</LineId>
       <Text>Defines how dangerous this character is as an adversary, and how likely they are to attack you.</Text>
+    </Text>
+    <Text>
+      <LineId>-6901836661263098418</LineId>
+      <Text>When the Horned One feasts, his acolytes follow. When his acolytes feast, the Horned One follows.</Text>
     </Text>
     <Text>
       <LineId>-6901836309996642546</LineId>
@@ -125416,6 +126326,10 @@ Your Aspirant will remember your advice,, especially in times of hardship.</Text
       <Text>Citizens, keep an eye on your wine, here comes the bald adventurer… </Text>
     </Text>
     <Text>
+      <LineId>-6901667662608810818</LineId>
+      <Text>Kandis</Text>
+    </Text>
+    <Text>
       <LineId>-6901666991915732616</LineId>
       <Text>From dust he came. To dust he returns.</Text>
     </Text>
@@ -126502,7 +127416,7 @@ The Liberti will likely be sold back into slavery.</Text>
     </Text>
     <Text>
       <LineId>-6901540939592682777</LineId>
-      <Text>$Additional Content Missmatch</Text>
+      <Text>Additional Content Mismatch</Text>
     </Text>
     <Text>
       <LineId>-6901539532706073559</LineId>
@@ -126695,6 +127609,10 @@ The liberti and plebeians are disappointed, but you hold firm.</Text>
       <Text>Watches the watchers.</Text>
     </Text>
     <Text>
+      <LineId>-6901515015881558250</LineId>
+      <Text>Olive Growers</Text>
+    </Text>
+    <Text>
       <LineId>-6901514554217942682</LineId>
       <Text>Apodixic Appointer</Text>
     </Text>
@@ -126868,6 +127786,10 @@ Deny - Players do not have access, ensuring fair competition</Text>
     <Text>
       <LineId>-6901493248916966340</LineId>
       <Text>Water Pavilion</Text>
+    </Text>
+    <Text>
+      <LineId>-6901492924664284834</LineId>
+      <Text>In case you need to make a point.</Text>
     </Text>
     <Text>
       <LineId>-6901492565183826306</LineId>
@@ -127144,6 +128066,10 @@ He suspects them of deserting and has asked you to stay clear of their last know
     <Text>
       <LineId>-6901466451205767609</LineId>
       <Text>Allows you to take out a large loan with a Rival.</Text>
+    </Text>
+    <Text>
+      <LineId>-6901466266558578701</LineId>
+      <Text>Stock (t)</Text>
     </Text>
     <Text>
       <LineId>-6901465606028772478</LineId>
@@ -127585,6 +128511,10 @@ Normal - Traders and Rivals only supply specific goods</Text>
       <Text>The Plebeian concurs</Text>
     </Text>
     <Text>
+      <LineId>-6901419198489327728</LineId>
+      <Text>Even the wisest amongst us cannot refuse a good revel.</Text>
+    </Text>
+    <Text>
       <LineId>-6901419014768400086</LineId>
       <Text>A fire has started in your city. </Text>
     </Text>
@@ -128014,6 +128944,10 @@ They have unique stock on offer, not all of which changes overtime. Visit their 
     <Text>
       <LineId>-6901360438434792630</LineId>
       <Text>Resume water consumption</Text>
+    </Text>
+    <Text>
+      <LineId>-6901360351979198140</LineId>
+      <Text>Statues from AC Odyssey</Text>
     </Text>
     <Text>
       <LineId>-6901360219809803562</LineId>
@@ -129692,7 +130626,7 @@ You may never learn, for his explanation is interrupted by the arrival of a ragt
     </Text>
     <Text>
       <LineId>-6901147420015258848</LineId>
-      <Text>Struthiocamelus Signum</Text>
+      <Text>Struthiokamelus Signum</Text>
     </Text>
     <Text>
       <LineId>-6901146300697565909</LineId>
@@ -129995,9 +130929,9 @@ Fine sails or not, though, Valeria didn't mention anything about you paying for 
     </Text>
     <Text>
       <LineId>-6901117198420327215</LineId>
-      <Text>Each island have specific fertilities which mean you cannot produce all the goods on the same island. In order to produce some goods you might need to find an island suitable for it.
+      <Text>Each island has specific fertilities, which means you cannot produce all the goods on the same island. In order to produce some goods you might need to find an island suitable for them.
 
-You can find the list of fertility in the minimap and porvince map.</Text>
+You can find the list of fertilities in the minimap and province map.</Text>
     </Text>
     <Text>
       <LineId>-6901116385775718100</LineId>
@@ -130440,6 +131374,10 @@ After a beat, he murmurs, "I advise you, ere, to &lt;i&gt;say the same.&lt;/i&gt
       <Text>May you be banned from all libraries, and your tongue dry up so I do not have to listen to your pointless talk!</Text>
     </Text>
     <Text>
+      <LineId>-6901070781079847525</LineId>
+      <Text>A chance find of old amphoras turned into a veritable discovery when workers found the '77 wine still fit for human consumption. </Text>
+    </Text>
+    <Text>
       <LineId>-6901070768315856572</LineId>
       <Text>approving</Text>
     </Text>
@@ -130879,6 +131817,10 @@ The whole affair appears to be rather embarrassing, and while their last positio
 Here might be a chance to set the records right....</Text>
     </Text>
     <Text>
+      <LineId>-6901011334536475820</LineId>
+      <Text>Hermophilos</Text>
+    </Text>
+    <Text>
       <LineId>-6901011020267636650</LineId>
       <Text>Siren Signum</Text>
     </Text>
@@ -130889,6 +131831,10 @@ Here might be a chance to set the records right....</Text>
     <Text>
       <LineId>-6901010458318756999</LineId>
       <Text>Oh, I see. Well, thank you, Marcia. The party is already starting, please join in.</Text>
+    </Text>
+    <Text>
+      <LineId>-6901009839834943370</LineId>
+      <Text>Construction underway</Text>
     </Text>
     <Text>
       <LineId>-6901009748886686080</LineId>
@@ -131237,6 +132183,10 @@ Tarragon is gearing up to rebel!</Text>
       <Text>Concordia is appalled that you supply any Oysters with Caviar to your population: this is gluttony.</Text>
     </Text>
     <Text>
+      <LineId>-6900961101695319208</LineId>
+      <Text>$Return to Town Square</Text>
+    </Text>
+    <Text>
       <LineId>-6900961075218688590</LineId>
       <Text>Set sail!</Text>
     </Text>
@@ -131435,7 +132385,7 @@ A victorious emperor may grant an ultimatum to the vanquished. A victorious rebe
     </Text>
     <Text>
       <LineId>-6900933320352619575</LineId>
-      <Text>$Create New Folder</Text>
+      <Text>Create New Folder</Text>
     </Text>
     <Text>
       <LineId>-6900933053251751993</LineId>
@@ -131463,7 +132413,7 @@ A victorious emperor may grant an ultimatum to the vanquished. A victorious rebe
     </Text>
     <Text>
       <LineId>-6900931482906558906</LineId>
-      <Text> ... lead to the capital. Carts filled with grain rumble through the streets, unimpeded: donkeys bray, mules flick their ears. This is the music to which hearts harken: hope displacing hunger. </Text>
+      <Text>All roads lead to the capital. Carts filled with grain rumble through the streets, unimpeded: donkeys bray, mules flick their ears. This is the music to which hearts harken: hope displacing hunger. </Text>
     </Text>
     <Text>
       <LineId>-6900931330539470450</LineId>
@@ -131957,7 +132907,7 @@ Sparse - Forests are rare and require careful management</Text>
     </Text>
     <Text>
       <LineId>-6900872055648309227</LineId>
-      <Text>$Mod Version Missmatches (Present / Expected)</Text>
+      <Text>Mod Version Mismatches (Present / Expected)</Text>
     </Text>
     <Text>
       <LineId>-6900871891115419348</LineId>
@@ -132445,7 +133395,7 @@ An imperial envoy with aid will soon arrive near the Villa Augusta.</Text>
     </Text>
     <Text>
       <LineId>-6900815152589477645</LineId>
-      <Text>Basket of the World</Text>
+      <Text>Breadbasket of Empire</Text>
     </Text>
     <Text>
       <LineId>-6900814827605752142</LineId>
@@ -133112,7 +134062,7 @@ A higher score means your computer can handle the game better in that area.</Tex
     </Text>
     <Text>
       <LineId>-6900736591802506832</LineId>
-      <Text>$Stamps</Text>
+      <Text>Stamps</Text>
     </Text>
     <Text>
       <LineId>-6900736356786461727</LineId>
@@ -133627,7 +134577,7 @@ You've lost! Sad.</Text>
     </Text>
     <Text>
       <LineId>-6900673687014079364</LineId>
-      <Text>&lt;b&gt;You don't have to provide all Needs.&lt;/b&gt; One per category is enough to advance to the next resident tier.</Text>
+      <Text>$⁠&lt;b&gt;You don't have to provide all Needs.&lt;/b&gt; A category is covered if all of its green segments are filled.</Text>
     </Text>
     <Text>
       <LineId>-6900673158264123988</LineId>
@@ -134438,6 +135388,10 @@ Either group may attempt to stir unrest, but you're confident you can deal with 
       <Text>An heroic deed.</Text>
     </Text>
     <Text>
+      <LineId>-6900580079785109294</LineId>
+      <Text>Hall of Echoes</Text>
+    </Text>
+    <Text>
       <LineId>-6900580011147661923</LineId>
       <Text>An irked Patrician confronts you.</Text>
     </Text>
@@ -135235,6 +136189,10 @@ Ah, so he is a spy.
       <Text>Produces Weld</Text>
     </Text>
     <Text>
+      <LineId>-6900492810860178305</LineId>
+      <Text>Obelisk</Text>
+    </Text>
+    <Text>
       <LineId>-6900492580785544261</LineId>
       <Text>…naturally, a Roman sees it running wild and wants to bring it to order, to heel— expect a bit of resistance there, mind…</Text>
     </Text>
@@ -135696,6 +136654,10 @@ It seems that your emperor expects you to send troops to the border immediately�
     <Text>
       <LineId>-6900432526917573084</LineId>
       <Text>A Trading Pier is an additional access point for arriving ships.</Text>
+    </Text>
+    <Text>
+      <LineId>-6900432289990488897</LineId>
+      <Text>Aristopaines</Text>
     </Text>
     <Text>
       <LineId>-6900431245737980047</LineId>
@@ -136453,6 +137415,10 @@ Then again, you could just hire a handler and keep the poor thing for yourself.<
       <Text>Sparrow Signum</Text>
     </Text>
     <Text>
+      <LineId>-6900342855217543009</LineId>
+      <Text>Crock Odile</Text>
+    </Text>
+    <Text>
       <LineId>-6900340616483804684</LineId>
       <Text>You're toeing the line. </Text>
     </Text>
@@ -136619,6 +137585,10 @@ You have been soundly defeated at the very first hurdle.</Text>
     <Text>
       <LineId>-6900325417764283317</LineId>
       <Text>What? So that's what you think. That's ridiculous. The emperor is old... and... I'm married. </Text>
+    </Text>
+    <Text>
+      <LineId>-6900325367053920790</LineId>
+      <Text>A parade through your streets in the name of victory!</Text>
     </Text>
     <Text>
       <LineId>-6900325297291363128</LineId>
@@ -137019,6 +137989,10 @@ The mysteries of Dindymene shall remain a mystery.  </Text>
     <Text>
       <LineId>-6900279990470632771</LineId>
       <Text>{AssetData(NotificationContext.CharacterGUID).Text} likes you being a supporter of the emperor. </Text>
+    </Text>
+    <Text>
+      <LineId>-6900279623982387546</LineId>
+      <Text>KASSANDRA'S LEGACY PACK</Text>
     </Text>
     <Text>
       <LineId>-6900279589697340838</LineId>
@@ -138707,6 +139681,10 @@ Seizing the opportunity to negotiate, their leader steps forward. He makes an of
       <Text>I hope the devout find what they're searching for, thank you Governor.</Text>
     </Text>
     <Text>
+      <LineId>-6900069910261977499</LineId>
+      <Text>Kassandra Legacy Pack</Text>
+    </Text>
+    <Text>
       <LineId>-6900069698713827475</LineId>
       <Text>From The Ashes</Text>
     </Text>
@@ -138760,7 +139738,7 @@ Seizing the opportunity to negotiate, their leader steps forward. He makes an of
     </Text>
     <Text>
       <LineId>-6900062728607390412</LineId>
-      <Text>Cura Annonae</Text>
+      <Text>The Bread Basket</Text>
     </Text>
     <Text>
       <LineId>-6900062487766293445</LineId>
@@ -139066,6 +140044,10 @@ He seems somewhat relieved for the short break from Diana's antics.</Text>
       <Text>Don't get too comfortable. We'll be moving again in no time.</Text>
     </Text>
     <Text>
+      <LineId>-6900017824562701345</LineId>
+      <Text>$Choose quest entry style in quest tracker</Text>
+    </Text>
+    <Text>
       <LineId>-6900016010771561019</LineId>
       <Text>{AssetData(RefGuid).Text}</Text>
     </Text>
@@ -139112,6 +140094,10 @@ He seems somewhat relieved for the short break from Diana's antics.</Text>
     <Text>
       <LineId>-6900010395372340563</LineId>
       <Text>...underneath, skeletons and shite.</Text>
+    </Text>
+    <Text>
+      <LineId>-6900009355531172907</LineId>
+      <Text>Gaius Julius</Text>
     </Text>
     <Text>
       <LineId>-6900008968196173728</LineId>
@@ -139308,6 +140294,10 @@ He seems somewhat relieved for the short break from Diana's antics.</Text>
     <Text>
       <LineId>-6899976109208690950</LineId>
       <Text>The Scathach we can lay hands on, we keep here.</Text>
+    </Text>
+    <Text>
+      <LineId>-6899975462379733484</LineId>
+      <Text>Randomise Portrait</Text>
     </Text>
     <Text>
       <LineId>-6899975438038245733</LineId>
@@ -139689,6 +140679,10 @@ Your munerator whispers in your ear, "She's a known cheat, domine, but influenti
     <Text>
       <LineId>-6899931479880213089</LineId>
       <Text>Woa, Dominus Denarius. You think you don't need to pay? I don't give a fig who you are. </Text>
+    </Text>
+    <Text>
+      <LineId>-6899931382148378366</LineId>
+      <Text>$TBD Music01</Text>
     </Text>
     <Text>
       <LineId>-6899930993522028840</LineId>
@@ -140730,6 +141724,10 @@ at least &lt;b&gt;7,500&lt;/b&gt; Knowledge.</Text>
       <Text>He is worried and confused.</Text>
     </Text>
     <Text>
+      <LineId>-6899822540528902745</LineId>
+      <Text>A feast in honour of Stata Mater, divine protector against flames.</Text>
+    </Text>
+    <Text>
       <LineId>-6899822396561582341</LineId>
       <Text>Amphitheatre Effect Decrease Happiness Liberti + Plebeians</Text>
     </Text>
@@ -141606,6 +142604,10 @@ Economic Power is based on Income across all islands.</Text>
       <Text>Death marches. Don't think it will not come for you. </Text>
     </Text>
     <Text>
+      <LineId>-6899691226552503420</LineId>
+      <Text>II/V</Text>
+    </Text>
+    <Text>
       <LineId>-6899690708670789689</LineId>
       <Text>BB is a bit salty that Voada keeps killing Romans. </Text>
     </Text>
@@ -141615,7 +142617,7 @@ Economic Power is based on Income across all islands.</Text>
     </Text>
     <Text>
       <LineId>-6899690526103268752</LineId>
-      <Text>$HoF Ornament Wall Aegyptus Gate OasisId</Text>
+      <Text>Mudbrick Gate</Text>
     </Text>
     <Text>
       <LineId>-6899690414438339480</LineId>
@@ -141636,6 +142638,10 @@ Economic Power is based on Income across all islands.</Text>
     <Text>
       <LineId>-6899688013151038519</LineId>
       <Text>I am equal to any Emperor, and equally worthy of courtesy. And I bid thee; speak!</Text>
+    </Text>
+    <Text>
+      <LineId>-6899687460519781253</LineId>
+      <Text>This one is for GOLDEN TICKETS we do not know what these are</Text>
     </Text>
     <Text>
       <LineId>-6899686855777269503</LineId>
@@ -142127,6 +143133,10 @@ Statecraft</Text>
       <Text>The gods are pleased, governor. Though they are not pleased with Fabius Fannius... the artisan serving my temple has disappeared without a warning. </Text>
     </Text>
     <Text>
+      <LineId>-6899626310996999532</LineId>
+      <Text>Dipylon</Text>
+    </Text>
+    <Text>
       <LineId>-6899626222398771813</LineId>
       <Text>The audience is happy you didn't let this happen</Text>
     </Text>
@@ -142438,6 +143448,10 @@ Discoveries are arranged in clusters: some require adjourning discoveries as pre
       <Text>~ {Festival:GetFestivalIntervalBasedOnCurrentAttributes(datasets.NeedAttributeType.Prestige) ~Duration}</Text>
     </Text>
     <Text>
+      <LineId>-6899585953071891508</LineId>
+      <Text>Gorgon</Text>
+    </Text>
+    <Text>
       <LineId>-6899585919892659358</LineId>
       <Text>Your inferior income has worsened diplomatic relations.</Text>
     </Text>
@@ -142642,6 +143656,10 @@ Discoveries are arranged in clusters: some require adjourning discoveries as pre
     <Text>
       <LineId>-6899558521566106029</LineId>
       <Text>Fleet on Transfer</Text>
+    </Text>
+    <Text>
+      <LineId>-6899558180885358788</LineId>
+      <Text>You have already contributed the maximum.</Text>
     </Text>
     <Text>
       <LineId>-6899557873615880659</LineId>
