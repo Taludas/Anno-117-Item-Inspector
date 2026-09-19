@@ -29,7 +29,8 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
 ## Filter-System
 - Suche über mehrere Kategorien: Filtert Items nach Seltenheit, Sockel, Nische, Ziel, Effekten und Quelle (steuerbar über zwei Dropdown-Menüs zur Auswahl der genauen Quelle).
 - Intelligente "Effektzusammenführung": Eine einheitliche Filterlogik, die ähnliche Attribute über verschiedene Datentypen hinweg zusammenführt (Attribut alleine, Attribut durch geändertes Bedürfnis, extra Attribute durch Bereichseffekte).
-- Spielversionsverlauf: Filtert Items, die in bestimmten Spielversionen oder DLC-Veröffentlichungen eingeführt wurden.
+- DLC-Filter: Filtert Items, die im Basisspiel oder in einer bestimmten DLC-Veröffentlichung eingeführt wurden.
+- Spielversionsverlauf: Über das Dropdown-Menü „Game Version“ lässt sich die gesamte Datenbank im Stand jeder früheren Hauptversion des Spiels anzeigen.
 - "Intelligente" Suchleiste: manuell kann nach (Teilen des) Namen des Items, GUID, (Teilen des) Namens der Effekte, Zielen usw. gesucht werden. Einfach eingeben, wonach gesucht wird, und die Eingabetaste drücken oder die Suchschaltfläche betätigen.
 - Durch den "Clear All" Button kann man den Filter komplett zurücksetzen.
 
@@ -41,7 +42,7 @@ Jeder Datenbankeintrag ist in zwei verschiedene Abschnitte unterteilt:
     - Tkinter (in der Regel in Python enthalten)
   - Installation:
     - Das Repository klonen
-    - Ausführen des Skripts "extract_assets_resolve_pools_buffs_conditions_sources.py" in der Konsole, um eine aktualisierte CSV-Datei zu generieren, davor gegebenenfalls die Datei „assets.xml“ und die Sprachdateien im data-Ordner updaten, wenn eine neue Game Version rausgekommen ist.
+    - Ausführen des Skripts "build_version_data.py" (`py build_version_data.py --all`) in der Konsole, um die Spieldaten-Pakete in data/versions zu erzeugen (das Skript führt die Item-Extraktion aus und reduziert die Spieldateien auf das, was das Programm braucht), davor gegebenenfalls die Datei „assets.xml“ und die Sprachdateien im data-Ordner updaten, wenn eine neue Game Version rausgekommen ist. Frühere Spielversionen werden aus dem Ordner game_versions gelesen (gleiche Ordnerstruktur).
     - Ausführen des Skripts "anno117_item_inspector.py" startet das Programm.
 
 # Known Issues

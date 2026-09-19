@@ -31,7 +31,8 @@ Every item entry is broken down into two distinct sections:
 ## Filtering System
 - Multi-Category Search: Filter items by Rarity, Allocation, Niche, Target, Effects and Source (controllable via two drop-down menus for specifying the exact source).
 - Smart Effect Merging: A unified filtering logic that merges similar attributes across different data types.
-- Game Version history: Filter for items introduced in specific game versions or DLC releases.
+- DLC filter: Filter for items introduced with the base game or a specific DLC release.
+- Game Version history: Switch the whole database to how it looked in any earlier major game version with the "Game Version" dropdown.
 - "Intelligent" Search Bar: You can manually search for (parts of the) item name, GUID, (parts of the) effect names, targets etc. Just type in what you are looking for and hit Enter or press the search button.
 - Clear all Filters by pressing the "Clear All" Button.
 
@@ -43,7 +44,7 @@ Every item entry is broken down into two distinct sections:
     - Tkinter (usually included with Python)
   - Installation:
     - Clone the repository
-    - Run the extract_assets_resolve_pools_buffs_conditions_sources.py script to generate a fresh csv file - update the game assets.xml and language files in the data folder if necessary (after game update).
+    - Run the build_version_data.py script (`py build_version_data.py --all`) to generate the game data packages in data/versions (it runs the item extraction and boils the game files down to what the app needs) - update the game assets.xml and language files in the data folder first if necessary (after game update). Older game versions are read from the game_versions folder (same folder layout).
     - Run the script anno117_item_inspector.py
 
 # Known Issues
