@@ -23,7 +23,8 @@ PERCENT_OVERRIDE_TAGS = [
     "BuffTransferSpeedUpgrade", "BuffReduceDamageImpactUpgrade",
     "BuffReduceCargoImpactUpgrade", "AccuracyCatapultModuleUpgrage",
     "AccuracyArcherModuleUpgrade", "AccuracyBallistaModuleUpgrage",
-    "AccuracyUpgrade", "ProductivityUpgrade"
+    "AccuracyUpgrade", "ProductivityUpgrade", "PassiveTradeProfitModifier",
+    "BuffReduceNegativeRiverCurrentImpactUpgrade"
 ]
 
 # NEW: Blacklist for Source Logic
@@ -49,8 +50,17 @@ def build_extended_source_maps(assets_map):
     rival_rewards = {}
     quest_item_map = {}
 
-    # Identify all Quest-related templates that might need climbing
-    QUEST_TEMPLATES = {'Sequence', 'Decision', 'StateChecker', 'SequenceCharNotif', 'GoToObjectiveComponent', 'DecisionRoot', 'Function', 'Objective'}
+    # Identify all Quest-related templates that might need climbing.
+    # "*ObjectiveComponent" is a whole family of quest-step templates (DeliveryObjectiveComponent,
+    # DestroyObjectiveComponent, PickUpObjectiveComponent, SelectObjectiveComponent,
+    # StatusQuoObjectiveComponent, GoToObjectiveComponent, ...) - matched by suffix so a future DLC's
+    # new quest-step template (any of these can carry its own Reward/RewardAssets/Item/Reward) is
+    # picked up automatically instead of silently dropping that item's source again.
+    QUEST_TEMPLATES = {'Sequence', 'Decision', 'StateChecker', 'SequenceCharNotif', 'DecisionRoot', 'Function', 'Objective'}
+
+    def is_quest_template(tpl):
+        return bool(tpl) and (tpl in QUEST_TEMPLATES or tpl.endswith('ObjectiveComponent'))
+
     quest_related_guids = set()
 
     for guid, asset in assets_map.items():
@@ -58,7 +68,7 @@ def build_extended_source_maps(assets_map):
         tpl = tpl_node.text if tpl_node is not None else ""
         if tpl == "RewardPool":
             reward_pool_guids.add(guid)
-        if tpl in QUEST_TEMPLATES:
+        if is_quest_template(tpl):
             quest_related_guids.add(guid)
 
     # REVERSE MAP: child_guid -> list of parent_guids
@@ -96,7 +106,7 @@ def build_extended_source_maps(assets_map):
             rival_rewards[item_id].append(guid)
 
         # 3. Quests with Broad Climbing
-        if tpl in ['Decision', 'Sequence', 'Objective', 'SequenceCharNotif', 'GoToObjectiveComponent']:
+        if is_quest_template(tpl):
             for text_node in asset.itertext():
                 val = text_node.strip()
                 if val in assets_map:
@@ -423,6 +433,12 @@ def parse_condition_node(cond_node, assets_map):
         variable = get_text_safe(data_node, "VariableToCheck", "")
         compare_val = get_text_safe(data_node, "SecondVariable/Values/BoolVariableOrValue/BoolValue", None)
         val_str = f"{variable} {compare_val}" if compare_val is not None else variable
+
+    elif template == "ConditionRomanization":
+        # Uses its own ComparisonOperator field instead of the generic ComparisonOp/ComparisonOpType
+        # checked above, so op is resolved here directly (AtMost/LessThan/MoreThan).
+        op = get_text_safe(data_node, "ComparisonOperator", "")
+        val_str = get_text_safe(data_node, "TargetValue")
 
     op_str = f"{op} " if op else ""
     scope = get_text_safe(data_node, "CounterScope", "0")

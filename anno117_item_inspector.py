@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
-import copy
 from PIL import Image, ImageTk
 import csv
 import xml.etree.ElementTree as ET
@@ -86,9 +85,8 @@ CONFIG_FILE = get_config_path()
 
 # Configuration
 BASE_ICON_PATH = '.'
-CSV_FILE = resource_path('items_export_with_effects.csv')
-ASSETS_XML = resource_path('data/base/config/export/assets.xml')
-LOCA_PATH_TEMPLATE = resource_path('data/base/config/gui/texts_{}.xml')
+# Compact per-game-version data packages (built by build_version_data.py) - the full in-game assets.xml / texts_*.xml are not shipped.
+VERSIONS_DIR = resource_path('data/versions')
 
 GITHUB_REPO = "Taludas/Anno-117-Item-Inspector"
 
@@ -118,8 +116,7 @@ BUFF_EFFECT_MAPPING = {
     "AqueductWaterSupplyUpgrade": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_irrigation_water_capacity_1.png", "-6901410119100201615"],
     "DistributorConsumedWaterUpgrade": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_irrigation_water_capacity_1.png", "-6900173698993465429"],
     "GoodConsumptionUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_consumption.png", "-6916926126237868583"],
-    # Only used for the effect dropdown/filter label -- the actual line rendering builds a
-    # full custom sentence in res_emb and doesn't consult this mapping.
+    # Only used for the effect dropdown/filter label -- the actual line rendering builds a full custom sentence in res_emb and doesn't consult this mapping.
     "GenerateLimitedLode": ["data/ui/fhd/base/icon_content/generic/icon_2d_fertility.png", "-6910834639284735326"],
     "ArmorUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_defense_armor.png", "-6916173326961563427"],
     "AttackCone_BallistaModule": ["data/ui/fhd/base/icon_content/generic/icon_2d_arrow_stylized_down.png", "-6908156295089722167", "-6906254771419500991"],
@@ -137,6 +134,7 @@ BUFF_EFFECT_MAPPING = {
     "BuffReduceCargoImpactUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_rushing_to.png", "-6917314961146315631"],
     "BuffReduceDamageImpactUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_rushing_to.png", "-6915299435512831228"],
     "BuffReduceNegativeWindImpactUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_wind_direction.png", "-6904284175891437012"],
+    "BuffReduceNegativeRiverCurrentImpactUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_speed_fast.png", "-6903205918667571422"],
     "BuffTransferSpeedUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_province_map.png", "-6914547372679383539"],
     "CanUseForest": ["data/ui/fhd/base/icon_content/infrastructure/icon_3d_resource_forest.png", "-6906268553696161885"],
     "CanUseMarsh": ["data/ui/fhd/base/icon_content/infrastructure/icon_3d_resource_marsh.png", "-6914826481896353728"],
@@ -180,7 +178,9 @@ BUFF_EFFECT_MAPPING = {
     "OffenseChargeUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_offense.png", "-6907642198169893607"],
     "OffenseMeleeUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_offense.png", "-6914624354330523363"],
     "OffenseRangedUpgrade": ["data/ui/fhd/base/icon_content/military/icon_2d_offense.png", "-6901124448895689147"],
+    "OverflowStorageRiskMultiplierUpgrade": ["data/ui/fhd/dlc03/icon_content/granary/icon_2d_storage_overflow.png", "-6913992260309554754"],
     "PassiveRuinRepairSpeedUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_rebuild.png", "-6902214522674861072"],
+    "PassiveTradeProfitModifier": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6909300745746637117"],
     "PassiveTradeReward": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6909300745746637117"],
     "PipeCapacityUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_category_marsh_drainage.png", "-6908505536770437697"],
     "Population": ["data/ui/fhd/base/icon_content/attributes/icon_2d_population.png", "-6916310552575698080"],
@@ -194,8 +194,7 @@ BUFF_EFFECT_MAPPING = {
     "RecruitmentCostInPercent": ["data/ui/fhd/base/icon_content/construction_tools/icon_2d_construction_materials.png", "-6900175465122901010"],
     "RecruitmentSpeedInPercent": ["data/ui/fhd/base/icon_content/generic/icon_2d_remaining_time.png", "-6912203919785395737"],
     "ReplaceInputs": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_rotation.png", "-6909767605057018144"],
-    # Only used for the effect dropdown/filter label -- the line rendering builds a full
-    # custom sentence in res_emb ("Self-supply {}") and doesn't consult this mapping.
+    # Only used for the effect dropdown/filter label -- the line rendering builds a full custom sentence in res_emb ("Self-supply {}") and doesn't consult this mapping.
     "SelfSupplyInput": ["data/ui/fhd/base/icon_content/generic/icon_2d_generic_rotation.png", "-6902431379744152273"],
     "ReplaceWorkforce": ["data/ui/fhd/base/icon_content/construction_tools/icon_2d_tools.png", "-6900271494650358300"],
     "ResolverRangeUpgrade": ["data/ui/fhd/base/icon_content/generic/icon_2d_patrol_range.png", "-6899682999703418604"],
@@ -234,7 +233,8 @@ INCIDENT_MAPPING = {
     "Fire": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_incident_minor_fire.png", "-6909498465775769599"],
     "Inferno": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_incident_major_fire.png", "-6902978744771256478"],
     "Unrest": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_incident_minor_riot.png", "-6913158135862449542"],
-    "Rebellion": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_incident_major_riot.png", "-6908386764451142720"]
+    "Rebellion": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_incident_major_riot.png", "-6908386764451142720"],
+    "Tremors": ["data/ui/fhd/dlc01/icon_content/incident/icon_2d_incident_tremor.png", "-6902990154555949770"],
 }
 
 # Allocation
@@ -263,7 +263,8 @@ CONDITION_TYPES = {
     "ConditionInStorage": ["-6904656400857447148", "-6916792298682888435"],
     "ConditionTradeRouteCount": "-6915569607474692589",
     "ConditionFestivalActive": ["-6911236995181305030", "-6908773579491322283"],
-    "ConditionRaceOutcome": "-6899894517186160753"
+    "ConditionRaceOutcome": "-6899894517186160753",
+    "ConditionRomanization": "-6913593039832459545"
 }
 
 # "All" - shown for ConditionFestivalActive when no specific festival GUID is set (any festival qualifies)
@@ -343,7 +344,7 @@ REWARD_POOL_MAPPING = {
     "43020": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_manx.png", "-6910353931395472437"],
     "43021": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_corvinus.png", "-6913545710924920342"],
     "43022": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038"],
-    "145045": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071"],
+    "145045": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_caecilia.png", "-6910597003872763071"],
     "64766": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6914762194635081755"],
     "64767": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6915564870584412590"],
     "64768": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_rival_dorian.png", "-6907653836002759647", "-6916763202365380332"],
@@ -383,9 +384,9 @@ REWARD_POOL_MAPPING = {
     "64802": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6914762194635081755"],
     "64803": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6915564870584412590"],
     "64804": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038", "-6916763202365380332"],
-    "145046": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6914762194635081755"],
-    "145047": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6915564870584412590"],
-    "145048": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071", "-6916763202365380332"],
+    "145046": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_caecilia.png", "-6910597003872763071", "-6914762194635081755"],
+    "145047": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_caecilia.png", "-6910597003872763071", "-6915564870584412590"],
+    "145048": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_caecilia.png", "-6910597003872763071", "-6916763202365380332"],
     "79669": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png", "-6906931485680097276", "-6906931485680097276"],
     "79670": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png", "-6915741635554061343", "-6915741635554061343"],
     "79671": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png", "-6909604399726531068", "-6909604399726531068"],
@@ -404,30 +405,49 @@ REWARD_POOL_MAPPING = {
     "95450": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_pirate_voada.png", "-6917151211833228038"],
     "95452": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_empress_julia.png", "-6917064935972779595"],
     "95453": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_emperor_calidus.png", "-6903528267829072805"],
-    "145049": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/dlc01/icon_content/portraits/icon_3d_trader_caecilia.png", "-6910597003872763071"],
-    "122533": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6908176692369518815"],
-    "122534": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6909503110265739293"],
-    "122535": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6915877880140582624"],
-    "122536": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6913083066444049357"],
-    "122537": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6910662342821446253"],
-    "122538": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6899731952442968805"],
-    "122539": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6901395514162112757"],
-    "122540": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6908928132728089827"],
-    "122541": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6914923149854169904"],
-    "122542": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6909867291834833909"],
-    "122543": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6903703426580683222"],
-    "122544": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6906276675127952394"],
-    "122545": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6907991623289664677"],
-    "122546": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6900196985132589583"],
-    "122547": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6914573601432067141"],
-    "145050": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "-6913008330424928700"],
+    "145049": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_trader_caecilia.png", "-6910597003872763071"],
+    "122533": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/attributes/icon_2d_happiness.png", "-6908176692369518815"],
+    "122534": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/attributes/icon_2d_health.png", "-6909503110265739293"],
+    "122535": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/attributes/icon_2d_fire_safety.png", "-6915877880140582624"],
+    "122536": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_religion.png", "-6913083066444049357"],
+    "122537": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/attributes/icon_2d_techtree_knowledge.png", "-6910662342821446253"],
+    "122538": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6899731952442968805"],
+    "122539": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/diplomacy/icon_2d_war_total.png", "-6901395514162112757"],
+    "122540": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/colosseum/icon_2d_colosseum_phase_base.png", "-6908928132728089827"],
+    "122541": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_mars.png", "-6914923149854169904"],
+    "122542": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_ceres.png", "-6909867291834833909"],
+    "122543": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_neptune.png", "-6903703426580683222"],
+    "122544": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_mercury.png", "-6906276675127952394"],
+    "122545": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_epona.png", "-6907991623289664677"],
+    "122546": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_cernunnos.png", "-6900196985132589583"],
+    "122547": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/base/icon_content/religion/icon_2d_deity_minerva.png", "-6914573601432067141"],
+    "145050": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/dlc01/icon_content/religion/icon_2d_deity_vulcanus.png", "-6913008330424928700"],
     # Visitors feature (Prestige-gated "Honoured Guests" ship): one RewardPool per rarity tier.
     "173298": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Rare"]],
     "173299": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Epic"]],
     "173300": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Legendary"]],
     "173301": ["data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png", "-6904119188857235835", "-6904119188857235835", RARITY_LOCA_MAPPING["Mythic"]],
     # Repeatable "Racer Specialist" research reward (DLC02 Circus Maximus tech tree)
-    "158539": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png", ["-6913855173603915663", "-6915178130906922013"], "-6906646074400544567", "-6915178130906922013"]
+    "158539": ["data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png", ["-6913855173603915663", "-6915178130906922013"], "-6906646074400544567", "-6915178130906922013"],
+    # DLC03
+    "174416": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_trader_heron.png", "-6903770377998821598"],
+    "174417": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_trader_heron.png", "-6903770377998821598", "-6914762194635081755"],
+    "174418": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_trader_heron.png", "-6903770377998821598", "-6915564870584412590"],
+    "174419": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_trader_heron.png", "-6903770377998821598", "-6916763202365380332"],
+    "174420": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_trader_heron.png", "-6903770377998821598"],
+    # DLC03 - Valeria gets her own separate DLC03-specific reward pool set (Aegyptus)
+    "174402": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_valeria.png", "-6914091878445862523", "-6914762194635081755"],
+    "174403": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_valeria.png", "-6914091878445862523", "-6915564870584412590"],
+    "174404": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_trader_valeria.png", "-6914091878445862523", "-6916763202365380332"],
+    "174405": ["data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png", "-6904030652562679494", "data/ui/fhd/base/icon_content/portraits/portrait_trader_valeria.png", "-6914091878445862523"],
+    "174397": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_trader_valeria.png", "-6914091878445862523"],
+    # DLC03 - Festivals of the new gods (Thoth / Sobek / Isis)
+    "175124": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/dlc03/icon_content/religion/icon_2d_deity_thoth.png", "-6903487047077379146"],
+    "175130": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/dlc03/icon_content/religion/icon_2d_deity_sobek.png", "-6905514693269600922"],
+    "175143": ["data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png", "-6908773579491322283", "data/ui/fhd/dlc03/icon_content/religion/icon_2d_deity_isis.png", "-6900617726685123960"],
+    # DLC03 - Kandis (new pirate NPC)
+    "174410": ["data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png", "-6915651869812775825", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_pirate_kandis.png", "-6901667662608810818"],
+    "174411": ["data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png", "-6914021190765224130", "data/ui/fhd/base/icon_content/portraits/portrait_dlc03_pirate_kandis.png", "-6901667662608810818", "-6914762194635081755"]
 }
 
 REWARD_POOL_CATEGORY_ORDER = {
@@ -453,7 +473,9 @@ SOURCE_LABELS = {
 # keeps one raw key per display name, so selecting that name would otherwise silently miss
 # items using the aliased tag -- this lets the filter match treat them as equivalent.
 EFFECT_TAG_ALIASES = {
-    "DistributorConsumedWaterUpgrade": "AqueductConsumedWaterUpgrade"
+    "DistributorConsumedWaterUpgrade": "AqueductConsumedWaterUpgrade",
+    "PassiveTradeProfitModifier": "PassiveTradeReward",
+    "PassiveTradeReward": "PassiveTradeProfitModifier"
 }
 
 # DLC Icons
@@ -481,7 +503,9 @@ class ItemBrowserApp:
         self.root.configure(bg=BG_MAIN)
 
         # Initialize all your dictionaries and lists
-        self.assets_root = None
+        self.available_versions = []
+        self.current_game_version = None
+        self._export_assets_cache = {}
         self.items_data = []
         self.localization_map = {}
         self.asset_guid_to_loca_id = {}
@@ -489,6 +513,7 @@ class ItemBrowserApp:
         self.asset_pool_first_item = {}
         self.asset_pool_members = {}
         self.asset_associated_region = {}
+        self.asset_farm_terrain = {}
         self.inheritance_lookup = {}
         self.target_display_to_guid = {}
         self.effect_display_to_raw = {}
@@ -555,11 +580,12 @@ class ItemBrowserApp:
             # 2. Heavy Data Parsing
             self.loading_label.config(text="Loading Localization...")
             self.root.update()
+            self.load_version_manifest()
             self.load_localization(self.current_language)
 
-            self.loading_label.config(text="Parsing Assets.xml...")
+            self.loading_label.config(text="Loading Asset Index...")
             self.root.update()
-            self.load_assets_map(ASSETS_XML)
+            self.load_assets_index()
 
             self.loading_label.config(text="Processing CSV Data...")
             self.root.update()
@@ -732,59 +758,62 @@ class ItemBrowserApp:
         tk.Button(btn_frame, text=" Yes, Reset ", command=proceed, bg=BG_SECTION, fg=FG_MAIN, width=12).pack(side=tk.LEFT, padx=10)
         tk.Button(btn_frame, text=" Cancel ", command=prompt.destroy, bg=BG_SECTION, fg=FG_MAIN, width=12).pack(side=tk.LEFT, padx=10)
 
-    # Parse Assets
-    def load_assets_map(self, xml_path):
-        if not os.path.exists(xml_path): return
+    # Game version data packages (built by build_version_data.py)
+    def load_version_manifest(self):
+        manifest_path = os.path.join(VERSIONS_DIR, "versions.json")
         try:
-            tree = ET.parse(xml_path)
-            self.assets_root = tree.getroot()
-            root = self.assets_root
-            for asset in root.findall('.//Asset'):
-                guid_node = asset.find('./Values/Standard/GUID')
-                if guid_node is None: continue
-                guid = guid_node.text.strip()
-
-                oasis_node = asset.find('./Values/Text/OasisId')
-                if oasis_node is not None:
-                    self.asset_guid_to_loca_id[guid] = oasis_node.text.strip()
-
-                quest_name_node = asset.find('./Values/QuestEntry/QuestName')
-                if quest_name_node is not None:
-                    self.asset_guid_to_loca_id[guid] = quest_name_node.text.strip()
-
-                base_node = asset.find('./BaseAssetGUID')
-                if base_node is not None and base_node.text:
-                    self.inheritance_lookup[guid] = base_node.text.strip()
-
-                icon_node = asset.find('./Values/Standard/IconFilename')
-                if icon_node is not None and icon_node.text:
-                    self.asset_guid_to_icon[guid] = icon_node.text.strip()
-
-                region_node = asset.find('./Values/Building/AssociatedRegions')
-                if region_node is not None and region_node.text:
-                    self.asset_associated_region[guid] = region_node.text.strip()
-
-                template_node = asset.find('./Template')
-                if template_node is not None and template_node.text and template_node.text.strip() == "AssetPoolNamed":
-                    child_asset = asset.find('./Values/AssetPool/AssetList/Item/Asset')
-                    if child_asset is not None and child_asset.text:
-                        self.asset_pool_first_item[guid] = child_asset.text.strip()
-
-                if template_node is not None and template_node.text and template_node.text.strip() in ("AssetPool", "AssetPoolNamed"):
-                    members = [a.text.strip() for a in asset.findall('./Values/AssetPool/AssetList/Item/Asset') if a.text]
-                    if members:
-                        self.asset_pool_members[guid] = members
-
+            with open(manifest_path, encoding="utf-8") as f:
+                manifest = json.load(f)
+            self.available_versions = manifest.get("versions", [])
+            self.latest_game_version = manifest.get("latest") or (self.available_versions[-1] if self.available_versions else None)
         except Exception as e:
-            print(f"Error indexing assets: {e}")
+            print(f"Version manifest error: {e}")
+            self.available_versions = []
+            self.latest_game_version = None
+        self.current_game_version = self.latest_game_version
+
+    def version_file(self, *parts):
+        return os.path.join(VERSIONS_DIR, str(self.current_game_version), *parts)
+
+    # Load the compact asset lookups (names, icons, inheritance, pools, regions) of the selected game version
+    def load_assets_index(self):
+        self.asset_guid_to_loca_id = {}
+        self.asset_guid_to_icon = {}
+        self.inheritance_lookup = {}
+        self.asset_associated_region = {}
+        self.asset_farm_terrain = {}
+        self.asset_pool_first_item = {}
+        self.asset_pool_members = {}
+        self.name_resolution_cache = {}
+        path = self.version_file("assets_index.json")
+        if not os.path.exists(path): return
+        try:
+            with open(path, encoding="utf-8") as f:
+                idx = json.load(f)
+            self.asset_guid_to_loca_id = idx.get("loca", {})
+            self.asset_guid_to_icon = idx.get("icon", {})
+            self.inheritance_lookup = idx.get("base", {})
+            self.asset_associated_region = idx.get("region", {})
+            self.asset_farm_terrain = idx.get("farm", {})
+            self.asset_pool_first_item = idx.get("first", {})
+            self.asset_pool_members = idx.get("members", {})
+        except Exception as e:
+            print(f"Error loading asset index: {e}")
 
     # Parse CSV Item data
     def load_csv_data(self):
-        if not os.path.exists(CSV_FILE): return
+        csv_path = self.version_file("items.csv")
+        if not os.path.exists(csv_path): return
+        self.items_data = []
+        self.filter_rarities = set()
+        self.filter_allocations = set()
+        self.filter_effects_raw = set()
+        self.filter_niches_raw = set()
+        self.filter_sources_raw = set()
         try:
             target_add_eff_id = ADDITIONAL_EFFECTS_ID[1] if isinstance(ADDITIONAL_EFFECTS_ID, list) else ADDITIONAL_EFFECTS_ID
 
-            with open(CSV_FILE, mode='r', encoding='utf-8') as f:
+            with open(csv_path, mode='r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     source_raw = row.get('Source', '').strip()
@@ -820,18 +849,12 @@ class ItemBrowserApp:
 
     # Parse Language files
     def load_localization(self, language):
-        path = LOCA_PATH_TEMPLATE.format(language)
+        path = self.version_file("loca", f"{language}.json")
         self.localization_map = {}
         if not os.path.exists(path): return
         try:
-            tree = ET.parse(path)
-            root = tree.getroot()
-            for text_container in root.findall('.//Text'):
-                line_id_node = text_container.find('LineId')
-                val_node = text_container.find('Text')
-                if line_id_node is not None and val_node is not None:
-                    tid = line_id_node.text.strip()
-                    self.localization_map[tid] = val_node.text if val_node.text else ""
+            with open(path, encoding="utf-8") as f:
+                self.localization_map = json.load(f)
         except Exception as e: print(f"Loca Error: {e}")
 
     # Resolve GUID to OasisID
@@ -854,12 +877,26 @@ class ItemBrowserApp:
         current_guid = guid
         visited = set()
 
-        # Roman is the implicit default and stays unlabeled; only Celtic buildings get a suffix,
+        # Roman is the implicit default and stays unlabeled; Celtic/Aegyptus buildings get a suffix,
         # driven by the requested asset's own Values/Building/AssociatedRegions tag - not by
         # whether its name happened to be inherited from a base asset (many Celtic wall/gate
         # variants have no OasisId of their own and always resolve via inheritance).
         CELTIC_ID = "-6903427160198155951"
-        celtic_suffix = f" ({self.localization_map.get(CELTIC_ID, 'Celtic').strip()})" if self.asset_associated_region.get(guid) == "Celtic" else ""
+        AEGYPTUS_ID = "-6914133370330207251"
+        FLOODPLAIN_ID = "-6915827260841809763"
+        region_suffix = ""
+        if self.asset_associated_region.get(guid) == "Celtic":
+            region_suffix = f" ({self.localization_map.get(CELTIC_ID, 'Celtic').strip()})"
+        elif guid in self.asset_farm_terrain or self.asset_associated_region.get(guid) == "Egyptian":
+            aegyptus_text = self.localization_map.get(AEGYPTUS_ID, 'Aegyptus').strip()
+            # Embankment-paired buildings (Values/Building/EmbankmentReplacement) share one OasisId between
+            # both terrain variants. Only the exceptional (Floodplain) side gets a prefix - same as Roman
+            # never getting a region tag - since the game has no standalone term for the plain/default side.
+            if self.asset_farm_terrain.get(guid) == "Floodplain":
+                floodplain_text = self.localization_map.get(FLOODPLAIN_ID, 'Floodplain').strip()
+                region_suffix = f" {floodplain_text} ({aegyptus_text})"
+            else:
+                region_suffix = f" ({aegyptus_text})"
 
         while current_guid:
             if current_guid in visited: break
@@ -868,7 +905,7 @@ class ItemBrowserApp:
             loca_id = self.asset_guid_to_loca_id.get(current_guid)
             if loca_id:
                 name = self.localization_map.get(loca_id, current_guid)
-                res = f"{name}{celtic_suffix}"
+                res = f"{name}{region_suffix}"
                 self.name_resolution_cache[guid] = res
                 return res
 
@@ -1321,6 +1358,13 @@ class ItemBrowserApp:
         lang_btn = tk.Button(row3, text="Default Language", command=self.change_language_request, bg=BG_SECTION, fg="#ffd700", cursor="hand2")
         lang_btn.pack(side=tk.LEFT, padx=5)
 
+        tk.Label(row3, text="Game Version:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(10, 2))
+        self.version_var = tk.StringVar()
+        self.version_combo = ttk.Combobox(row3, textvariable=self.version_var, state="readonly", width=12)
+        self.version_combo.pack(side=tk.LEFT, padx=(0, 5))
+        self.update_version_dropdown()
+        self.version_var.trace("w", lambda *args: self.on_game_version_change())
+
         self.setup_dlc_filter_button(row3)
 
         def open_kofi():
@@ -1574,7 +1618,7 @@ class ItemBrowserApp:
 
         # 1. Add "All Game Versions" (Optional: add a generic icon or keep text only)
         self.dlc_menu.add_command(
-            label=" All Game Versions",
+            label=" All Content",
             command=lambda: self.set_dlc_filter("all")
         )
         self.dlc_menu.add_separator()
@@ -1605,7 +1649,7 @@ class ItemBrowserApp:
                 )
 
         # The Button that triggers the menu
-        self.dlc_btn = tk.Button(parent, text="Version: All ▽", command=self.show_dlc_menu, bg=BG_SECTION, fg=FG_DIM, relief=tk.FLAT, padx=10, cursor="hand2")
+        self.dlc_btn = tk.Button(parent, text="DLC: All ▽", command=self.show_dlc_menu, bg=BG_SECTION, fg=FG_DIM, relief=tk.FLAT, padx=10, cursor="hand2")
         self.dlc_btn.pack(side=tk.LEFT, padx=5)
 
     def setup_dlc_filter(self, parent_frame):
@@ -1660,7 +1704,7 @@ class ItemBrowserApp:
     def update_dlc_menu_labels(self, counts):
         try:
             # Update "All Game Versions"
-            self.dlc_menu.entryconfigure(0, label=f"All Game Versions ({counts['all']})")
+            self.dlc_menu.entryconfigure(0, label=f"All Content ({counts['all']})")
 
             idx = 2
             for key in DLC_ICONS.keys():
@@ -1861,44 +1905,32 @@ class ItemBrowserApp:
             self.root.clipboard_clear()
             self.root.clipboard_append(guid)
 
+    def load_export_assets(self):
+        version = self.current_game_version
+        if version not in self._export_assets_cache:
+            try:
+                with open(self.version_file("export_assets.json"), encoding="utf-8") as f:
+                    self._export_assets_cache[version] = json.load(f)
+            except Exception as e:
+                print(f"Export data error: {e}")
+                self._export_assets_cache[version] = None
+        return self._export_assets_cache[version]
+
     def export_selected_item_xml(self):
         selected = self.tree.selection()
-        if not selected or self.assets_root is None:
+        if not selected:
             return
 
         guid = selected[0]
-
-        # Find the main item asset
-        item_asset = None
-        for asset in self.assets_root.findall('.//Asset'):
-            g_node = asset.find('./Values/Standard/GUID')
-            if g_node is not None and g_node.text.strip() == guid:
-                item_asset = asset
-                break
-
-        if item_asset is None:
+        export_data = self.load_export_assets()
+        if not export_data or guid not in export_data["assets"]:
             return
 
-        # Collect the main asset plus all referenced buff assets
-        export_list = [copy.deepcopy(item_asset)]
-        related_guids = set()
-
-        for path in [
-            './Values/Item/Buff',
-            './/Buffs/Item/GUID',
-            './/BoostBuffs/Item/GUID',
-            './Values/Item/EffectTargetGuid',
-            './Values/Item/EffectTargets/Item/GUID',
-        ]:
-            for node in item_asset.findall(path):
-                if node.text and node.text.strip().replace('-', '').isdigit():
-                    related_guids.add(node.text.strip())
-
-        if related_guids:
-            for asset in self.assets_root.findall('.//Asset'):
-                g_node = asset.find('./Values/Standard/GUID')
-                if g_node is not None and g_node.text.strip() in related_guids:
-                    export_list.append(copy.deepcopy(asset))
+        # The main item asset plus all referenced buff assets (pre-extracted per version by build_version_data.py)
+        export_list = [ET.fromstring(export_data["assets"][guid])]
+        for related_guid in export_data["related"].get(guid, []):
+            if related_guid in export_data["assets"]:
+                export_list.append(ET.fromstring(export_data["assets"][related_guid]))
 
         root_export = ET.Element("Assets")
         for asset in export_list:
@@ -1920,6 +1952,37 @@ class ItemBrowserApp:
         )
         if file_path:
             tree_to_save.write(file_path, encoding="utf-8", xml_declaration=True)
+
+    # Game version dropdown (data packages built by build_version_data.py)
+    def version_display(self, version):
+        return f"{version} (latest)" if version == getattr(self, 'latest_game_version', None) else str(version)
+
+    def update_version_dropdown(self):
+        self.version_display_to_id = {self.version_display(v): v for v in reversed(self.available_versions)}
+        self.version_combo['values'] = list(self.version_display_to_id.keys())
+        self.version_var.set(self.version_display(self.current_game_version))
+
+    def on_game_version_change(self):
+        selected = self.version_display_to_id.get(self.version_var.get())
+        if not selected or selected == self.current_game_version:
+            return
+        if getattr(self, '_language_swap_in_progress', False):
+            return
+        self._language_swap_in_progress = True
+        self.current_game_version = selected
+
+        self.root.config(cursor="watch")
+        self.overlay = tk.Frame(self.root, bg=BG_MAIN)
+        self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
+        tk.Label(self.overlay, text=f"Loading Game Version {selected}...\nPlease wait!", font=FONT_HEADER, fg=FG_MAIN, bg=BG_MAIN).place(relx=0.5, rely=0.5, anchor="center")
+        self.root.update()
+        self.root.after(100, lambda: self._execute_language_swap(reload_version=True))
+
+    def clear_details_panel(self):
+        self.header_canvas.delete("all")
+        self.details_text.config(state=tk.NORMAL)
+        self.details_text.delete("1.0", tk.END)
+        self.details_text.config(state=tk.DISABLED)
 
     # LOGIC for Language change
     def on_language_change(self, event=None):
@@ -1952,8 +2015,8 @@ class ItemBrowserApp:
         self.root.update()
         self.root.after(100, self._execute_language_swap)
 
-    def _execute_language_swap(self):
-        """Internal method to handle the heavy processing"""
+    def _execute_language_swap(self, reload_version=False):
+        """Internal method to handle the heavy processing (also used for game version switches, which additionally reload the version's item data)"""
         # Restoring 6+ filter dropdowns below each fire a var.set() trace that would otherwise call refresh_table() (and re-select, re-flashing the header) on its own; suppress those and do exactly one refresh once everything is restored.
         self._suppress_refresh = True
         try:
@@ -1974,6 +2037,13 @@ class ItemBrowserApp:
             self.name_resolution_cache = {}
 
             # 3. Perform the actual data reload
+            if reload_version:
+                self.load_assets_index()
+                self.load_csv_data()
+                # A DLC that doesn't exist in the selected game version would leave an empty, unexplained list
+                if self.current_dlc_filter != "all" and not any(
+                        ORIGIN_TO_DLC_KEY.get(str(i.get('Origin', '')).strip(), "base") == self.current_dlc_filter for i in self.items_data):
+                    self.current_dlc_filter = "all"
             self.load_localization(self.current_language)
 
             # Rebuild dropdown lists
@@ -2015,6 +2085,8 @@ class ItemBrowserApp:
             # Refresh - its own internal selection restore (captured from the tree's still untouched selection at its start) already re-selects, scrolls into view, and fires on_item_select via <<TreeviewSelect>>.
             self._suppress_refresh = False
             self.refresh_table()
+            if reload_version and not self.tree.selection():
+                self.clear_details_panel()
 
         except Exception as e:
             import traceback
@@ -2263,7 +2335,7 @@ class ItemBrowserApp:
         if self.current_dlc_filter != "all" and self.current_dlc_filter in self.menu_icons:
              self.dlc_btn.config(text=f" {display_name} ({current_count}) ▽", image=self.menu_icons[self.current_dlc_filter], compound=tk.LEFT)
         else:
-             self.dlc_btn.config(text=f"Version: {display_name} ({current_count}) ▽", image="")
+             self.dlc_btn.config(text=f"DLC: {display_name} ({current_count}) ▽", image="")
         self.update_dlc_menu_labels(counts)
 
         # 4. PERSISTENT SORTING LOGIC
@@ -2339,7 +2411,7 @@ class ItemBrowserApp:
                 left, right = left.strip(), right.strip()
 
                 loc_label = ""
-                if left in ("ConditionPlayerCounter", "ConditionCompareVariable"): loc_label = ""
+                if left in ("ConditionPlayerCounter", "ConditionCompareVariable", "ConditionRomanization"): loc_label = ""
                 elif left in CONDITION_TYPES: loc_label = self.resolve_oasis_list(CONDITION_TYPES[left])
                 elif left in MODULE_MAPPING: loc_label = self.resolve_oasis_list(MODULE_MAPPING[left])
                 else: loc_label = resolve_all_guids(left)
@@ -2371,6 +2443,10 @@ class ItemBrowserApp:
                 if left == "ConditionRaceOutcome":
                     position, _, event_guid = right.strip().partition(' ')
                     right = f"{position} | {event_guid}".strip()
+
+                if left == "ConditionRomanization":
+                    label = self.resolve_oasis_list(CONDITION_TYPES["ConditionRomanization"]).replace("{}", "").strip()
+                    right = f"{label} {right.strip().replace(' ', '')}%"
 
                 if "PopulationByGroup" in right:
                     right = right.replace("PopulationByGroup", "").strip()
@@ -3189,6 +3265,8 @@ class ItemBrowserApp:
                 # Only capitalize when it opens the line (no target names before it).
                 on_island_label = on_island_label[0].upper() + on_island_label[1:]
 
+            # Target names carry region tags now, so the line can outgrow a non-fullscreen window - opt it into word wrap (widget itself is wrap=NONE).
+            target_line_start = self.details_text.index("end-1c")
             for i, group in enumerate(mt_groups):
                 p_name, sub_text = self.get_target_info(group)
                 t_icon = self.get_target_icon(group)
@@ -3215,6 +3293,7 @@ class ItemBrowserApp:
 
             label_line = f" {on_island_label}\n" if mt_groups else f"{on_island_label}\n"
             self.details_text.insert(tk.END, label_line, ("single_targets", "section_bg"))
+            self.details_text.tag_add("wrap_word", target_line_start, "end-1c")
             self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
 
             insert_effect_block(mythic_fx_raw)
@@ -3233,6 +3312,7 @@ class ItemBrowserApp:
 
             if alloc_raw == "Villa":
                 # VILLA: [Icons/Names] [Label]
+                target_line_start = self.details_text.index("end-1c")
                 for i, group in enumerate(raw_groups):
                     p_name, sub_text = self.get_target_info(group)
                     t_icon = self.get_target_icon(group)
@@ -3262,9 +3342,11 @@ class ItemBrowserApp:
 
                 # "Residences in range:"
                 self.details_text.insert(tk.END, f" {target_label}:\n", ("single_targets", "section_bg"))
+                self.details_text.tag_add("wrap_word", target_line_start, "end-1c")
 
             else:
                 # SHIP: [Label] [Icons/Names]
+                target_line_start = self.details_text.index("end-1c")
                 self.details_text.insert(tk.END, f"{target_label} ", ("single_targets", "section_bg"))
                 for i, group in enumerate(raw_groups):
                     p_name, _ = self.get_target_info(group)
@@ -3283,6 +3365,7 @@ class ItemBrowserApp:
                         self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
 
                 self.details_text.insert(tk.END, ":\n", ("single_targets", "section_bg"))
+                self.details_text.tag_add("wrap_word", target_line_start, "end-1c")
 
             self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
 
