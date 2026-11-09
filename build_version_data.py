@@ -95,9 +95,15 @@ def index_assets(assets_path):
         if icon_node is not None and icon_node.text:
             idx["icon"][guid] = icon_node.text.strip()
 
+        template_node = asset.find('./Template')
+        template = template_node.text.strip() if template_node is not None and template_node.text else ""
+
         region_node = asset.find('./Values/Building/AssociatedRegions')
         if region_node is not None and region_node.text:
             idx["region"][guid] = region_node.text.strip()
+        elif "Embankment" in template:
+            # Riverbank (Embankment) buildings only exist in Aegyptus but carry no AssociatedRegions tag.
+            idx["region"][guid] = "Egyptian"
 
         embankment_node = asset.find('./Values/Building/EmbankmentReplacement')
         if embankment_node is not None and embankment_node.text:
@@ -105,8 +111,6 @@ def index_assets(assets_path):
             terrain2 = terrain2_node.text.strip() if terrain2_node is not None and terrain2_node.text else None
             embankment_pairs[guid] = (embankment_node.text.strip(), terrain2)
 
-        template_node = asset.find('./Template')
-        template = template_node.text.strip() if template_node is not None and template_node.text else ""
         if template == "AssetPoolNamed":
             child = asset.find('./Values/AssetPool/AssetList/Item/Asset')
             if child is not None and child.text:

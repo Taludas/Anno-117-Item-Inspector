@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, font as tkfont
 from PIL import Image, ImageTk
 import csv
 import xml.etree.ElementTree as ET
@@ -11,6 +11,7 @@ import sys
 import platform
 import ctypes
 import threading
+import unicodedata
 import urllib.request
 import urllib.error
 import _version
@@ -461,6 +462,53 @@ REWARD_POOL_CATEGORY_ORDER = {
     "icon_2d_prestige":              5,  # Visitors
 }
 
+CONTRACT_DIFFICULTY_ORDER = ["-6914762194635081755", "-6915564870584412590", "-6916763202365380332"]
+
+
+# Search comparison form: lower-case with accents stripped, so "e" also finds "é".
+def fold(text):
+    return "".join(c for c in unicodedata.normalize("NFKD", str(text)) if not unicodedata.combining(c)).casefold()
+
+
+SOURCE_RESEARCH_ICONS = {
+    "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png",
+    "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png",
+    "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png",
+    "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png"
+}
+
+# Source section category buttons
+SOURCE_BTN_SELECTED_BG = "#24446e"
+SOURCE_BTN_HOVER_BG = "#1d3858"
+SOURCE_OTHER_ICON = "data/ui/fhd/base/icon_content/generic/icon_2d_generic_reward.png"
+
+# Reward pools that belong to another region than the default Latium (e.g. the same NPC's
+# Aegyptus pools), so their source entries can be told apart.
+SOURCE_POOL_REGION = {
+    "174397": "Egyptian",  # Valeria trades
+    "174402": "Egyptian",  # Valeria contracts
+    "174403": "Egyptian",
+    "174404": "Egyptian",
+    "174405": "Egyptian",  # Valeria ship drops
+}
+
+# Region -> (icon, name OasisID)
+REGION_TAGS = {
+    "Roman": ("data/ui/fhd/base/icon_content/generic/icon_2d_region_heartlands.png", "-6909366691960942471"),
+    "Celtic": ("data/ui/fhd/base/icon_content/generic/icon_2d_region_wetlands.png", "-6914592963788818653"),
+    "Egyptian": ("data/ui/fhd/dlc03/icon_content/generic/icon_2d_region_egypt.png", "-6914133370330207251"),
+}
+REGION_ORDER = ["Roman", "Celtic", "Egyptian"]
+
+# Region name suffixes on building names
+CELTIC_ID = "-6903427160198155951"
+AEGYPTUS_ID = "-6914133370330207251"
+FLOODPLAIN_ID = "-6915827260841809763"
+
+# Land / riverbank (Floodplain) variant markers in condensed target pool lists
+TERRAIN_LAND_ICON = "data/ui/fhd/dlc03/icon_content/generic/icon_2d_harvest.png"
+TERRAIN_FLOODPLAIN_ICON = "data/ui/fhd/dlc03/icon_content/generic/icon_2d_flooded.png"
+
 # Source Labels
 SOURCE_LABELS = {
     "ItemGainedWhenDefeated": ["data/ui/fhd/base/icon_content/diplomacy/icon_2d_subjugation_consul.png", "-6914401298572542861"],
@@ -876,27 +924,7 @@ class ItemBrowserApp:
         # 3. Resolve via Inheritance
         current_guid = guid
         visited = set()
-
-        # Roman is the implicit default and stays unlabeled; Celtic/Aegyptus buildings get a suffix,
-        # driven by the requested asset's own Values/Building/AssociatedRegions tag - not by
-        # whether its name happened to be inherited from a base asset (many Celtic wall/gate
-        # variants have no OasisId of their own and always resolve via inheritance).
-        CELTIC_ID = "-6903427160198155951"
-        AEGYPTUS_ID = "-6914133370330207251"
-        FLOODPLAIN_ID = "-6915827260841809763"
-        region_suffix = ""
-        if self.asset_associated_region.get(guid) == "Celtic":
-            region_suffix = f" ({self.localization_map.get(CELTIC_ID, 'Celtic').strip()})"
-        elif guid in self.asset_farm_terrain or self.asset_associated_region.get(guid) == "Egyptian":
-            aegyptus_text = self.localization_map.get(AEGYPTUS_ID, 'Aegyptus').strip()
-            # Embankment-paired buildings (Values/Building/EmbankmentReplacement) share one OasisId between
-            # both terrain variants. Only the exceptional (Floodplain) side gets a prefix - same as Roman
-            # never getting a region tag - since the game has no standalone term for the plain/default side.
-            if self.asset_farm_terrain.get(guid) == "Floodplain":
-                floodplain_text = self.localization_map.get(FLOODPLAIN_ID, 'Floodplain').strip()
-                region_suffix = f" {floodplain_text} ({aegyptus_text})"
-            else:
-                region_suffix = f" ({aegyptus_text})"
+        region_suffix = self.region_suffix(guid)
 
         while current_guid:
             if current_guid in visited: break
@@ -915,6 +943,37 @@ class ItemBrowserApp:
         res = f"Unknown ({guid})"
         self.name_resolution_cache[guid] = res
         return res
+
+    # Region an asset belongs to ("Roman" is the default) and whether it is the Floodplain variant.
+    def asset_region(self, guid):
+        if self.asset_associated_region.get(guid) == "Celtic":
+            region = "Celtic"
+        elif guid in self.asset_farm_terrain or self.asset_associated_region.get(guid) == "Egyptian":
+            region = "Egyptian"
+        else:
+            region = "Roman"
+        return region, self.asset_farm_terrain.get(guid) == "Floodplain"
+
+    # Roman is the implicit default and stays unlabeled; Celtic/Aegyptus buildings get a suffix,
+    # driven by the requested asset's own Values/Building/AssociatedRegions tag - not by
+    # whether its name happened to be inherited from a base asset (many Celtic wall/gate
+    # variants have no OasisId of their own and always resolve via inheritance).
+    def region_suffix(self, guid):
+        region, floodplain = self.asset_region(guid)
+        # Embankment-paired buildings (Values/Building/EmbankmentReplacement) share one OasisId between
+        # both terrain variants. Only the exceptional (Floodplain) side gets a prefix - same as Roman
+        # never getting a region tag - since the game has no standalone term for the plain/default side.
+        if floodplain:
+            floodplain_text = self.localization_map.get(FLOODPLAIN_ID, 'Floodplain').strip()
+            return f" {floodplain_text}{self.region_suffix_text(region)}"
+        return self.region_suffix_text(region)
+
+    def region_suffix_text(self, region):
+        if region == "Celtic":
+            return f" ({self.localization_map.get(CELTIC_ID, 'Celtic').strip()})"
+        if region == "Egyptian":
+            return f" ({self.localization_map.get(AEGYPTUS_ID, 'Aegyptus').strip()})"
+        return ""
 
     # Setup for multiple OasisIds for one GUID/mapping entry
     def resolve_oasis_list(self, oid_list):
@@ -1071,6 +1130,18 @@ class ItemBrowserApp:
                     # This ensures the tab uses the 'source_line_split' tab settings
                     text_widget.insert(tk.END, part, tags)
 
+    # Pixel width an insert_text_with_icons() rendering of this string would take up --
+    # icon tokens use their rendered size + the image_create padx, plain text is measured
+    # with the actual font so varying-length localized titles are accounted for exactly.
+    def measure_icon_text_width(self, text, font_obj):
+        total = 0
+        for part in re.split(r'(\[(?:IMG|SIMG)[:\s].*?\])', text):
+            if part.startswith('[') and part.endswith(']'):
+                total += 25 + 4 if part.startswith('[SIMG') else 35 + 4
+            elif part:
+                total += font_obj.measure(part)
+        return total
+
     # Resolve Item Source from csv
     def resolve_source(self, raw_source):
         if not raw_source or raw_source == "None": return []
@@ -1103,6 +1174,9 @@ class ItemBrowserApp:
             def process_mapping(mapping):
                 pending_icon = None
                 real_content_count = 0  # excludes the synthetic leading "-" placeholder
+                # Festival pools' secondary icon is a small attribute/deity glyph, not a
+                # portrait -- keep it at the small size instead of the portrait enlargement.
+                is_festival_pool = bool(mapping) and isinstance(mapping[0], str) and "icon_2d_festival" in mapping[0]
                 for i, item in enumerate(mapping):
                     # A list item (e.g. combined legend-only OasisIDs) isn't a lookup key for the inline text - it just falls through to the dash-placeholder branch.
                     if isinstance(item, str) and item.endswith('.png'):
@@ -1110,7 +1184,7 @@ class ItemBrowserApp:
                     else:
                         # Determine sizing: First icon/ID pair is small (SIMG)
                         is_first = (len(line_segments) == 0)
-                        tag = "SIMG" if is_first else "IMG"
+                        tag = "SIMG" if (is_first or is_festival_pool) else "IMG"
 
                         if is_first and pending_icon:
                             line_segments.append(f"[{tag}:{pending_icon}] -")
@@ -1171,6 +1245,112 @@ class ItemBrowserApp:
                 resolved_lines.append(f"{line}")
 
         return resolved_lines
+
+    # Groups an item's sources by category (a pool's front icon, or the keyed-source label) for
+    # the Source section's filter row. Entries leave out the category icon + title -- the
+    # selected button and the list's sub-header already show those.
+    def resolve_source_groups(self, raw_source):
+        if not raw_source or raw_source == "None":
+            return []
+        groups = {}
+
+        def label_of(text_id):
+            if isinstance(text_id, list):
+                raw = " ".join(self.localization_map.get(t, t) for t in text_id)
+            else:
+                raw = self.localization_map.get(text_id, text_id)
+            return re.sub(r'<[^>]+>', '', raw).replace("{}", "").strip()
+
+        def group_for(icon, title_id, order):
+            if icon not in groups:
+                groups[icon] = {"key": icon, "icon": icon, "label": label_of(title_id) if title_id else "",
+                                "order": order, "entries": [], "count": 0, "by_text": {}}
+            groups[icon]["count"] += 1
+            return groups[icon]
+
+        # parts: (label or None, percent text, percent value, sort order, region) -- entries with the
+        # same text (a contract NPC's difficulties, the same trader in Latium and Aegyptus) share one line.
+        def add_entry(group, text, parts):
+            group["entries"].append({"text": text, "parts": parts, "pct": max((p[2] for p in parts), default=0.0)})
+
+        def add_part(group, text, part):
+            entry = group["by_text"].get(text)
+            if entry is None:
+                add_entry(group, text, [part])
+                group["by_text"][text] = group["entries"][-1]
+            else:
+                entry["parts"].append(part)
+                entry["pct"] = max(entry["pct"], part[2])
+
+        def pool_entry_text(mapping):
+            title_ids = mapping[1] if isinstance(mapping[1], list) else [mapping[1]]
+            # Festival secondary icons are small attribute/deity glyphs; the others are portraits.
+            icon_tag = "SIMG" if "icon_2d_festival" in mapping[0] else "IMG"
+            segments, pending_icon = [], None
+            for part in mapping[2:]:
+                if isinstance(part, str) and part.endswith('.png'):
+                    pending_icon = part
+                    continue
+                if part in title_ids and not pending_icon:
+                    continue
+                text = label_of(part)
+                if pending_icon:
+                    segments.append(f"[{icon_tag}:{pending_icon}] {text}")
+                else:
+                    segments.append(f"- {text}" if segments else text)
+                pending_icon = None
+            return " ".join(segments) if segments else label_of(mapping[1])
+
+        label_keys = list(SOURCE_LABELS)
+        for part in [p.strip() for p in raw_source.split('|') if p.strip()]:
+            pool = re.match(r'(\d+)\s*\[(.*?)\]', part)
+            if pool:
+                guid, percent = pool.groups()
+                try:
+                    pct = float(percent.rstrip('%'))
+                except ValueError:
+                    pct = 0.0
+                mapping = REWARD_POOL_MAPPING.get(guid)
+                region = SOURCE_POOL_REGION.get(guid, "Roman")
+                if mapping:
+                    order = next((p for k, p in REWARD_POOL_CATEGORY_ORDER.items() if k in mapping[0]), 50)
+                    group = group_for(mapping[0], mapping[1], order)
+                    if len(mapping) >= 5:
+                        # Contract: index 4 is the difficulty
+                        diff_id = mapping[4]
+                        diff_order = CONTRACT_DIFFICULTY_ORDER.index(diff_id) if diff_id in CONTRACT_DIFFICULTY_ORDER else 99
+                        add_part(group, pool_entry_text(mapping[:4]), (label_of(diff_id), percent, pct, diff_order, region))
+                        continue
+                    text = pool_entry_text(mapping)
+                else:
+                    group = group_for(SOURCE_OTHER_ICON, None, 99)
+                    xml_icon = self.asset_guid_to_icon.get(guid)
+                    name = self.get_resolved_name(guid)
+                    text = f"[SIMG:{xml_icon}] {name}" if xml_icon else name
+                add_part(group, text, (None, percent, pct, 0, region))
+                continue
+
+            key, _, val = part.partition(':')
+            key, val = key.strip(), val.strip()
+            mapping = SOURCE_LABELS.get(key)
+            if mapping:
+                group = group_for(mapping[0], mapping[1], 90 + label_keys.index(key))
+                if val and val != mapping[1]:
+                    if val.startswith('-'):
+                        text = label_of(val)
+                    else:
+                        text = self.get_resolved_name(val)
+                        portrait = self.asset_guid_to_icon.get(val) if key == "ItemGainedWhenDefeated" else None
+                        if portrait:
+                            text = f"[IMG:{portrait}] {text}"
+                    add_entry(group, text, [])
+            else:
+                target = val or key
+                xml_icon = self.asset_guid_to_icon.get(target)
+                name = self.get_resolved_name(target)
+                add_entry(group_for(SOURCE_OTHER_ICON, None, 99), f"[SIMG:{xml_icon}] {name}" if xml_icon else name, [])
+
+        return sorted(groups.values(), key=lambda g: g["order"])
 
     # Shows a legend tooltip for Source icons.
     def show_source_legend(self, event):
@@ -1455,10 +1635,10 @@ class ItemBrowserApp:
                 guids = [g.strip() for g in raw_f.split(';') if g.strip()]
                 for g in guids:
                     if any(g != p for p in active_ex) and g not in EX_POOLS: continue
-                    name = self.get_resolved_name(g)
-                    if not name.startswith("Unknown"):
-                        unique_names.add(name)
-                        self.target_display_to_guid[name] = g
+                    if self.get_resolved_name(g).startswith("Unknown"): continue
+                    name = self.target_display_name(g)
+                    unique_names.add(name)
+                    self.target_display_to_guid[name] = g
         self.target_combo['values'] = ["All"] + sorted(list(unique_names))
 
     def update_rarity_dropdown(self):
@@ -1880,7 +2060,7 @@ class ItemBrowserApp:
         self.details_text.tag_configure("effect_line_indented", font=FONT_BODY, foreground="#e0eaff", tabs=("40", "left", "780", "right"))
 
         # Source tag updated for the split column logic
-        self.details_text.tag_configure("source_line_split", font=FONT_BODY, foreground="#ffffff", tabs=("400", "left"))
+        self.details_text.tag_configure("source_line_split", font=FONT_BODY, foreground="#ffffff", tabs=("435", "left"))
         self.details_text.tag_configure("source_header", font=FONT_HEADER, foreground="#ffffff")
 
         self.details_text.tag_configure("single_targets", font=FONT_UI_BOLD)
@@ -2133,7 +2313,7 @@ class ItemBrowserApp:
         eff_disp = self.effect_var.get()
         eff_raw_filter = self.effect_display_to_raw.get(eff_disp)
         source_name = self.source_var.get()
-        s_query = self.search_var.get().strip().lower()
+        s_query = fold(self.search_var.get().strip())
 
         # 3. Filter Logic
         for item in self.items_data:
@@ -2251,7 +2431,7 @@ class ItemBrowserApp:
                         found_match = True
                 else:
                     # 2. NAME MATCH
-                    if s_query in raw_name.lower():
+                    if s_query in fold(raw_name):
                         found_match = True
 
                     # 3. CATEGORY MATCH (Compare against Localized UI text)
@@ -2269,9 +2449,9 @@ class ItemBrowserApp:
                         _, loc_alloc = self.resolve_loca_and_icon(alloc_val, raw_alloc)
 
                         # Using 'in' allows partial matching (e.g., "civic" finds "Civic Buildings")
-                        if (s_query in loc_niche.lower() or
-                            s_query in loc_rarity.lower() or
-                            s_query in loc_alloc.lower()):
+                        if (s_query in fold(loc_niche) or
+                            s_query in fold(loc_rarity) or
+                            s_query in fold(loc_alloc)):
                             found_match = True
 
                     # 4. CONTENT MATCH (Targets, Sources, Effects)
@@ -2280,7 +2460,7 @@ class ItemBrowserApp:
                         target_raw = item.get('Targets', '')
                         if target_raw and target_raw != "None":
                             t_guids = target_raw.replace('|', ';').replace(':', ';').split(';')
-                            resolved_targets = " ".join([self.get_resolved_name(g.strip()).lower() for g in t_guids if g.strip()])
+                            resolved_targets = fold(" ".join([self.get_resolved_name(g.strip()) for g in t_guids if g.strip()]))
                             if s_query in resolved_targets:
                                 found_match = True
 
@@ -2288,7 +2468,7 @@ class ItemBrowserApp:
                         # 4b. Sources (Translate source formatting to readable text)
                         source_raw = item.get('Source', '')
                         if source_raw and source_raw != "None":
-                            res_sources = " ".join(self.resolve_source(source_raw)).lower()
+                            res_sources = fold(" ".join(self.resolve_source(source_raw)))
                             if s_query in res_sources:
                                 found_match = True
 
@@ -2296,14 +2476,14 @@ class ItemBrowserApp:
                         # 4c. Effects (Check raw text AND localized dropdown names)
                         eff_raw = (item.get('Buff Effects', '') + "|" + item.get('BoostBuff Effects', '') + "|" + item.get('MythicEffect Effects', '')).strip()
                         if eff_raw and eff_raw != "None":
-                            if s_query in eff_raw.lower():
+                            if s_query in fold(eff_raw):
                                 found_match = True
                             else:
                                 # Check if the search term matches the localized name of the effect.
                                 # raw_id is always the dropdown's first-seen ("canonical") key, so
                                 # also check any tag that aliases to it (e.g. Distributor->Aqueduct).
                                 for disp_name, raw_id in getattr(self, 'effect_display_to_raw', {}).items():
-                                    if s_query not in disp_name.lower():
+                                    if s_query not in fold(disp_name):
                                         continue
                                     if raw_id in eff_raw or any(v == raw_id and k in eff_raw for k, v in EFFECT_TAG_ALIASES.items()):
                                         found_match = True
@@ -2628,31 +2808,89 @@ class ItemBrowserApp:
 
         self._hide_timer = None
 
-    # Helper to split Target GUIDs and resolve names with variant preservation.
-    # get_resolved_name() already appends the "(Celtic)" suffix (via Values/Building/AssociatedRegions)
-    # where applicable, so no extra region handling is needed here.
+    def plain_building_name(self, guid):
+        name = self.get_resolved_name(guid)
+        suffix = self.region_suffix(guid)
+        return name[:-len(suffix)] if suffix and name.endswith(suffix) else name
+
+    # Plain building name -> {region: {is_floodplain, ...}} over every region-tagged building in the
+    # game, i.e. which regional / land-riverbank versions of that building exist at all.
+    # Rebuilt whenever the name cache is replaced (language or game version switch).
+    def building_variants(self):
+        if getattr(self, "_building_variants_for", None) is not self.name_resolution_cache:
+            variants = {}
+            for guid in set(self.asset_associated_region) | set(self.asset_farm_terrain):
+                if self.get_resolved_name(guid).startswith("Unknown"):
+                    continue
+                region, floodplain = self.asset_region(guid)
+                variants.setdefault(self.plain_building_name(guid), {}).setdefault(region, set()).add(floodplain)
+            self._building_variants = variants
+            self._building_variants_for = self.name_resolution_cache
+        return self._building_variants
+
+    # Text-only name (target dropdown): the region/riverbank tag is kept only when the game has more
+    # than one version of the building, so the entries stay distinguishable.
+    def target_display_name(self, guid):
+        plain = self.plain_building_name(guid)
+        versions = sum(len(flags) for flags in self.building_variants().get(plain, {}).values())
+        return self.get_resolved_name(guid) if versions > 1 else plain
+
+    # Region / land-riverbank icons behind a plain building name. present = {region: {is_floodplain, ...}}
+    # for the version(s) being shown. Region icons only when the game has the building in more than
+    # one region; land/riverbank icons only where both terrain versions exist.
+    def variant_markers(self, plain_name, present):
+        in_game = self.building_variants().get(plain_name, {})
+        regions = [r for r in REGION_ORDER if r in present]
+        show_regions = len(set(in_game) | set(regions)) > 1
+        markers = []
+        for r in regions:
+            parts = [f"[SIMG:{REGION_TAGS[r][0]}]"] if show_regions else []
+            if not {True, False} - (in_game.get(r, set()) | present[r]):
+                icons = [f"[SIMG:{icon}]" for flag, icon in ((False, TERRAIN_LAND_ICON), (True, TERRAIN_FLOODPLAIN_ICON)) if flag in present[r]]
+                parts.append(f"({'|'.join(icons)})")
+            if parts:
+                markers.append(" ".join(parts))
+        return " · ".join(markers)
+
+    # Helper to split Target GUIDs and resolve names for an asset pool's popup list.
+    # Regional variants of one building are condensed into one line under the plain name. Region
+    # icons appear only when the game has that building in more than one region (so they say which
+    # one is meant, even if the pool lists just one); land/riverbank icons only where both exist.
     def get_target_info(self, group):
         if ":" in group:
             p_guid, m_str = group.split(":", 1)
             p_name = self.get_resolved_name(p_guid)
 
             sub_guids = [m.strip() for m in m_str.split(";") if m.strip()]
-            resolved_sub_targets = []
+            variants = {}  # plain name -> {"icon", "regions": {region: {is_floodplain, ...}}}
 
             for m_guid in sub_guids:
-                v_name = self.get_resolved_name(m_guid)
-                if v_name.startswith("Unknown"): continue
+                if self.get_resolved_name(m_guid).startswith("Unknown"): continue
+                base = self.plain_building_name(m_guid)
+                region, floodplain = self.asset_region(m_guid)
 
+                entry = variants.setdefault(base, {"icon": None, "regions": {}})
                 icon_path = self.get_target_icon(m_guid)
-                # Ensure each line is its own discrete unit
-                icon_tag = f"[SIMG:{icon_path}] " if icon_path else "• "
-                resolved_sub_targets.append(f"{icon_tag}{v_name}")
+                # The default (Latium, land) variant's icon represents the condensed line.
+                if icon_path and (entry["icon"] is None or (region == "Roman" and not floodplain)):
+                    entry["icon"] = icon_path
+                entry["regions"].setdefault(region, set()).add(floodplain)
+
+            lines = []
+            for base in sorted(variants, key=fold):
+                entry = variants[base]
+                icon_tag = f"[SIMG:{entry['icon']}] " if entry["icon"] else "• "
+                lines.append(f"{icon_tag}{base} {self.variant_markers(base, entry['regions'])}".rstrip())
 
             # .strip() prevents the parser from seeing an extra line at the end
-            return p_name, "\n".join(sorted(resolved_sub_targets)).strip()
+            return p_name, "\n".join(lines).strip()
 
-        p_name = self.get_resolved_name(group)
-        return (p_name if not p_name.startswith("Unknown") else group), ""
+        # Single target (inline in the effect line): plain name + the same markers as in the popups.
+        if self.get_resolved_name(group).startswith("Unknown"):
+            return group, ""
+        region, floodplain = self.asset_region(group)
+        plain = self.plain_building_name(group)
+        return f"{plain} {self.variant_markers(plain, {region: {floodplain}})}".rstrip(), ""
 
     # Get and render icon for the target before the target text
     def get_target_icon(self, guid, is_ship=False):
@@ -3276,7 +3514,7 @@ class ItemBrowserApp:
                 active_style = "multiple_targets" if sub_text else "single_targets"
 
                 self.insert_text_with_icons(self.details_text, icon_tag, (active_style, "section_bg"))
-                self.details_text.insert(tk.END, p_name, (tag, active_style, "section_bg"))
+                self.insert_text_with_icons(self.details_text, p_name, (tag, active_style, "section_bg"))
 
                 # Only bind tooltip if there is actual sub_text (i.e. it's an Asset Pool)
                 if sub_text:
@@ -3322,7 +3560,7 @@ class ItemBrowserApp:
                     active_style = "multiple_targets" if sub_text else "single_targets"
 
                     self.insert_text_with_icons(self.details_text, icon_tag, (active_style, "section_bg"))
-                    self.details_text.insert(tk.END, p_name, (tag, active_style, "section_bg"))
+                    self.insert_text_with_icons(self.details_text, p_name, (tag, active_style, "section_bg"))
 
                     # Only bind tooltip if there is actual sub_text
                     if sub_text:
@@ -3359,7 +3597,7 @@ class ItemBrowserApp:
                     self.details_text.tag_unbind(tag, "<Enter>")
 
                     self.insert_text_with_icons(self.details_text, icon_tag, ("single_targets", "section_bg"))
-                    self.details_text.insert(tk.END, p_name, ("single_targets", "section_bg"))
+                    self.insert_text_with_icons(self.details_text, p_name, ("single_targets", "section_bg"))
 
                     if i < len(raw_groups) - 1:
                         self.details_text.insert(tk.END, ", ", ("single_targets", "section_bg"))
@@ -3487,113 +3725,203 @@ class ItemBrowserApp:
         self.details_text.insert(tk.END, "\n")
         self.details_text.insert(tk.END, big_sep)
 
-        # --- ITEM SOURCE Rendering (Multi-Column using tabs) ---
-        self.details_text.tag_configure("source_header", font=FONT_UI_BOLD)
-        self.details_text.tag_configure("source_line_split", font=FONT_SMALL, tabs=("400", "left"))
-        self.details_text.tag_configure("source_gold", foreground="#ffd700")
-        self.details_text.tag_configure("source_research", foreground="#eba117")
-
+        # --- ITEM SOURCE Rendering (category filter row + list of the selected category) ---
         source_raw = data.get('Source', '').strip()
         if source_raw and source_raw != "None":
-            source_start = self.details_text.index(tk.INSERT)
+            self.render_source_section(source_raw)
 
-            # 1. Localize and Iconize the Source Header
-            source_header_guid = "-6907963067247957273"
-            source_icon_path = resource_path("data/ui/fhd/base/icon_content/generic/icon_2d_generic_reward.png")
-
-            # Localize
-            localized_source_title = self.localization_map.get(source_header_guid, "SOURCES").upper()
-
-            # Combine with Icon Tag
-            header_with_icon = f"[SIMG:{source_icon_path}] {localized_source_title}: \n"
-
-            # --- TAG BINDING LOGIC ---
-            # Record where we start inserting
-            tag_start = self.details_text.index(tk.INSERT)
-
-            # Insert using a new tag 'source_legend_trigger'
-            self.insert_text_with_icons(self.details_text, header_with_icon, ("source_header", "section_bg", "source_legend_trigger"))
-            self.details_text.insert(tk.END, "\n", ("half_space", "section_bg"))
-
-            tag_end = self.details_text.index(f"{tag_start} lineend")
-
-            # Bind the hover events to the header text
-            self.details_text.tag_bind("source_legend_trigger", "<Enter>", lambda e: [self.details_text.config(cursor="question_arrow"), self.show_source_legend(e)])
-            self.details_text.tag_bind("source_legend_trigger", "<Leave>", lambda e: [self.details_text.config(cursor="xterm"), self.hide_target_tooltip(e)])
-
-            # 2. Resolve and Columnize the Source List
-            resolved_list = self.resolve_source(source_raw)
-
-            # --- COLOR RANKING LOGIC ---
-            ICON_TO_CAT = {
-                "data/ui/fhd/base/icon_content/generic/icon_2d_buy_sell.png": "-6915651869812775825",
-                "data/ui/fhd/base/icon_content/quest_tracker/icon_2d_questlog_writting.png": "-6914021190765224130",
-                "data/ui/fhd/base/icon_content/generic/icon_2d_loading_ramp_ship.png": "-6904030652562679494",
-                "data/ui/fhd/base/icon_content/city_incident/icon_2d_festival.png": "-6908773579491322283",
-                "data/ui/fhd/base/icon_content/attributes/icon_2d_prestige.png": "-6904119188857235835"
-            }
-            RESEARCH_ICONS = {
-                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_military.png",
-                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_civic.png",
-                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_economic.png",
-                "data/ui/fhd/base/icon_content/tech_tree/icon_2d_research_dlc02.png"
-            }
-
-            item_stats = []
-            for item_str in resolved_list:
-                pct_match = re.search(r'(\d+(?:\.\d+)?)%', item_str)
-                pct = float(pct_match.group(1)) if pct_match else 0.0
-
-                category = "none"
-                # Check for Research first
-                if any(res_icon in item_str for res_icon in RESEARCH_ICONS):
-                    category = "research"
-                else:
-                    # Check for Big Categories based on the icon path
-                    for icon_path, cat_id in ICON_TO_CAT.items():
-                        if icon_path in item_str:
-                            category = cat_id
-                            break
-
-                item_stats.append({'text': item_str, 'pct': pct, 'cat': category})
-
-            # Identify ALL Top 1s for each Big Category
-            gold_texts = set()
-            for cat_id in ICON_TO_CAT.values():
-                cat_items = [i for i in item_stats if i['cat'] == cat_id]
-                if cat_items:
-                    max_val = max(i['pct'] for i in cat_items)
-                    if max_val > 0:
-                        for i in cat_items:
-                            if i['pct'] == max_val:
-                                gold_texts.add(i['text'])
-
-            research_texts = {i['text'] for i in item_stats if i['cat'] == "research"}
-
-            # Split into two halves for the columns
-            mid = (len(resolved_list) + 1) // 2
-            left_col = resolved_list[:mid]
-            right_col = resolved_list[mid:]
-
-            # Print the columns
-            # Function to pick the right tags for an item
-            def get_style(txt):
-                if not txt: return ("source_line_split", "section_bg")
-                if txt in gold_texts: return ("source_gold", "source_line_split", "section_bg")
-                if txt in research_texts: return ("source_research", "source_line_split", "section_bg")
-                return ("source_line_split", "section_bg")
-
-            for i in range(len(left_col)):
-                l_item = left_col[i]
-                r_item = right_col[i] if i < len(right_col) else ""
-
-                self.insert_text_with_icons(self.details_text, l_item, get_style(l_item))
-                if r_item:
-                    self.details_text.insert(tk.END, "\t", ("source_line_split", "section_bg"))
-                    self.insert_text_with_icons(self.details_text, r_item, get_style(r_item))
-                self.details_text.insert(tk.END, "\n", ("section_bg"))
+        for name in self.details_text.window_names():
+            self.bind_wheel_passthrough(self.details_text.nametowidget(name))
 
         self.details_text.config(state=tk.DISABLED)
+
+    # Source section: header (hover = icon legend), one button per source category, and the
+    # entries of the selected category below. Must stay the last section of the details panel --
+    # switching category re-renders everything from the "source_list_start" mark to the end.
+    def render_source_section(self, source_raw):
+        t = self.details_text
+        t.tag_configure("source_header", font=FONT_UI_BOLD)
+        t.tag_configure("source_gap", spacing1=5)
+        t.tag_configure("source_gap_wide", spacing1=9)
+        t.tag_configure("source_gold", foreground="#ffd700")
+        t.tag_configure("source_research", foreground="#eba117")
+
+        groups = self.resolve_source_groups(source_raw)
+        if not groups:
+            return
+
+        # Only the icon + title carry the legend trigger: a tagged trailing newline would stretch
+        # the hover area across the whole empty remainder of the line.
+        title = self.localization_map.get("-6907963067247957273", "SOURCES").upper()
+        header_icon = "data/ui/fhd/base/icon_content/generic/icon_2d_generic_reward.png"
+        self.insert_text_with_icons(t, f"[SIMG:{header_icon}] {title}:", ("source_header", "section_bg", "source_legend_trigger"))
+        t.insert(tk.END, "\n", ("source_header", "section_bg"))
+        t.insert(tk.END, "\n", ("half_space", "section_bg"))
+        # The category tabs make the icon legend optional: it only opens on a click on the header.
+        t.tag_bind("source_legend_trigger", "<Enter>", lambda e: t.config(cursor="question_arrow"))
+        t.tag_bind("source_legend_trigger", "<Leave>", lambda e: [t.config(cursor="xterm"), self._hide_source_legend(e)])
+        t.tag_bind("source_legend_trigger", "<Button-1>", self._toggle_source_legend)
+
+        # Keep the chosen category while browsing items, as long as the next item has it too.
+        self._source_groups = {g["key"]: g for g in groups}
+        if getattr(self, "selected_source_category", None) not in self._source_groups:
+            self.selected_source_category = groups[0]["key"]
+
+        row = tk.Frame(t, bg=BG_SECTION)
+        self._source_buttons = {}
+        for g in groups:
+            btn = tk.Label(row, image=self.get_icon_photo(g["icon"], (28, 28)), compound=tk.LEFT,
+                           font=FONT_SMALL, fg=FG_MAIN, bg=BG_SECTION, padx=6, pady=2,
+                           cursor="hand2", highlightthickness=1)
+            btn.pack(side=tk.LEFT, padx=(0, 6))
+            btn.bind("<Button-1>", lambda e, k=g["key"]: self._select_source_category(k))
+            btn.bind("<Enter>", lambda e, k=g["key"]: k != self.selected_source_category and e.widget.config(bg=SOURCE_BTN_HOVER_BG))
+            btn.bind("<Leave>", lambda e: self._style_source_buttons())
+            self._source_buttons[g["key"]] = btn
+        # Style before embedding so the row already has its final size when the text lays out the line.
+        self._style_source_buttons()
+        t.window_create(tk.END, window=row)
+        t.insert(tk.END, "\n", ("section_bg",))
+
+        t.mark_set("source_list_start", "end-1c")
+        t.mark_gravity("source_list_start", tk.LEFT)
+        self._render_source_list()
+
+    def _toggle_source_legend(self, event):
+        if getattr(self, "_source_legend_open", False):
+            self._hide_source_legend(event)
+        else:
+            self.show_source_legend(event)
+            self._source_legend_open = True
+        return "break"
+
+    def _hide_source_legend(self, event=None):
+        if getattr(self, "_source_legend_open", False):
+            self._source_legend_open = False
+            self.hide_target_tooltip(event)
+
+    # Embedded widgets (section header rows, price row, source tabs) swallow the mouse wheel --
+    # hand it back to the details text so the panel scrolls wherever the cursor is.
+    def bind_wheel_passthrough(self, widget):
+        widget.bind("<MouseWheel>", self._forward_details_wheel, add="+")
+        for child in widget.winfo_children():
+            self.bind_wheel_passthrough(child)
+
+    def _forward_details_wheel(self, event):
+        self.details_text.event_generate("<MouseWheel>", delta=event.delta)
+        return "break"
+
+    # The selected tab expands to show its category title; the others show only icon + count.
+    def _style_source_buttons(self):
+        for key, btn in self._source_buttons.items():
+            group = self._source_groups[key]
+            count = f" ({group['count']})" if group["count"] > 1 else ""
+            if key == self.selected_source_category:
+                btn.config(text=f" {group['label']}{count}", bg=SOURCE_BTN_SELECTED_BG,
+                           highlightbackground="#ffd700", highlightcolor="#ffd700")
+            else:
+                btn.config(text=f" {group['count']}" if group["count"] > 1 else "", bg=BG_SECTION,
+                           highlightbackground="#ffffff", highlightcolor="#ffffff")
+
+    def _select_source_category(self, key):
+        if key == self.selected_source_category:
+            return
+        self.selected_source_category = key
+        self._style_source_buttons()
+        self.details_text.config(state=tk.NORMAL)
+        self._render_source_list()
+        self.details_text.config(state=tk.DISABLED)
+
+    def _render_source_list(self):
+        t = self.details_text
+        group = self._source_groups.get(self.selected_source_category)
+        # Up to end-1c: a range reaching "end" makes Tk delete the newline before it instead, which
+        # would swallow the tab row's line break and glue the list onto the tabs.
+        t.delete("source_list_start", "end-1c")
+        if group is None:
+            return
+
+        # Gold marks the best chance within the category (on a contract line only the matching
+        # difficulty); research pools keep their own colour.
+        plain = ("source_line_split", "section_bg")
+        gold = ("source_gold",) + plain
+        is_research = group["icon"] in SOURCE_RESEARCH_ICONS
+        top = max((e["pct"] for e in group["entries"]), default=0)
+
+        def region_name(region):
+            return self.localization_map.get(REGION_TAGS[region][1], region).strip()
+
+        # Each line is a list of (text, tags) pieces.
+        def line_pieces(entry):
+            base = ("source_research",) + plain if is_research else plain
+
+            def chance_tags(pct):
+                return gold if not is_research and top > 0 and pct == top else base
+
+            parts = sorted(entry["parts"], key=lambda p: (REGION_ORDER.index(p[4]), p[3]))
+            if not parts:
+                return [(f"- {entry['text']}", base)]
+            regions = list(dict.fromkeys(p[4] for p in parts))
+
+            # One region: Latium is the untagged default, any other gets the "(Aegyptus)" tag like targets do.
+            if len(regions) == 1:
+                suffix = "" if regions[0] == "Roman" else f" ({region_name(regions[0])})"
+                if len(parts) == 1 and parts[0][0] is None:
+                    return [(f"- {entry['text']}{suffix} [{parts[0][1]}]", chance_tags(parts[0][2]))]
+                pieces = [(f"- {entry['text']}{suffix} –", base)]
+                for i, (label, percent, pct, _, _) in enumerate(parts):
+                    pieces.append((" " if i == 0 else " · ", base))
+                    pieces.append((f"{label} {percent}", chance_tags(pct)))
+                return pieces
+
+            # Several regions: list the source once, each region's chances behind its region icon.
+            pieces = [(f"- {entry['text']} –", base)]
+            for i, (label, percent, pct, _, region) in enumerate(parts):
+                pieces.append((" " if i == 0 else " · ", base))
+                if i == 0 or region != parts[i - 1][4]:
+                    icon = REGION_TAGS[region][0]
+                    pieces.append((f"[SIMG:{icon}] " if self.get_icon_photo(icon) else f"{region_name(region)}: ", base))
+                pieces.append((f"{label} {percent}" if label else percent, chance_tags(pct)))
+            return pieces
+
+        lines = [line_pieces(e) for e in group["entries"]]
+
+        # Two columns only when both actually fit next to each other; otherwise one column, so
+        # nothing ever gets pushed past the panel edge.
+        font_obj = tkfont.Font(font=FONT_SMALL)
+
+        def line_width(pieces):
+            return self.measure_icon_text_width("".join(text for text, _ in pieces), font_obj)
+
+        width = t.winfo_width()
+        available = width - 2 * int(t.cget("padx")) - 20 if width > 1 else 790
+        mid = (len(lines) + 1) // 2
+        left, right = lines[:mid], lines[mid:]
+        left_w = max((line_width(p) for p in left), default=0)
+        right_w = max((line_width(p) for p in right), default=0)
+        gap = 40
+        if len(lines) >= 4 and left_w + gap + right_w <= available:
+            t.tag_configure("source_line_split", font=FONT_SMALL, tabs=(str(left_w + gap), "left"))
+            rows = [(left[i], right[i] if i < len(right) else None) for i in range(mid)]
+        else:
+            t.tag_configure("source_line_split", font=FONT_SMALL, tabs=())
+            rows = [(line, None) for line in lines]
+
+        for l_line, r_line in rows:
+            for text, tags in l_line:
+                self.insert_text_with_icons(t, text, tags)
+            if r_line:
+                t.insert(tk.END, "\t", plain)
+                for text, tags in r_line:
+                    self.insert_text_with_icons(t, text, tags)
+            t.insert(tk.END, "\n", ("section_bg",))
+
+        # Gap under the tab row: spacing above the first row rather than a spacer line (whose height would
+        # depend on a font). Portrait rows are taller and already bring their own air, text/glyph rows need more.
+        if rows:
+            first_row = rows[0][0] + (rows[0][1] or [])
+            has_portrait = any("[IMG:" in text for text, _ in first_row)
+            t.tag_add("source_gap" if has_portrait else "source_gap_wide", "source_list_start")
 
 if __name__ == "__main__":
     root = tk.Tk()

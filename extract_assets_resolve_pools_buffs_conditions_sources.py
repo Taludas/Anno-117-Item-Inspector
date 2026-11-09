@@ -258,11 +258,12 @@ def parse_value_node(node):
 
             # 1. ActiveTradePriceInPercent: value in assets is already the direct percent, no offset needed
 
-            # 2. Reduction Tags (Force '-' for positive values)
+            # 2. Reduction Tags: value stored in assets is the amount the (bad) impact is reduced by, so the displayed effect is the negation -- a positive raw value is a genuine improvement (shown negative), and a negative raw value is a genuine worsening (shown positive).
             REDUCTION_TAGS = [
                 "BuffReduceCargoImpactUpgrade",
                 "BuffReduceDamageImpactUpgrade",
-                "BuffReduceNegativeWindImpactUpgrade"
+                "BuffReduceNegativeWindImpactUpgrade",
+                "BuffReduceNegativeRiverCurrentImpactUpgrade"
             ]
 
             # 3. CLEAN FORMATTING: Remove .0 from integers
@@ -271,8 +272,10 @@ def parse_value_node(node):
             # Tags whose value is a GUID reference — never prepend a sign
             GUID_VALUE_TAGS = ["AddedFertility", "GenerateLimitedLodeFertility"]
 
-            if tag_name in REDUCTION_TAGS and val_num > 0:
-                final_val = f"-{val_fmt}"
+            if tag_name in REDUCTION_TAGS:
+                flipped_num = -val_num
+                flipped_fmt = str(int(flipped_num)) if flipped_num.is_integer() else str(flipped_num)
+                final_val = f"+{flipped_fmt}" if flipped_num > 0 else flipped_fmt
             elif tag_name in GUID_VALUE_TAGS:
                 final_val = val_fmt  # raw number, no sign
             else:
