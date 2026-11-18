@@ -54,8 +54,11 @@ def version_key(v):
 
 def current_version_label():
     with open(os.path.join(ROOT, "_version.py"), encoding="utf-8") as f:
-        m = re.search(r"__VERSION__\s*=\s*'(\d+)\.(\d+)", f.read())
-    return f"{m.group(1)}.{m.group(2)}"
+        m = re.search(r"__VERSION__\s*=\s*'(\d+)\.(\d+)(?:\.(\d+))?", f.read())
+    label = f"{m.group(1)}.{m.group(2)}"
+    if m.group(3) and m.group(3) != "0":  # game patch release, e.g. 3.0.1 (the 4th digit is the user's build counter)
+        label += f".{m.group(3)}"
+    return label
 
 
 def harvest_numbers(text, guids, oasis_ids):

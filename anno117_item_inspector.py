@@ -9,7 +9,6 @@ import webbrowser
 import json
 import sys
 import platform
-import ctypes
 import threading
 import unicodedata
 import urllib.request
@@ -69,16 +68,19 @@ def get_config_path():
     """Returns a path to config.json in the user's AppData folder"""
     app_name = "Anno 117 Item Inspector"
 
-    if platform.system() == "Windows":
+    system = platform.system()
+    if system == "Windows":
         # Points to C:\Users\<User>\AppData\Roaming\Anno 117 Item Inspector
-        base_dir = os.path.join(os.environ.get('APPDATA'), app_name)
+        base_dir = os.path.join(os.environ.get('APPDATA') or os.path.expanduser("~"), app_name)
+    elif system == "Darwin":
+        base_dir = os.path.join(os.path.expanduser("~"), "Library", "Application Support", app_name)
     else:
-        # For Mac/Linux, uses a hidden folder in the home directory
-        base_dir = os.path.join(os.path.expanduser("~"), f".{app_name.lower()}")
+        # Linux / BSD: XDG config dir (~/.config by default)
+        xdg = os.environ.get("XDG_CONFIG_HOME") or os.path.join(os.path.expanduser("~"), ".config")
+        base_dir = os.path.join(xdg, app_name)
 
     # Create the directory if it doesn't exist yet
-    if not os.path.exists(base_dir):
-        os.makedirs(base_dir)
+    os.makedirs(base_dir, exist_ok=True)
 
     return os.path.join(base_dir, "config.json")
 
@@ -546,7 +548,18 @@ class ItemBrowserApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Anno 117 Item Inspector" + f' v{_version.__VERSION__}')
-        self.root.iconbitmap(resource_path("data/ui/anno117_item_inspector.ico"))
+        icon_file = resource_path("data/ui/anno117_item_inspector.ico")
+        try:
+            if platform.system() == "Windows":
+                self.root.iconbitmap(icon_file)
+            else:
+                # iconbitmap() only understands .ico on Windows; X11/macOS need a photo image.
+                with Image.open(icon_file) as ico:
+                    ico.load()
+                    self._window_icon = ImageTk.PhotoImage(ico.convert("RGBA"))
+                self.root.iconphoto(True, self._window_icon)
+        except Exception as e:
+            print(f"Window icon not set: {e}")
         self.root.geometry("1440x900")
         self.root.configure(bg=BG_MAIN)
 
@@ -591,12 +604,39 @@ class ItemBrowserApp:
                 print(f"Font not found: {font_path}")
                 return False
 
-            # GDI AddFontResourceExW constant
-            FR_PRIVATE = 0x10
-
-            # Load the font using Windows API
-            res = ctypes.windll.gdi32.AddFontResourceExW(font_path, FR_PRIVATE, 0)
-            return res > 0
+            try:
+                import ctypes
+                system = platform.system()
+                if system == "Windows":
+                    # GDI AddFontResourceExW constant
+                    FR_PRIVATE = 0x10
+                    res = ctypes.windll.gdi32.AddFontResourceExW(font_path, FR_PRIVATE, 0)
+                    return res > 0
+                if system == "Darwin":
+                    ct = ctypes.cdll.LoadLibrary("/System/Library/Frameworks/CoreText.framework/CoreText")
+                    cf = ctypes.cdll.LoadLibrary("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")
+                    raw = os.path.abspath(font_path).encode("utf-8")
+                    cf.CFURLCreateFromFileSystemRepresentation.restype = ctypes.c_void_p
+                    cf.CFURLCreateFromFileSystemRepresentation.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_long, ctypes.c_bool]
+                    ct.CTFontManagerRegisterFontsForURL.argtypes = [ctypes.c_void_p, ctypes.c_uint32, ctypes.c_void_p]
+                    url = cf.CFURLCreateFromFileSystemRepresentation(None, raw, len(raw), False)
+                    return bool(ct.CTFontManagerRegisterFontsForURL(url, 1, None))  # 1 = process scope
+                # Linux: add the file to fontconfig's application font set (Tk/Xft reads it from there)
+                for lib in ("libfontconfig.so.1", "libfontconfig.so"):
+                    try:
+                        fc = ctypes.cdll.LoadLibrary(lib)
+                        break
+                    except OSError:
+                        fc = None
+                if fc is None:
+                    return False
+                fc.FcConfigAppFontAddFile.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+                fc.FcConfigAppFontAddFile.restype = ctypes.c_int
+                return bool(fc.FcConfigAppFontAddFile(None, os.path.abspath(font_path).encode("utf-8")))
+            except Exception as e:
+                # Not fatal: Tk falls back to a default font.
+                print(f"Could not register font {font_path}: {e}")
+                return False
 
         for f in FONT_FILES:
             load_custom_font(resource_path(f))
@@ -721,7 +761,7 @@ class ItemBrowserApp:
         # 1. Check if config exists
         if os.path.exists(CONFIG_FILE):
             try:
-                with open(CONFIG_FILE, "r") as f:
+                with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     config = json.load(f)
                     lang = config.get("language")
                     if lang:
@@ -760,7 +800,7 @@ class ItemBrowserApp:
 
         def set_lang(lang):
             selected_lang[0] = lang
-            with open(CONFIG_FILE, 'w') as f:
+            with open(CONFIG_FILE, 'w', encoding='utf-8') as f:
                 json.dump({"language": lang}, f)
             lang_window.grab_release()
             lang_window.destroy()
@@ -1453,6 +1493,8 @@ class ItemBrowserApp:
 
         row3 = tk.Frame(top_frame, bg=BG_MAIN)
         row3.pack(side=tk.TOP, fill=tk.X)
+
+        self._install_dropdown_typeahead()
 
         # --- ROW 1 --- Primary filters; widths scaled up proportionally to fill space freed by moving Source
         tk.Label(row1, text="Language:", bg=BG_MAIN, fg=FG_MAIN, font=FONT_BODY).pack(side=tk.LEFT, padx=(0, 2))
@@ -3800,15 +3842,80 @@ class ItemBrowserApp:
             self._source_legend_open = False
             self.hide_target_tooltip(event)
 
+    # Type-ahead for the (readonly) filter dropdowns: pressing letters jumps to the next entry starting with them.
+    # Works on the closed combobox (sets the value) and inside the opened list (moves the highlight).
+    def _install_dropdown_typeahead(self):
+        self._ta_buffer = ""
+        self._ta_after = None
+
+        def next_index(values, current):
+            buf = self._ta_buffer.casefold()
+            n = len(values)
+            if n == 0:
+                return None
+            # Same letter pressed repeatedly -> cycle through entries starting with that letter
+            cycling = len(set(buf)) == 1 and len(buf) > 1
+            needle = buf[0] if cycling else buf
+            start = current + 1 if (cycling or len(buf) == 1) else max(current, 0)
+            for off in range(n):
+                i = (start + off) % n
+                if str(values[i]).casefold().startswith(needle):
+                    return i
+            return None
+
+        def collect(char):
+            if self._ta_after:
+                self.root.after_cancel(self._ta_after)
+            self._ta_buffer += char
+            self._ta_after = self.root.after(900, lambda: setattr(self, "_ta_buffer", ""))
+
+        def on_closed(event):
+            w = event.widget
+            if len(event.char) != 1 or not event.char.isprintable() or event.char == " ":
+                return
+            values = list(w.cget("values"))
+            collect(event.char)
+            idx = next_index(values, w.current())
+            if idx is not None:
+                w.current(idx)
+                w.event_generate("<<ComboboxSelected>>")
+            return "break"
+
+        def on_open(event):
+            lb = str(event.widget)  # popdown listbox is a Tcl-created widget, so drive it via tk.call
+            if len(event.char) != 1 or not event.char.isprintable() or event.char == " ":
+                return
+            call = self.root.tk.call
+            values = [str(v) for v in self.root.tk.splitlist(call(lb, "get", 0, "end"))]
+            collect(event.char)
+            sel = self.root.tk.splitlist(call(lb, "curselection"))
+            idx = next_index(values, int(sel[0]) if sel else -1)
+            if idx is not None:
+                call(lb, "selection", "clear", 0, "end")
+                call(lb, "selection", "set", idx)
+                call(lb, "activate", idx)
+                call(lb, "see", idx)
+            return "break"
+
+        self.root.bind_class("TCombobox", "<KeyPress>", on_closed, add="+")
+        self.root.bind_class("ComboboxListbox", "<KeyPress>", on_open, add="+")
+
     # Embedded widgets (section header rows, price row, source tabs) swallow the mouse wheel --
     # hand it back to the details text so the panel scrolls wherever the cursor is.
     def bind_wheel_passthrough(self, widget):
-        widget.bind("<MouseWheel>", self._forward_details_wheel, add="+")
+        # Windows/macOS send <MouseWheel>; X11 (Linux) sends Button-4/5 instead.
+        for sequence in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
+            widget.bind(sequence, self._forward_details_wheel, add="+")
         for child in widget.winfo_children():
             self.bind_wheel_passthrough(child)
 
     def _forward_details_wheel(self, event):
-        self.details_text.event_generate("<MouseWheel>", delta=event.delta)
+        if event.num == 4:
+            self.details_text.yview_scroll(-4, "units")
+        elif event.num == 5:
+            self.details_text.yview_scroll(4, "units")
+        else:
+            self.details_text.event_generate("<MouseWheel>", delta=event.delta)
         return "break"
 
     # The selected tab expands to show its category title; the others show only icon + count.
